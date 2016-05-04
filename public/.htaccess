@@ -1,0 +1,66 @@
+RewriteEngine On
+
+Redirect /home/ /
+Redirect /know-your-paperwork/ /blog/used-car-paperwork/
+Redirect /buying-used-cars/ /blog/buying-used-car/
+Redirect /used-car-paperwork/ /blog/used-car-paperwork/
+Redirect /buying-used-car/ /blog/buying-used-car/
+Redirect /mobile/ /
+Redirect /tips-and-advice/ /blog/tips-and-advice/
+Redirect /introduction-buying-selling-used-cars/ /blog
+Redirect /pagead/gen_204?id=ladd_evt /
+
+
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.xml -f
+RewriteRule ^(.*)$ $1.xml
+
+#RewriteRule ^sitemap(-+([a-zA-Z0-9_-]+))?\.xml\.gz?$ /blog/sitemap$1.xml$2 [L]
+
+
+# The following rule tells Apache that if the requested filename
+# exists, simply serve it.
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+
+RewriteRule ^.*$ - [NC,L]
+# The following rewrites all other queries to index.php. The 
+# condition ensures that if you are using Apache aliases to do
+# mass virtual hosting, the base path will be prepended to 
+# allow proper resolution of the index.php file; it will work
+# in non-aliased environments as well, providing a safe, one-size 
+# fits all solution.
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+RewriteRule ^(.*) - [E=BASE:%1]
+RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpg "access 1 year"
+ExpiresByType image/jpeg "access 1 year"
+ExpiresByType image/gif "access 1 year"
+ExpiresByType image/png "access 1 year"
+ExpiresByType text/css "access 1 month"
+ExpiresByType text/html "access 1 month"
+ExpiresByType application/pdf "access 1 month"
+ExpiresByType text/x-javascript "access 1 month"
+ExpiresByType application/x-shockwave-flash "access 1 month"
+ExpiresByType image/x-icon "access 1 year"
+ExpiresDefault "access 1 month"
+</IfModule>
+<IfModule mod_deflate.c>
+    <filesMatch "\.(js|css|html|php|ttf)$">
+        SetOutputFilter DEFLATE
+    </filesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^sitemap(-+([a-zA-Z0-9_-]+))?\.xml(\.gz)?$ /blog/sitemap$1.xml$2 [L]
+</IfModule>
+
+
