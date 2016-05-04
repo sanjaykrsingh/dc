@@ -1,0 +1,579 @@
+﻿body{
+	font-family: 'OpenSansN', arial, verdana;
+}
+.top-bar{
+	background: #f1f1f1;
+	font-size: 12px;
+}
+
+.navbar {
+margin: 10px 0;
+}
+.navbar-nav>li{
+	padding: 20px 0;
+}
+.navbar-nav>li>a{
+	color: #333;
+	padding: 0 20px;
+}
+.navbar-nav>li>a{
+	border-left: 1px solid #333;
+}
+.navbar-nav>li:first-child a{
+	border: none;
+}
+.collapse.in .navbar-nav>li>a{
+	border: 0;
+	padding: 10px;
+}
+.collapse.in .navbar-nav>li{
+	padding: 0;
+}
+ul {
+list-style: none;
+}
+.social {
+padding: 0;
+margin: 0;
+}
+.info li, .social li {
+position: relative;
+float: left;
+min-width: 20px;
+}
+.social li, .social a {
+display: table-cell;
+vertical-align: middle;
+height: 40px;
+}
+.info{
+	padding: 0;
+	margin: 0;
+}
+.info li{
+	margin-left: 20px;
+}
+.breadcrum{
+	background-color: #5e5652;
+	float: left;
+	position: relative;
+	width: 100%;
+	line-height: 34px;
+}
+.breadcrum a, .breadcrum{
+	color: #fff;
+}
+.icon-executive{
+	width: 28px;
+	height: 34px;
+	background: url('../images/icon-executive.jpg') no-repeat;
+	float: left;
+}
+.breadcrum .fa{
+	color: #f95446;
+}
+.slider{
+	width: 100%;
+	float: left;
+	min-height: 387px;
+	background-image: url('../images/slider-02.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.bg-car{
+	background-image: url('../images/bg-car.png');
+	background-repeat: no-repeat;
+	background-position: 20% 100px;
+	min-height: 100%;
+	background-size: 60%;
+}
+.heading-text{
+	float: left;
+}
+.heading-text h2{
+	font-size: 21px;
+	color: #5e5652;
+	margin: 0;
+}
+.heading-text h2:first-child{
+	margin-top: 20px;
+}
+
+.heading-text h2 span{
+	color: #ca1911;
+	font-size: 30px;	
+}
+
+.car-search{
+	float: right;
+	font-size: 18px;
+	margin-top: 30px;
+	position: relative;
+}
+.car-search-option-cont{width: 150px; float: right;}
+
+.search-popover{
+	width: 600px;
+	height: 300px;
+	background-color: rgba(255,255,255, .95);
+	position: absolute;
+	right: 110px;
+	top: 44px;
+	border: 1px solid #ccc;
+	border-right: 0;
+	padding: 10px;
+	font-size: 14px;
+}
+.search-popover .body-type-icon li {margin-bottom: 10px; text-align: center;}
+.car-make-list li.checkbox{margin-top: 0; margin-bottom: 5px;}
+.icon-car-search{
+	width: 34px;
+	height: 34px;
+	float: left;
+	background: url('../images/icon-car-search-lence.png') no-repeat 0 0;
+}
+.car-search ul{
+	margin-top: 10px;
+	float: left;
+}
+.search-make, .search-type, .search-budget{display: none;}
+.car-search-option>li.active .search-make,
+.car-search-option>li.active .search-type,
+.car-search-option>li.active .search-budget{display: block;}
+.icon-make,
+.icon-type,
+.icon-budget{
+	width: 100px;
+	height: 100px;
+	float: left;
+	background: url('../images/icon-car-search-options.jpg') no-repeat 10px 0 #fff;
+	padding-top: 70px;
+	text-align: center;
+	border: 1px solid #ccc;
+}
+.icon-type{
+	border-top: 0;
+	border-bottom: 0;
+}
+.icon-type{background-position: 10px -100px}
+.icon-budget{background-position: 10px -198px}
+
+.icon-make:hover, .active .icon-make{	background-position: -70px 0;}
+.icon-type:hover, .active .icon-type{	background-position: -70px -100px;}
+.icon-budget:hover, .active .icon-budget{	background-position: -70px -198px;}
+.active .icon-make,
+.active .icon-type,
+.active .icon-budget{border-left: 1px solid #fff;}
+
+
+
+/*************** body type *****************/
+.body-type{
+	background: url('../images/body-type-bg.png') repeat-x bottom;
+	min-height: 107px;
+	width: 100%;
+	float: left;
+	margin-bottom: -15px;
+	
+}
+.body-type h4{
+	color: #ca1911;
+	margin-bottom: 0;
+}
+.body-type-icon{
+	padding: 0;
+	margin: 0 0 20px 0;
+	float: left;
+	width: 80%;
+}
+.body-type-icon li a{
+	/*background-image: url('../images/body-type-car.png');*/
+	background-repeat: no-repeat;
+	float: left;
+	min-width: 80px;
+	min-height: 37px;
+	color: #38c3ac;
+	margin-right: 10px;
+	padding-top: 46px;
+	text-align: center;
+	font-size: 12px;
+}
+.body-type-icon li a span{color: #555;}
+
+/*
+.icon-luxury{width: 112px;}
+.icon-sports{background-position: -122px 0;}
+.icon-minivan{background-position: -217px 0;}
+.icon-coupes{background-position: -312px 0;}
+.icon-sedan{background-position: -412px 0; width: 86px;}
+.icon-wegon{background-position: -519px 0; width: 86px;}
+.icon-hackbak{background-position: -623px 0;}
+.icon-muv{background-position: right top; width: 94px}
+*/
+.body-type-icon li a{min-width: 100px; height: 60px; }
+.icon-convertible{	background-image: url('../images/Convertible.png');}
+.icon-hatchback{background-image: url('../images/Hatchback.png');}
+.icon-muv{background-image: url('../images/MUV.png');}
+.icon-sedan{background-image: url('../images/Sedan.png');}
+.icon-sports{background-image: url('../images/Sports.png');}
+.icon-stationwagon{background-image: url('../images/Stationwagon.png');}
+.icon-suv{background-image: url('../images/SUV.png');}
+
+.btn{border-radius: 0;}
+.btn-success{
+background-color: #38c3ac;
+}
+
+/***************** special offer *****************/
+.special-offer{
+	width: 100%;
+	padding-bottom: 30px;
+	float: left;
+}
+.offer-flag{
+	background: url('../images/offer.png') no-repeat 0 0;
+	float: left;
+	width: 112px;
+	height: 121px;
+	margin-top: 8px;
+	background-size: 100%;
+}
+.offer-price-cont{
+	float: left;
+	font-size: 40px;
+	margin: 40px 0 0 60px;
+}
+.icon-rs{
+	background: url('../images/icon-rs.png') no-repeat 0 0;
+	width: 47px;
+	height: 51px;
+	float: left;
+	background-size: 100%;
+	margin-right: 10px;
+}
+.market-price{
+	color: #7b7b7b;
+	float: left;
+	text-decoration: line-through;
+	font-weight: normal;
+	margin-right: 10px;
+}
+.offer-price{
+	color: #ca1911;
+	font-weight: bold;
+}
+.icon-car{	
+	background: url('../images/car-alto.png') no-repeat 0 0;
+	width: 446px;
+	height: 252px;
+	float: left;
+	background-size: 100%;
+}
+.car-name{
+	font-size: 30px;
+	color: #1674ac;
+	border-bottom: 5px solid #ca1911;
+	padding: 0 0 0 100px;
+	margin: 90px 20% 0 100px;
+	text-align: right;
+}
+.car-description{
+	float: right;
+	width: 55%;
+}
+.car-description ul{
+	padding: 0;
+	margin: 0;
+}
+.car-description li{
+	float: left;
+	width: 33.3%;
+	padding: 0 0 0 40px;
+	margin: 15px 0 0;
+}
+.car-description li span{
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+/**** icons car usages ***/
+.icon-fuel,
+.icon-transmission,
+.icon-color,
+.icon-city,
+.icon-star,
+.icon-meter,
+.icon-owner{
+	float: left;
+	width: 37px;
+	height: 29px;
+}
+
+.icon-fuel{background: url('../images/icon-fuel.png') no-repeat 0 0;}
+.icon-transmission{background: url('../images/icon-transmission.png') no-repeat 0 0;}
+.icon-color{background: url('../images/icon-color.png') no-repeat 0 0;}
+.icon-city{background: url('../images/icon-city.png') no-repeat 0 0;}
+.icon-meter{background: url('../images/icon-meter.png') no-repeat 0 0;}
+.icon-owner{background: url('../images/icon-user.png') no-repeat 0 0;}
+.icon-star{background: url('../images/icon-star.png') no-repeat 0 0;}
+.icon-star img{height: 100%; width: auto;}
+.car-description .btn{
+	margin: 20px 0 0 20px;
+}
+
+/************************************ sell your car ******************************************/
+
+.sell-your-car{
+	float: left;
+	background: #8fd4c9;
+	width: 100%;
+	padding-bottom: 30px;
+}
+.sell-your-car .container{
+	position: relative;
+}
+.sell-your-car h2{color: #5f5b5b; font-size: 40px;}
+.sell-your-car h2 span{color: #ca1911;}
+.sell-your-car h4{}
+
+.sell-car-img{background: url('../images/sell-car-img.png') no-repeat 0 0; width: 337px; height: 222px; float: right; right: 0; top: 0;}
+
+.sell-your-car ul{
+	float: left;
+	margin-right: 300px;
+	margin-top: -50px;
+}
+.icon-doorstep{background: url('../images/icon-doorstep.png') no-repeat 0 0;}
+.icon-fair{background: url('../images/icon-fair.png') no-repeat 0 0;}
+.icon-purchase{background: url('../images/icon-purchase.png') no-repeat 0 0;}
+.icon-cheque{background: url('../images/icon-cheque.png') no-repeat 0 0;}
+.icon-doorstep,
+.icon-fair,
+.icon-purchase,
+.icon-cheque{
+	width: 25%;
+	padding-top: 85px;
+	color: #fff;
+	min-width: 85px;
+	float: left;
+	background-position: top center;
+	text-align: center;
+	font-weight: bold;
+}
+.sell-your-car .btn{
+	margin-top: -80px;
+}
+.txtgreen{color: #007f46;}
+
+/***************************** customer feedback *********************************/
+.customer-feedback{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	margin: 20px 0 0 0;
+	
+}
+
+.customer-feedback-cont h2{
+	color: #9b9b9b;
+	text-align: center;
+	padding: 30px 0;
+}
+.customer-feedback-cont h2 span{
+	color: #ca1911;
+}
+.customer-feedback li{
+	float: left;
+	width: 32.3%;
+	font-size: 12px;
+	line-height: 15px;
+	padding: 10px;
+	border: 1px solid #e1e1e1;
+	margin-right: 1%;
+	box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.customer-feedback li img{
+	float: left;
+	margin-right: 20px;
+}
+.owner-detail{
+	float: right;
+}
+.owner-detail span{
+	display: block;
+	color: #ca1911;
+}
+
+.footer{
+	background: #141d24;
+	color: #fff;
+	margin: 40px 0 0 0;
+}
+.footer a{
+	color: #fff;
+}
+.footer ul{
+	padding: 0;
+}
+.site-links li{
+	padding: 7px 0;
+}
+.footer .title{
+	padding-bottom: 7px;
+	border-bottom: 1px solid #3b4146;
+}
+.contact-detail span{
+	font-weight: bold;
+}
+.right-caret {
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid #fff;
+    display: inline-block;
+    height: 0;
+    opacity: 1;
+    vertical-align: top;
+    width: 0;
+}
+.footer .right-caret{
+	margin: 5px 10px 0 0;
+}
+.social_icons li{
+	float: left;
+	width: 10%;
+}
+.top-bar .social_icons li{
+	width: 30px;
+	float: right;
+}
+.top-bar .social_icons,
+.top-bar .social_icons a{margin: 0;}
+
+.social-login-btn {
+margin: 5px;
+width: 100%;
+font-size: 150%;
+padding: 0;
+}
+.social-facebook {
+background-color: #4c699e;
+border-color: #47618d;
+}
+.social-google {
+background-color: #da573b;
+border-color: #be5238;
+}
+
+.footer .callus{
+	width: 100%;
+	background: #fff;
+	padding: 10px 0;
+	color: #555;
+}
+.callus span{
+	margin: 0 20px;
+	font-size: 20px;
+}
+.contact-detail p{padding: 0; margin: 0;}
+.contact-detail .marginT10, .marginT10{margin-top: 10px;}
+.marginT20{margin-top: 20px;}
+.copywright{background: #5e5652; color: #fff; font-size: 12px; padding: 5px 0;}
+
+.carousel-control.right,
+.carousel-control.left{
+	background: none;
+	color: #333;
+	opacity: 1;
+	font-size: 25px;
+	top: 45%;
+}
+.carousel-inner{width: calc(100% - 35px);
+margin-left: 20px;
+}
+.carousel-control.right{text-align: right;}
+.carousel-control.left{text-align: left;}
+
+@media (max-width: 767px) {
+	
+	.top-bar{
+		padding: 3px 0;
+		text-align: center;
+	}
+	.breadcrum .info  li{margin: 0;}
+	.breadcrum .info  li:first-child{margin-right: 20px;}
+
+  .heading-text h2{
+	font-size: 15px;
+  }
+  .heading-text h2 span{
+	font-size: 20px;
+  }
+  .car-search{
+	width: 100%;
+	margin-top: 135px;
+  }
+  .sell-your-car h2{font-size: 35px;}
+  .search-popover{display: none !important;}
+  .car-search-option, .car-search-option-cont{width: 100%; padding: 0; margin: 0;}
+  .car-search-option li{float: left;}
+  .car-search-option li.active a{border-color: #ccc;}
+  .icon-make, .icon-type, .icon-budget{width: 96px;}
+  .icon-type{
+	border: 1px solid #ccc;
+	border-left: 0;
+	border-right: 0;
+	}
+	.body-type{
+		margin-top: 10px;
+	} 
+	.body-type .btn{margin-top: -60px;}
+	
+	.offer-price-cont{
+		margin: 10px 0 0 0;
+		font-size: 20px;
+		width: 177px;
+		float: right;
+	}
+	.offer-flag{margin: 0;}
+	.market-price,
+	.offer-price{float: left; margin: 0 0 0 10px;}
+	.icon-car{
+		width: 100%;
+		height: 180px;
+	}
+	.car-name{
+		padding: 0;
+		margin: 0;
+	}
+	.car-description{
+		width: 100%;
+	}
+	.car-description li{
+		min-width: 50%;
+	}
+	.car-description li span{display: none;}
+	.sell-your-car ul{	
+		margin: 0;
+	}
+	.sell-your-car ul li{width: 50%;}
+	.sell-your-car .btn{
+		margin-top: 20px;
+	}
+	.customer-feedback li{
+		width: 100%;
+		margin-bottom: 20px;
+	}
+	.callus{text-align: center;}
+	.footer-call{margin-top: 20px; text-align: center; width: 100%;}
+	.callus span{font-size: 16px; display: block;}
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+	.body-type-icon li a{
+		margin-right: 5px;
+	}
+	.car-name{margin-right: 5%;}
+	.car-description{
+		width: 52%;
+	}
+	.car-description li{width: 50%;}
+}
