@@ -1,0 +1,130 @@
+<link rel="stylesheet" href="<?php echo $this->basePath(); ?>/css/sort.css">
+<script src="<?php echo $this->basePath(); ?>/js/jquery-1.js"></script>
+<script src="<?php echo $this->basePath(); ?>/js/jquery-ui.js"></script>
+<style>
+	.top_head{ 
+		font:24px Arial,Helvetica,sans-serif;
+    padding: 5px 0;}
+	.btm_note {
+    clear: both;
+    font: 13px Arial,Helvetica,sans-serif;;
+    padding: 5px 0;
+}
+	.dd_images{float;left; margin:10px 10px 10px 50px;}
+	#sortable { list-style-type: none; margin: 0; padding: 0; width: 450px; }
+	#sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; position: relative; }
+	#sortable li div.number { 
+	cursor: pointer;
+    display: block;
+    font: 70px arial;
+    height: 90px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100px;
+    z-index: 100;
+	opacity: 0.5;}
+	</style>
+<script>
+$(function() {
+$("#sort ul").sortable({ opacity: 0.6, cursor: 'move', update: function() {
+	var order = $(this).sortable("serialize") + '&action=updateRecordsListings'; 
+			$.post("updateDB.php", order, function(theResponse){
+				$("#contentRight").html(theResponse);
+			}); 	
+setTimeout('sort()',100);			
+		}								  
+		});
+});
+function sort()
+{
+	var elm;
+	$( "li.ui-state-default" ).each(function( index ) {
+		elm=$(this);
+		$("."+elm.attr('rel')).text((index+1));
+		$("#image_"+elm.attr('image-id')).val((index+1));
+		
+	});
+}
+</script>
+<div class="admin_menu_box">
+      
+            
+             <div class="">
+               <div class="manage-inventory-right-panel">
+	<h1>
+		Showroom Images
+        	<div class="add-image">
+       			
+              <a href="<?php echo $this->url('showroom') ?>">Back </a> 
+        </div>
+    </h1>
+		<div class="errortopdiv" style="color: red; text-align: center; width: 100%;display:none;">Please Rectify The Errors In Red.</div>
+		<div class="tab">
+    	<ul>
+          <li><a href="<?php echo $this->url('showroom',array('action' => "view-images",'id'=>$showroom_id))?>">Upload Photos</a></li>
+                    <li><a href="<?php echo $this->url('showroom',array('action' => "image-sort",'id'=>$showroom_id))?>">Sort Photos</a></li> 
+                    <li><a href="<?php echo $this->url('showroom',array('action' => "image-view",'id'=>$showroom_id))?>">View Photos</a></li>
+        </ul>
+    </div>	
+	
+    <div class="tab-Available">
+        <div class="add-inventory-tab-content">
+        <div class="middle">
+        <div class="popup-tab popup-tab-margin">
+            	<ul>
+                	
+                </ul>
+            </div> 
+			<br><br>
+			<br><br>
+    <!-- The file upload form used as target for the file upload widget -->
+    <form id="imagetag" name="imagetag" action="" method="POST" enctype="multipart/form-data">
+      
+       <div id="sort" class="dd_images">
+<div class="top_head">
+Sort Your Photos
+</div>
+<div class="btm_note">
+Drag and drop photos for sorting.
+</div> 
+  <ul class="ui-sortable" id="sortable">     
+     
+		<?php  
+		 $intN = 0;
+		foreach($objShowroomImages as $showroomImage) { 
+			if(file_exists($config['image_absolute_path']."showroom/thumb/".$showroomImage->img_name))
+			{
+				$image_path = $config['image_path']."showroom/thumb/";
+			}
+			else
+			{
+				$image_path = $config['image_path']."showroom/";
+			}
+		?>
+		
+		<li rel="rec_<?php echo $intN; ?>" class="ui-state-default" image-id="<?php echo $showroomImage->showroom_img_id; ?>" id="li_<?php echo $showroomImage->showroom_img_id; ?>">
+	
+	<img src="<?php echo $image_path.$showroomImage->img_name; ?>" height="90" width="100">
+	<input type="hidden" name="image_<?php echo $showroomImage->showroom_img_id; ?>" id="image_<?php echo $showroomImage->showroom_img_id; ?>"
+	value="<?php echo $intN+1; ?>">
+	<div class="number rec_<?php echo $intN; ?>"><?php echo $intN+1; ?></div>
+	</li>
+	<?php $intN++; 
+	} 
+	?>
+	</ul>
+	</div>
+	
+	<input type="submit" id="addinventorysave" class="add-enventry-save" value="Save">
+	
+    </form>
+   
+</div></div> 
+        <p></p>
+    </div>
+
+	 </div>
+	 </div>
+</div>

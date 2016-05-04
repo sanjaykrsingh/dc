@@ -1,0 +1,162 @@
+<div class="admin_menu_box">
+      
+            
+             <div class="">
+               <div class="manage-inventory-right-panel">
+	<h1>
+		Buyer's Enquiry
+        	
+    </h1>
+	<table width="100%" border="0">
+    <tbody>
+        <tr>
+            <td width="22%" align="right" height="20"><a href="<?php echo $this->url('enquiry',array('action' => "buyer-add")) ?>" class="link_org3">Add Buyer Enquiry</a></td>
+						
+        </tr>
+    </tbody>
+</table>
+<br>
+		<div class="errortopdiv" style="color: red; text-align: center; width: 100%;display:none;">Please Rectify The Errors In Red.</div>
+		<div class="tab">
+    	<ul>
+          <li><a class="active" style="cursor:pointer">Buyer Enquiry</a></li>
+                    <li><a href="<?php echo $this->url('enquiry',array('action' => "seller"))?>">Seller Enquiry</a></li> 
+                    <li><a href="<?php echo $this->url('enquiry',array('action' => "general"))?>">General Enquiry</a></li>
+        </ul>
+    </div>	
+	
+    <div class="tab-Available">
+        <div class="add-inventory-tab-content">
+        <div class="middle">
+        <div class="popup-tab popup-tab-margin">
+            	<ul>
+                	
+                </ul>
+            </div> 
+			<br><br>
+			<?php 
+			
+		 ?>
+				<form method="post" name="frmsearch" id="frmsearch" type="post" action="">
+
+<div class="filter-header">
+    <h2>Search</h2> 
+        
+</div>
+    <div class="filter-search-content">
+        <div class="mode-right-content">
+            <table cellspacing="0" cellpadding="2" class="search-table-margin">
+                <tbody>
+					<tr>
+					<td>Date: <input type="text" name="start_date" id="start_date" value="<?php echo @$arrPost['start_date']; ?>" class="basic-car-detail-textbox"> to <input type="text" name="end_date" id="end_date" value="<?php echo @$arrPost['end_date']; ?>" class="basic-car-detail-textbox"></td>
+					</tr>
+				</tbody>
+				</table>
+        </div>
+		<div class="high-advanced-filter" id="show">
+            <!--<img src="images/hide-icon.png" class="hide-icon"><span class="text-advanced-search" id="advanced_search_link">Show Advanced Search</span>-->
+            <input name="Submit" type="submit" value="Search" class="filter-search-icon"> 
+
+        </div> 
+		
+		</div>
+		 <div class="short-by-filter filter-mrg-t10">
+       
+        <div class="right">
+            <ul>
+			<li>
+			</li>
+
+                                <li>
+                    <a class="export-buyer" style="cursor:pointer" >Export 
+                        <img src="<?php echo $this->basePath();?>/images/excel.png" class="img">
+                    </a>
+                </li>
+             
+                            </ul>
+        </div>
+    </div>
+</form>
+	<div class="car-detail-content">
+   
+    <table class="table-content" width="100%" cellpadding="5" cellspacing="0">
+<thead>
+ <tr>
+		<th>Customer Name</th>
+        <th>Email</th>
+		<th>Mobile</th>
+        <th>StockId</th>
+		<th>Make-Model-Variant</th>
+		<th>Status</th>
+		<th>Date</th>
+		<th>Action</th>
+</tr>
+</thead>
+<tbody>
+ <?php
+                foreach ($arrEnquiry as $enquiry) :
+            ?>
+<tr>
+	<td><?php echo $this->escapeHtml($enquiry['name']);?></td>
+	<td> <?php echo $this->escapeHtml($enquiry['email']);?></td>
+	
+        <td><?php echo $this->escapeHtml($enquiry['mobile']);?></td>
+		<td><?php echo $this->escapeHtml($enquiry['stock_id']);?></td>
+		<td><?php echo $this->escapeHtml($enquiry['make_name']);?> - <?php echo $this->escapeHtml($enquiry['model_name']);?> - <?php echo $this->escapeHtml($enquiry['variant_name']);?></td>
+		<td><?php echo $this->escapeHtml($enquiry['status']);?></td>
+		<td><?php echo date("d-m-Y H:i:s",strtotime($enquiry['enquiry_on']));?></td>
+		<td><a href="<?php echo $this->url('enquiry',array('action' => "buyer-edit","id"=>$enquiry['enq_id'])) ?>">Edit</a></td>
+	
+</tr>
+ <?php
+                endforeach;
+            ?>
+</tbody></table>
+ <!-- The file upload form used as target for the file upload widget -->
+	<?php if ($this->pageCount >  1): ?>
+    <div class="pagination pagination-centered" width="100%">
+        <ul>
+            <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('enquiry', array('action' => 'index', 'page' => $this->first, 'order_by' => $order_by, 'order' => $order,)); ?>">&laquo;</a></li>
+            <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('enquiry', array('action' => 'index','page' => $this->previous, 'order_by' => $order_by, 'order' => $order,)); ?>">&lsaquo;</a></li>
+
+            <!-- Numbered page links -->
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <li <?php echo $page == $this->current ? 'class="active"' : ''; ?>><a href="<?php echo $this->url('enquiry', array('action' => 'index','page' => $page, 'order_by' => $order_by, 'order' => $order,)); ?>">
+                        <?php echo $page; ?>
+                    </a></li>
+            <?php endforeach; ?>
+
+            <!-- Next page link -->
+            <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('enquiry', array('action' => 'index','page' => $this->next, 'order_by' => $order_by, 'order' => $order,)); ?>">&rsaquo;</a></li>
+            <!-- Last page link -->
+            <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('enquiry', array('action' => 'index','page' => $this->last, 'order_by' => $order_by, 'order' => $order,)); ?>">&raquo;</a></li>
+        </ul>
+    </div>
+<?php endif; ?>
+   </div>
+</div></div> 
+        <p></p>
+    </div>
+
+	 </div>
+	 </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('[name="start_date"]').datepicker({
+            format: "yyyy-mm-dd"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+  $('[name="end_date"]').datepicker({
+            format: "yyyy-mm-dd"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+  });
+
+</script>

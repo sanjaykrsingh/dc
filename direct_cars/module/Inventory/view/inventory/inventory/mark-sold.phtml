@@ -1,0 +1,251 @@
+<div class="admin_menu_box">
+      
+            
+             <div class="">
+               <div class="manage-inventory-right-panel">
+	<h1>
+		Mark Sold
+        	<div>
+       			
+            
+        </div>
+    </h1>
+		<div class="errortopdiv" style="color: red; text-align: center; width: 100%;"><?php print_r(@$flashMessages[0]); ?></div>
+		
+    </div>	
+	
+    <div class="tab-Available">
+        <div class="add-inventory-tab-content">
+        <div class="middle">
+        
+    <!-- The file upload form used as target for the file upload widget -->
+    <form id="frmhotdeal" name="frmhotdeal" action="<?php echo $this->url('inventory',array('action' => "save-mark-sold")) ?>" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="stock_id" id="stock_id" value="<?php echo $stock_id; ?>">
+		<div class="basic-car-detail-header"></div>
+            <table cellpadding="12" cellspacing="0">
+            	<tbody>
+				
+				<tr>
+                	<td>
+					<span class="label-text">Reg No: </span>
+					<input type="text" name="reg_no" id="reg_no" value="<?php echo $arrStockData['registration_no']; ?>" class="basic-car-detail-textbox" readonly>
+						
+                    </td>
+					</tr>
+					<tr>
+					<td>
+					<span class="label-text">Make: </span>
+					<input type="text" name="make" id="make" value="<?php echo $arrStockData['make_name']; ?>" class="basic-car-detail-textbox" readonly>
+						
+                    </td>
+					<td>
+					<span class="label-text">Model: </span>
+					<input type="text" name="model" id="model" value="<?php echo $arrStockData['model_name']; ?>" class="basic-car-detail-textbox" readonly>
+						
+                    </td>
+					<td>
+					<span class="label-text">Variant: </span>
+					<input type="text" name="variant" id="variant" value="<?php echo $arrStockData['variant_name']; ?>" readonly class="basic-car-detail-textbox">
+						
+                    </td>
+                </tr>
+				<tr>
+                	<td>
+					<span class="label-text">Date of Delivery: </span>
+					<input type="text" name="delivery_date" id="delivery_date" value="" class="basic-car-detail-textbox" required>
+						
+                    </td>
+					<td>
+					<span class="label-text">Delivered By: </span>
+					 <select name="delivered_by" id="delivered_by" class="car-make-select" required>
+					 <option value="">Select</option>
+					 <?php
+							foreach ($arrUserData as $adminuser) :
+						?>
+						<option value="<?php echo $adminuser['user_id']; ?>"><?php echo $adminuser['first_name']." ".$adminuser['last_name']."(".$adminuser['email'].")"; ?></option>
+						<?php
+							endforeach;
+						?>
+					</select>
+					
+						
+                    </td>
+					<td>
+					<span class="label-text">Sales Type: </span>
+					<select name="sales_type" id="sales_type" value="" required>
+					<option value="">Select</option>
+					<option value="Retail">Retail</option>
+					<option value="Wholesale">Wholesale</option>
+					<option value="Finance Only">Finance Only</option>
+					</select>
+						
+                    </td>
+					
+                </tr>
+				<input type="hidden" name="buyer_id" id="buyer_id" value="">
+				<tr>
+                	<td >
+					<span class="label-text">Buyer Mob: </span>
+                   	 <input name="buyer_mobile" type="text" value="" required id="buyer_mobile" class="basic-car-detail-textbox" >  <input type="button" id="buyermobile" value="Go">
+                    </td>
+                  	<td >
+					<span class="label-text">Buyer ID: </span>
+                   	 <input name="buyer_number" type="text" value="" required id="buyer_number" class="basic-car-detail-textbox" >   <input type="button" id="buyernumber" value="Go">
+                    </td>
+					<td >
+					<span class="label-text">Buyer Name: </span>
+                   	 <input name="buyer_name" type="text" value="" required id="buyer_name" class="basic-car-detail-textbox" >  
+                    </td>
+                  
+                </tr>
+				
+					<tr>
+<td><span class="label-text">HPA: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span class="select-popup-container">
+                           <input name="hpa" type="radio" value="1" checked class="hparadio reg-no-label">
+                     &nbsp; &nbsp;&nbsp;&nbsp; Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                                 <input name="hpa" type="radio" value="0" class="hparadio reg-no-label">
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </select></td>
+	<td colspan="2" class="financiersname">
+
+					<span class="label-text">Financiers Name: </span>
+  
+    <Select id="buyer_financiers_name" name="buyer_financiers_name" class="car-make-select">
+	<option value="">Select</option>
+	<option value="HDFC BANK">HDFC BANK</option>
+	<option value="KOTAK MAHINDRA">KOTAK MAHINDRA</option>
+	<option value="ICICI BANK">ICICI BANK</option>
+	<option value="ARVAL INDIA">ARVAL INDIA</option>
+	<option value="ALD AUTOMOTIVE">ALD AUTOMOTIVE</option>
+	<option value="LEASEPLAN">LEASEPLAN</option>
+	<option value="AXIS BANK">AXIS BANK</option>
+	<option value="MAHINDRA FINANCE">MAHINDRA FINANCE</option>
+	<option value="TATA CAPITAL">TATA CAPITAL</option>
+	<option value="AU FINANCERS">AU FINANCERS</option>
+	<option value="CITIBANK">CITIBANK</option>
+	<option value="STATE BANK OF INDIA">STATE BANK OF INDIA</option>
+	<option value="STATE BANK OF PATIALA">STATE BANK OF PATIALA</option>
+	<option value="STATE BANK OF BIKANER & JAIPUR">STATE BANK OF BIKANER & JAIPUR</option>
+	<option value="STATE BANK OF MAHARASHTRA">STATE BANK OF MAHARASHTRA</option>
+	<option value="STATE BANK OF TRAVANCORE">STATE BANK OF TRAVANCORE</option>
+	<option value="TRANSLEAZE">TRANSLEAZE</option>
+	<option value="ROYAL BANK OF SCOTLAND">ROYAL BANK OF SCOTLAND</option>
+	<option value="STANDARD CHARTED BANK">STANDARD CHARTED BANK</option>
+	<option value="MAGMA">MAGMA</option>
+	<option value="RELIANCE CAPITAL">RELIANCE CAPITAL</option>
+	<option value="SHRIRAM">SHRIRAM</option>
+	<option value="GE MONEY">GE MONEY</option>
+	<option value="GE CAPITAL">GE CAPITAL</option>
+	<option value="other">OTHER</option>
+  </select>
+     
+		<input type="text" name="txt_buyer_financiers_name" id="txt_buyer_financiers_name" value="" style="display:none" class="basic-car-detail-textbox">                                
+
+ </td>
+
+</tr>
+				
+            </tbody></table>
+			<input type="submit" id="save" class="add-enventry-save" value="Save">
+		</div>
+    </form>
+   
+</div>
+        <p></p>
+    
+
+	 </div>
+	 </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('[name="delivery_date"]').datepicker({
+            format: "yyyy-mm-dd"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+  });
+  $("#buyer_financiers_name").change(function() {
+		if($("#buyer_financiers_name").val() == 'other')
+		{
+			$("#txt_buyer_financiers_name").attr("style","")			
+		}
+		else
+		{
+			$("#txt_buyer_financiers_name").attr("style","display:none")			
+		}
+	});
+$("#buyermobile").click(function (e) {
+		var customer_mobile = $("#buyer_mobile").val();
+		if(customer_mobile == "")
+		{
+			alert("Please enter buyer mobile.");
+			return false;
+		}
+		$.ajax({
+				type: "post",
+				data: "customer_mobile=" +customer_mobile,
+				url: base_url() + "customer/get-customer",
+				async: false,
+				dataType: "html",
+				success: function(response) {			
+					var result = $.parseJSON(response);
+					$.each(result ,function(a,b){
+						$("#buyer_id").val(b.cust_id);
+						if(b.cust_id != 0)
+						{
+								$("#buyer_number").val(b.customer_id);
+								$("#buyer_name").val(b.customer_name);
+						}
+						
+					});
+				}	
+					
+			});
+	
+	});
+	
+	$("#buyernumber").click(function (e) {
+		var seller_number = $("#buyer_number").val();
+		if(seller_number == "")
+		{
+			alert("Please enter buyer ID.");
+			return false;
+		}
+		$.ajax({
+				type: "post",
+				data: "customer_id=" +buyer_number,
+				url: base_url() + "customer/get-customer",
+				async: false,
+				dataType: "html",
+				success: function(response) {			
+					var result = $.parseJSON(response);
+					$.each(result ,function(a,b){
+						$("#buyer_id").val(b.cust_id);
+						if(b.cust_id != 0)
+						{
+								$("#buyer_mobile").val(b.customer_mobile);
+								$("#buyer_name").val(b.customer_name);
+						}
+						
+					});
+				}	
+					
+			});
+	
+	});
+	
+	$(".hparadio").click(function (e) {
+		var selected = $("input[type='radio'][name='hpa']:checked");
+		if(selected.val() > 0)
+		{
+			$(".financiersname").attr("style","");
+		}
+		else
+		{
+			$(".financiersname").attr("style","display:none");
+		}
+	});
+	
+</script>

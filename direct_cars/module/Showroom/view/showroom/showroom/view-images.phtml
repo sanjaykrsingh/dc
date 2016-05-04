@@ -1,0 +1,165 @@
+<div class="admin_menu_box">
+      
+            
+             <div class="">
+               <div class="manage-inventory-right-panel">
+	<h1>
+		Showroom Image List
+        	<div class="add-image">
+       			
+              <a href="<?php echo $this->url('showroom') ?>">Back </a> 
+        </div>
+    </h1>
+		<div class="errortopdiv" style="color: red; text-align: center; width: 100%;display:none;">Please Rectify The Errors In Red.</div>
+		<div class="tab">
+    	<ul>
+          <li><a href="<?php echo $this->url('showroom',array('action' => "view-images",'id'=>$showroom_id))?>">Upload Photos</a></li>
+                    <li><a href="<?php echo $this->url('showroom',array('action' => "image-sort",'id'=>$showroom_id))?>">Sort Photos</a></li> 
+                    <li><a href="<?php echo $this->url('showroom',array('action' => "image-view",'id'=>$showroom_id))?>">View Photos</a></li>
+        </ul>
+    </div>	
+	
+    <div class="tab-Available">
+        <div class="add-inventory-tab-content">
+        <div class="middle">
+        <div class="popup-tab popup-tab-margin">
+            	<ul>
+                	
+                </ul>
+            </div> 
+			<br><br>
+			<?php 
+			$form->setAttribute('action', $this->url('showroom', array('action' => 'add-image','id'=>$showroom_id)));
+			$form->prepare(); // The correct enctype is set here ?>
+		<?php echo $this->form()->openTag($form); ?>
+			
+        <!-- Car Details -->
+		
+        <div class="sub-content">
+		 <div style="color:green;text-align:center;padding-bottom: 10px;
+    text-align: center;">You can upload images of size greater than 25kb and less than 8MB</div>
+		 <div class="basic-car-detail-header">Image Upload</div>
+            <table cellpadding="12" cellspacing="0">
+            	<tbody>
+				
+				<tr>
+                	<td>
+					 <?php
+						
+					 $fileElement = $form->get('image-file'); ?>
+					<span class="label-text">Select Image*: </span>
+					
+                    	<?php echo $this->formFile($fileElement); ?>
+						<?php echo $this->formElementErrors($fileElement); ?>
+						
+                    </td>
+					
+                    <td>
+					
+                    </td><td>&nbsp;
+                    </td>
+                </tr>
+				
+            </tbody></table>
+			<input type="submit" id="addimagesave" class="add-enventry-save" value="Save">
+		</div>
+	<?php echo $this->form()->closeTag(); ?>
+    <!-- The file upload form used as target for the file upload widget -->
+    <form id="frmImageList" name="frmImageList" action="" method="POST" enctype="multipart/form-data">
+	<?php if ($this->pageCount >  1): ?>
+    <div class="pagination pagination-centered" width="100%">
+        <ul>
+            <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('showroom', array('action' => 'view-images', 'id' => $showroom_id, 'page' => $this->first, 'order_by' => $order_by, 'order' => $order,)); ?>">&laquo;</a></li>
+            <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('showroom', array('action' => 'view-images', 'id' => $showroom_id,'page' => $this->previous, 'order_by' => $order_by, 'order' => $order,)); ?>">&lsaquo;</a></li>
+
+            <!-- Numbered page links -->
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <li <?php echo $page == $this->current ? 'class="active"' : ''; ?>><a href="<?php echo $this->url('showroom', array('action' => 'view-images','id' => $showroom_id,'page' => $page, 'order_by' => $order_by, 'order' => $order,)); ?>">
+                        <?php echo $page; ?>
+                    </a></li>
+            <?php endforeach; ?>
+
+            <!-- Next page link -->
+            <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('showroom', array('action' => 'view-images','id' => $showroom_id,'page' => $this->next, 'order_by' => $order_by, 'order' => $order,)); ?>">&rsaquo;</a></li>
+            <!-- Last page link -->
+            <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('showroom', array( 'action' => 'view-images','id' => $showroom_id,'page' => $this->last, 'order_by' => $order_by, 'order' => $order,)); ?>">&raquo;</a></li>
+        </ul>
+    </div>
+<?php endif; ?>
+     <input type="hidden" name="showroom_id" id="showroom_id" value="<?php echo $showroom_id; ?>">   
+        <!-- The loading indicator is shown during file processing -->
+        <div class="fileupload-loading"></div>
+        <br>
+        <!-- The table listing the files available for upload/download -->
+        <table role="presentation" class="table table-striped" width="100%"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
+		
+		<tr class="template-download" style="display: table-row;">
+        
+            <td class="preview">
+			 
+			</td>
+            <td class="name">
+               <button type="button" class="btn-showroom-save-tag btn btn-danger setprofile ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary">
+                    <i class="icon-plus icon-white"></i>
+                    <span class="ui-button-text">Save Tag</span>
+                </button>
+            </td>
+            
+           <td></td>
+        
+        <td class="delete">
+             <button type="button" class="btn btn-showroom-delete-selected btn-danger delete ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-trash"></span><span class="ui-button-text">
+                    <i class="icon-trash icon-white"></i>
+                    <span>Delete Selected</span>
+                </span></button>
+		 </td>
+		   <td>
+                <input type="checkbox" id="chk_all_post" name="chk_all_post" value="false" class="toggle">
+        </td>
+    </tr>
+		<?php
+                foreach ($arrShowroom as $showroom) :
+				if(file_exists($config['image_absolute_path']."showroom/thumb/".$showroom['img_name']))
+				{
+					$image_path = $config['image_path']."showroom/thumb/";
+				}
+				else
+				{
+					$image_path = $config['image_path']."showroom/";
+				}
+            ?>
+<tr>
+	<td><?php if($showroom['img_name']!= "") {?>
+		<img src="<?php echo $image_path.$showroom['img_name']; ?>" width="100px">
+	<?php } ?></td>
+        <td> 
+		 <input type="hidden" name="image_id[]" value="<?php echo $showroom['showroom_img_id']; ?>">
+               <input type="text" name="image_title[]" id="image_title<?php echo $showroom['showroom_img_id']; ?>" value="<?php echo $showroom['img_title']; ?>"style="width:450px" class="basic-car-detail-textarea-small">
+		</td>
+		<td><a href="<?php echo $this->url('showroom',array('action' => "image-crop",'id'=>$showroom['showroom_img_id']))?>">Crop</a></td>
+        <td>
+            <a href="<?php echo $this->url('showroom',array('action' => "delete-image","id"=>$showroom['showroom_img_id'])) ?>" onclick="return confirm('Do you want to delete?')">Delete</a>    
+        </td>
+		<td>
+		<input type="checkbox" id="delete_image<?php echo $showroom['showroom_img_id']; ?>" name="delete_image[]" value="<?php echo $showroom['showroom_img_id']; ?>">
+		</td>
+        
+	
+</tr>
+ <?php
+                endforeach;
+            ?>
+	</tbody></table>
+    </form>
+   
+</div></div> 
+        <p></p>
+    </div>
+
+	 </div>
+	 </div>
+</div>

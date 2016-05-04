@@ -1,0 +1,541 @@
+<?php
+
+?>
+<script type="text/javascript">
+<!--//---------------------------------+
+//  Developed by Roshan Bhattarai 
+//  Visit http://roshanbh.com.np for this script and more.
+//  This notice MUST stay intact for legal use
+// --------------------------------->
+$(document).ready(function()
+{
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked 
+	$("#firstpane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});	
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked 
+	$("#secondpane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});	
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked 
+	$("#thirdpane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});	
+   //slides the element with class "menu_body" when paragraph with class "menu_head" is clicked
+	$("#fourthpane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked
+	$("#fifthpane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked
+	$("#sixthpane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked
+	$("#sevenpane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked
+	$("#eightpane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked
+	$("#ninepane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked
+	$("#tenpane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked
+	$("#elevenpane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked
+	$("#twelvepane p.menu_head").click(function()
+    {
+		$(this).css({backgroundImage:"url(down.png)"}).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+       	$(this).siblings().css({backgroundImage:"url(left.png)"});
+	});
+	//slides the element with class "menu_body" when paragraph with class "menu_head" is clicked 	
+});
+</script>
+<div class="admin_menu_box">
+      
+            
+             <div class="">
+               <div class="manage-inventory-right-panel">
+	<h1>
+		Modify Inventory 
+		<div class="add-image">
+       			
+              <a href="<?php echo $this->url('inventory',array('action' => "index",'id'=>'1')) ?>">Back </a> 
+        </div>	
+        	<!--<div class="progress-bar-bg">
+       			<div class="percentage-text">0%</div>
+                <div class="progress-bar-container">
+                	<div class="red-bar" style="width:0%"></div>
+                </div>
+        </div>-->
+    </h1>
+		<div class="errortopdiv" style="color: red; text-align: center; width: 100%;display:none;">Please Rectify The Errors In Red.</div>
+     
+ <div class="tab">
+    	<ul>
+           <li><a style="cursor:pointer" class="active ">Car Details</a></li>
+            <li><a style="cursor:pointer" href="<?php echo $this->url('inventory',array('action' => "image-list",'id'=>$arrStockData['stock_id']))?>">Image Manager</a></li>
+        </ul>
+    </div>	 
+    <div class="tab-Available">
+        <div class="add-inventory-tab-content">
+		
+        <div class="sub-content">
+		<form name="save_invantory" id="save_invantory" method="post" enctype="multipart/form-data" onsubmit="return validate_stock();">
+          <input type="hidden" name="mmv_id" id="mmv_id" value="<?php echo $arrStockData['mmv_id']; ?>">
+		  <input type="submit" id="addinventorysav1" class="add-enventry-save" value="Save">
+		  <br><br><br>
+		  <div class="basic-car-detail-header">Basic Car Details</div>
+            
+            <table cellpadding="12" cellspacing="12">
+                
+                <tbody><tr>
+                    <td>
+                        
+                        <span>
+                            <span class="label-text" style="width:70px; float:left;">Make year*: 
+                               </span>
+                            <span class="select-popup-container">
+                                <select name="month" id="month" class="car-make-select-small">
+                                    <option value="">Select</option>
+                                    <?php foreach($arr_fixed_values['month'] as $monthNo => $monthName)
+										  { ?> 
+										  <option class="month" value="<?php echo $monthNo; ?>" 
+										  <?php if($monthNo == $arrStockData['make_month']) echo 'selected="selected"'; ?>><?php echo $monthName; ?></option>
+									<?php } ?>
+									
+                                </select> 		
+                            </span>
+                            <span class="select-popup-container">
+								
+                                <select name="year" id="year" class="car-make-select-small select-mrg-10 select-make">
+                                    <option value="">Select</option>
+									<?php echo $end_year = date("Y");
+									for($intY = $end_year; $intY >= $start_year; $intY--)
+									{ 
+										?><option class="jyear" value="<?php echo $intY; ?>" <?php if($intY == $arrStockData['make_year']) echo "Selected"; ?>><?php echo $intY; ?></option><?php
+									}
+									?>
+                                                                            
+                                                                            
+                                                                 
+                                </select>
+                            </span>                        </span>                    </td>
+                    <td>&nbsp;</td>
+			<td>&nbsp;</td>
+                </tr>
+                
+            	<tr>
+                    <td>
+                        <div id="makediv_img" style="display:none;" class="makemodelversiondiv">
+                            <img src="<?php echo $this->basePath(); ?>/images/loader.gif" class="makemodelversionimg">                        </div>
+                        <span class="select-popup-container">
+                            <span class="label-text">Make*: </span>
+                            <span class="makeerror errortext"></span>
+                            
+                            <select name="make" id="make" class="car-make-select">
+                                <option value="" class="jMake">Select</option>
+								 <?php foreach($arr_fixed_values['make_array'] as $key => $value)
+										  { ?> 
+										  <option class="jMake" value="<?php echo $value['make_id']; ?>" 
+										  <?php if($value['make_id'] == $arrStockData['make_id']) echo "Selected"; ?>><?php echo $value['make_name']; ?></option>
+									<?php } ?>
+							</select>  
+                        </span></td>
+                    <td>
+                        <div id="modeldiv_img" style="display:none;" class="makemodelversiondiv">
+                            <img src="<?php echo $this->basePath(); ?>/images/loader.gif" class="makemodelversionimg">                        </div>
+                        
+                        <span class="select-popup-container">
+                            <span class="label-text">Model*: </span>
+                            <span class="modelerror errortext"></span>
+                            <select name="model" id="model" class="car-make-select">
+                                <option value="">Model</option>
+								 <?php foreach($arr_fixed_values['model_array'] as $key => $value)
+										  { ?> 
+										  <option class="jMake" value="<?php echo $value['model_id']; ?>" 
+										  <?php if($value['model_id'] == $arrStockData['model_id']) echo "Selected"; ?>><?php echo $value['model_name']; ?></option>
+									<?php } ?>
+                             </select>
+                        </span></td>
+                    <td>
+                        <div id="versiondiv_img" style="display:none;" class="makemodelversiondiv">
+                            <img src="<?php echo $this->basePath(); ?>/images/loader.gif" class="makemodelversionimg">                        </div>
+                        
+                       
+                        <span class="select-popup-container">
+                            <span class="label-text">Variant*: </span>
+                            <span class="varianterror errortext"></span>
+                            <select name="variant" id="variant" class="car-make-select">
+                                <option value="">Variant</option>
+                             <?php foreach($arr_fixed_values['variant_array'] as $key => $value)
+										  { ?> 
+										  <option class="jMake" value="<?php echo $value['variant_id']; ?>" 
+										  <?php if($value['variant_id'] == $arrStockData['variant_id']) echo "Selected"; ?>><?php echo $value['variant_name']; ?></option>
+									<?php } ?>
+							</select>                               
+                        </span>                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="select-popup-container">
+                            <span class="label-text">No of Owners*: </span>
+                            <span class="ownererror errortext"></span>
+                            <select name="owner" id="owner" class="car-make-select">
+                                <option value="">Select</option>
+                                <?php foreach($arr_fixed_values['owner'] as $oNo => $oName)
+										  { ?> 
+								<option class="owner" value="<?php echo $oNo; ?>" <?php if($arrStockData['owner'] == $oNo) echo "selected"; ?>><?php echo $oName; ?></option>
+								<?php } ?>
+                               
+                            </select>         
+                        </span>                    </td>
+                    <td valign="top">
+                        <span class="label-text">Kilometers Driven*: </span>
+                        <span class="kmerror errortext"></span>
+                        <input type="text" maxlength="8" autocomplete="off" class="jNumberonly basic-car-detail-textbox" id="kmdriven" value="<?php echo $arrStockData['kilometre'];?>" name="km" >
+                        <div style="height: 5px;">&nbsp;</div><span class="km-text"></span>                    </td>
+                    <td>
+                        <span class="label-text">Color*: </span>
+                        <span class="colorerror errortext"></span>
+                        <select name="color" id="color" class="car-make-select">
+                            <option value="">Select</option>
+							<?php foreach($arr_fixed_values['color'] as $cNo => $cName)
+								  { ?> 
+									<option class="col" value="<?php echo $cNo; ?>" <?php if($arrStockData['color'] == $cNo) echo "selected"; ?>><?php echo $cName; ?></option>
+							<?php } ?>
+
+                            <option class="col" value="Other">Other</option>
+                        </select>                        
+                        <div id="othercolors" style="clear:both;margin-top:10px;display:none;">
+                            <br>
+                            <input type="text" id="othercolor" name="othercolor" class="basic-car-detail-textbox" value="1">
+                        </div>                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="label-text ref-no">Reg. No*: 
+                            <span class="regerror errortext"></span>                        </span>
+
+                        <input type="text" value="<?php echo $arrStockData['registration_no']; ?>" name="reg" id="reg" class="basic-car-detail-textbox-small" onfocus="blank(this,'Reg. No.')" onblur="unblank(this,'Reg. No.')">
+        
+				    </td>
+                    <td>
+                        <span class="select-popup-container">
+                            <span class="label-text">Fuel Type*: </span>
+                            <span class="fuelerror errortext"></span>
+                            <select name="fuel" id="fuel" class="car-make-select">
+                                <option value="">Select</option>
+                                <?php foreach($arr_fixed_values['fuel'] as $key => $value)
+								  { ?> 
+								<option class="fuel" value="<?php echo $key; ?>" <?php if($arrStockData['fuel_type'] == $key) echo "selected"; ?>><?php echo $value; ?></option>
+								<?php } ?>
+                               
+                            </select> 
+                        </span>                    </td>
+                    <td>
+                        <span class="select-popup-container">
+                            <span class="label-text">Transmission Type*: </span>
+                            <span class="transmissionerror errortext"></span>
+                            <select name="tranmission" id="tranmission" class="car-make-select">
+                                <option value="">Select</option>
+                                <?php foreach($arr_fixed_values['tranmission'] as $key => $value)
+								  { ?> 
+								<option class="tranmission" value="<?php echo $key; ?>" <?php if($arrStockData['transmission_type'] == $key) echo "selected"; ?>><?php echo $value; ?></option>
+								<?php } ?>
+                               
+                            </select>                               
+                        </span>                    </td>
+                </tr>
+                <tr>
+                    
+                    
+                    <td >
+                        <span class="label-text">Registration Place*: </span>
+                        <span class="regcityerror errortext"></span>
+                        	<?php  if(!in_array($arrStockData['registration_place'], $arr_fixed_values['regcity']))
+									{
+										$arrStockData['other_registration_place'] = $arrStockData['registration_place'];
+										$arrStockData['registration_place'] = "Other";
+									} else {
+										$arrStockData['other_registration_place'] = "";
+									}
+							?>					
+                       <select name="regcity" id="regcity" class="car-make-select">
+                            <option value="">Select</option>
+							 <?php
+									foreach($arr_fixed_values['regcity'] as $key => $value)
+								  { ?> 
+									<option class="regcitylist" value="<?php echo $key; ?>" <?php if($arrStockData['registration_place'] == $key) echo "selected"; ?>><?php echo $value; ?></option>
+							 <?php } ?>
+                           <option class="regcitylist" value="Other" <?php if($arrStockData['other_registration_place'] != "") echo "selected"; ?>>Other</option>
+                        </select>
+
+                        </td><td>						
+                        <div id="otherregcitydiv" style="<?php if($arrStockData['other_registration_place'] == "" ) { ?>display:none <?php } ?>">
+                            
+                            <input type="text" id="otherregcity" name="otherregcity" class="basic-car-detail-textbox" value="<?php echo $arrStockData['other_registration_place']; ?>">
+                        </div>
+						                   </td>
+						
+						
+						<td >
+						 <span class="label-text">Showroom Name*: </span>
+                        <span class="select-popup-container">
+                            <select name="showroom" id="showroom" class="car-make-select">
+                            <?php foreach($arr_fixed_values['showroom'] as $key => $value)
+								  { ?> 
+							<option class="showroom" value="<?php echo $value->showroom_id; ?>"<?php if($value->showroom_id == $arrStockData['showroom_id']) echo "selected" ?>><?php echo $value->showroom_name; ?></option>
+                                <?php }?>                                    
+                            </select>
+							</td>
+                </tr>
+                
+                
+<tr>
+	<td><span class="label-text">Car Video: </span>
+<input type="text"  class="basic-car-detail-textbox" name="car_video" value="<?php echo $arrStockData['car_video']; ?>" id="car_video">
+</td>
+	<td colspan="2">
+
+			
+
+ </td>
+
+</tr>
+<tr>
+                    <td colspan="2">
+                        <?php $insurance = $arrStockData['car_insurance'];
+							foreach($arr_fixed_values['insurance'] as $key => $value)
+								  { ?> 
+						<input name="insurance" type="radio" value="<?php echo $key; ?>" <?php if($key == $insurance) { ?>checked="checked" <?php } ?> class="insuranceradio reg-no-label">
+                        <label class="reg-no-label"><?php echo $value; ?></label>
+                        
+                       <?php } ?>
+
+                    </td>
+                    <td class="insurance-expiry" style="<?php if($insurance == 0) { echo "display:none"; } ?>">                        
+                        
+						<span class="label-text" style="float:left">Valid Till:</span>
+						<select name="jimonth" id="jimonth" class="car-make-select-small">
+							 <?php 
+							 $arrExpiry = explode("-",$arrStockData['insurance_expiry']);
+							 foreach($arr_fixed_values['month'] as $monthNo => $monthName)
+										  { ?> 
+										  <option class="month" value="<?php echo $monthNo; ?>"<?php if($arrExpiry[0] == $monthNo) echo "selected"; ?>><?php echo $monthName; ?></option>
+									<?php } ?>
+						</select>
+                                                        
+                            <select name="jiyear" id="jiyear" class="car-make-select-small">
+                                                                    
+                                                                    <?php for($i = 0; $i < 3; $i++)
+																	{ 
+																		$iyear = date("Y")+$i;
+																		?>
+																		<option value="<?php echo $iyear; ?>" <?php if($arrExpiry[1] == $iyear) echo "selected"; ?> class="jiyear"><?php echo $iyear; ?></option>
+																<?php } ?>
+                                                                    
+                                                            </select>
+                                
+             
+                            
+                    </td>
+                </tr>
+<tr>
+<td><span class="label-text">Car Status*: </span>
+                        <span class="select-popup-container">
+                            <select name="car_status" id="car_status" class="car-make-select">
+							<?php foreach($arr_fixed_values['car_status'] as $key => $value)
+								  { ?> 
+									<option class="showroom" value="<?php echo $key; ?>" <?php if($key == $arrStockData['car_status']) echo "selected" ?>><?php echo $value; ?></option>
+							 <?php } ?>
+                             
+                            </select></td>
+	<td colspan="2">
+
+					<span class="label-text">Car Highlights:: </span>
+<textarea placeholder="Car Highlights:" name="car_hignlights" style="width:418px;" class="basic-car-detail-textarea-small add-description">
+<?php echo $arrStockData['car_hignlights'];?>
+</textarea>
+                                    
+
+ </td>
+
+</tr>
+            </tbody></table>
+            
+           
+            
+         </div>
+          <!-- Car Details End -->
+          <!-- Car Details -->
+        <div class="sub-content">
+            <div class="basic-car-detail-header">Price</div>
+            <table cellpadding="12" cellspacing="0">
+            	<tbody><tr>
+                	<td>
+					<span class="label-text">Price*: </span>
+					
+                    	<input type="text" maxlength="8" autocomplete="off" name="pricegaadi" id="pricegaadi" value="<?php echo $arrStockData['expected_price']; ?>" class="pricegaadi basic-car-detail-textbox" >
+						
+                        <div class="price-detail-popup" style="display: none;">
+                        	<img src="<?php echo $this->basePath(); ?>/images/left-arrow.png" class="left-arrow">
+                        	<div class="subHeading">Price</div>
+                            <div class="smallText">This will be the selling price of the car when listed on direct_cars.com</div>
+                        </div>
+						<div style="height: 5px;">&nbsp;</div><span class="gaadiprice-text"></span>
+						<span class="pricegaadierror errortext"></span>
+                    </td>
+                    <td colspan="2">
+							<span class="label-text">Special Offers (Other details to attract buyers): </span>
+<textarea placeholder="Special Offers" name="offer" style="width:418px;" class="basic-car-detail-textarea-small add-description">
+<?php echo $arrStockData['special_offer'];?>
+</textarea>
+                                    
+ <div class="price-detail-popup" style="margin: -46px 0px 0px 445px; display: none;">
+                        	<img src="<?php echo $this->basePath(); ?>/images/left-arrow.png" class="left-arrow">
+                        	<div class="subHeading">Special Offers</div>
+                            <div class="smallText">Please specify any special offer that would attract buyers e.g. - "Quick sale, lowest price", "Buy this car at just @8,450 per month, easy loan, spot approval", "prices dropped recently"</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody></table>
+         </div>
+          
+
+          <!-- Car Details End -->
+          <!-- Car Details -->
+        <div class="sub-content">
+            <div class="basic-car-detail-header">Certification Report</div>
+            <table cellpadding="12" cellspacing="0">
+            	<tbody><tr>
+                	<td>
+					<span class="label-text">Certified By: </span>
+                   	 <span class="select-popup-container">
+                            <select name="certified_by" id="certified_by" class="car-make-select">
+							<option class="showroom" value="">Select</option>
+								 <?php foreach($arr_fixed_values['certified_by'] as $key => $value)
+										  { ?> 
+												<option class="showroom" value="<?php echo $key; ?>" <?php if($arrStockData['certified_by'] == $key) echo "selected" ?>><?php echo $value; ?></option>
+									<?php } ?>
+                                                                  
+                            </select>
+                    </td>
+                   <td>
+					<span class="label-text">Warranty Details: </span>
+                   	 <span class="select-popup-container">
+                            <select name="warranty" id="warranty" class="car-make-select">
+							<option class="showroom" value="">Select</option>
+								 <?php foreach($arr_fixed_values['warranty'] as $key => $value)
+										  { ?> 
+										  <option class="showroom" value="<?php echo $key; ?>"  <?php if($arrStockData['certified_warranty_details'] == $key) echo "selected" ?>><?php echo $value; ?></option>
+									<?php } ?>
+                            
+                            </select>
+                    </td>
+					<td>
+					<span class="label-text">Free Services: </span>
+                   	 <span class="select-popup-container">
+                            <select name="free_services" id="free_services" class="car-make-select">
+                             <option class="showroom" value="">Select</option>
+								 <?php foreach($arr_fixed_values['free_services'] as $key => $value)
+										  { ?> 
+										  <option class="showroom" value="<?php echo $key; ?>" <?php if($arrStockData['free_services'] == $key) echo "selected" ?>><?php echo $value; ?></option>
+									<?php } ?>   							 
+                            </select>
+                    </td>
+                  
+                </tr>
+				<tr>
+                	<td>
+					<span class="label-text">Service History: </span>
+                   	 <span class="select-popup-container">
+                            <select name="service_history" id="service_history" class="car-make-select">
+							<option class="showroom" value="">Select</option>
+								 <?php foreach($arr_fixed_values['service_history'] as $key => $value)
+										  { ?> 
+										  <option class="showroom" value="<?php echo $key; ?>" <?php if($arrStockData['service_history'] == $key) echo "selected" ?>><?php echo $value; ?></option>
+									<?php } ?>  
+                                                 
+                            </select>
+                    </td>
+                   <td colspan="2">
+					<span class="label-text">On Road Assistance: </span>
+                   	 <span class="select-popup-container">
+                            <select name="onraod_assistance" id="onraod_assistance" class="car-make-select">
+							<option class="showroom" value="">Select</option>
+								 <?php foreach($arr_fixed_values['onraod_assistance'] as $key => $value)
+										  { ?> 
+										  <option class="showroom" value="<?php echo $key; ?>" <?php if($arrStockData['on_road_assistance'] == $key) echo "selected" ?>><?php echo $value; ?></option>
+									<?php } ?>                  
+                            </select>
+                    </td>
+					
+                  
+                </tr>
+            </tbody></table>
+         </div>
+          <!-- Car Details End -->
+           <!-- Car Details -->
+        <div class="sub-content">
+            <div class="basic-car-detail-header">Meta tags</div>
+            <table cellpadding="12" cellspacing="0">
+            	<tbody><tr>
+                	<td>
+					<span class="label-text">Meta Description: </span>
+                   	 <input name="meta_description" type="text" value="<?php echo $arrStockData['meta_description']; ?>" class="basic-car-detail-textbox" >  
+                    </td>
+                   <td colspan="2">
+                    <label class="reg-no-label mrg-t10">Meta keywords :</label>
+                    <input name="meta_keywords" type="text" value="<?php echo $arrStockData['meta_keywords']; ?>" class="basic-car-detail-textbox">  
+                    </td>
+                  
+                </tr>
+            </tbody></table>
+         </div>
+         
+          <input type="submit" id="addinventorysave" class="add-enventry-save" value="Save">
+		
+         <!-- <input type="button" name="pre" id="addinventorysaves" class="add-enventry-save" value="Preview">-->
+        </div> 
+        <p></p>
+    </div>
+	 </form>
+    <!-- Image Manager popup start -->
+   
+</div>
+             </div>
+    </div>

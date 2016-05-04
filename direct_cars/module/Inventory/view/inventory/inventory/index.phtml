@@ -1,0 +1,390 @@
+<div class="admin_menu_box">
+             <div class="">
+               				<div class="manage-inventory-right-panel">
+							<div class="errortopdiv" style="color: red; text-align: center; width: 100%;"><?php print_r(@$flashMessages[0]); ?></div>
+    <h1>Manage Inventory</h1>
+    <div class="tab">
+        <ul>
+                        <li><a href="<?php echo $this->url('inventory',array('action' => "index",'id'=>'1')) ?>" <?php if($actionid == 1) { ?>class="active"<?php } ?>>Available (<?php echo @$arrCnt[1]; ?>)
+                       </a>
+            </li>
+                      
+		  		  
+            <li><a href=" <?php echo $this->url('inventory',array('action' => "index",'id'=>'2')) ?> " <?php if($actionid == 2) { ?>class="active"<?php } ?>>Removed (<?php echo @$arrCnt[0]; ?>)
+                                    </a>
+            </li>
+			            <li><a href="<?php echo $this->url('inventory') ?>" <?php if($actionid == "") { ?>class="active"<?php } ?>>All (<?php echo @$arrCnt[0]+@$arrCnt[1]; ?>)
+                                      </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-Available">
+        
+<form method="post" name="frmsearch" id="frmsearch" type="post" action="">
+
+<div class="filter-header">
+    <h2>Search</h2> 
+        <div class="search-by-id-content">
+            <label>Car id / Reg No.</label>
+            <input type="text" placeholder="Search" name="carid" value="<?php echo @$objSearch->carid; ?>" class="search-textbox">
+            <div class="search-icon"> </div>
+        </div>
+</div>
+
+    <div class="filter-search-content">
+        <div class="mode-right-content">
+            <table cellspacing="0" cellpadding="2" class="search-table-margin">
+                <tbody><tr>
+                    <td>
+                        <span class="select-popup-container">
+                            <span class="label-text2">Select Model: </span>
+                            <select name="search_make" id="search_make" class="car-make-select">
+                                <option value="" class="jMake">Select</option>
+								<?php foreach($arrModel as $model) { ?>
+								<option value="<?php echo $model['make_id']; ?>" <?php if(@$objSearch->search_make == $model['make_id'])  echo "selected";  ?> class="jMake"><?php echo $model['make_name']; ?></option>
+								<?php } ?>
+                        </select>
+						
+                        </span>
+						 </td>
+
+                    <td>
+						<span class="select-popup-container">
+                            <span class="label-text">Model*: </span>
+                            <span class="modelerror errortext"></span>
+                            <select name="model" id="model" class="car-make-select">
+                                <option value="" class="jMake">Select</option>
+								<?php foreach($arrmakemodel as $model) { ?>
+								<option value="<?php echo $model['model_id']; ?>" <?php if(@$objSearch->model == $model['model_id'])  echo "selected";  ?> class="jMake"><?php echo $model['model_name']; ?></option>
+								<?php } ?>
+                                                             </select>
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="select-popup-container">
+                           <span style="width:160px; float:left;" class="label-text2">Driven (km) </span>
+                          
+                                <select name="min_km" id="min_km" class="select-with-75">
+                                    <option value="">Select</option>
+                                    <option value="">No Min</option>
+									<?php foreach($arr_fixed_values['km_driven'] as $key => $value) { ?>
+										<option value="<?php echo $key; ?>" <?php if(@$objSearch->min_km == $key)  echo "selected";  ?>><?php echo $value; ?></option>
+									<?php } ?>
+                                </select> 		
+                           
+                                <select name="max_km" id="max_km" class="select-with-75 select-mrg-10">
+                                    <option value="">Select</option>
+									<?php foreach($arr_fixed_values['km_driven'] as $key => $value) { ?>
+										<option value="<?php echo $key; ?>" <?php if(@$objSearch->max_km == $key)  echo "selected";  ?>><?php echo $value; ?></option>
+									<?php } ?>
+                                     <option value="">No Max</option>                                     
+                                                                 
+                                </select>
+                           
+                      </span></td>
+                    <td>
+                        <span class="select-popup-container">
+                      <span style="width:168px; float:left;" class="label-text2">Year </span></span>
+                      
+                                <select name="min_year" id="min_year" class="select-with-75">
+                                    <option value="">Select</option>
+									<?php echo $end_year = date("Y");
+									for($intY = $end_year; $intY >= $start_year; $intY--)
+									{ 
+										?><option value="<?php echo $intY; ?>" <?php if(@$objSearch->min_year == $intY)  echo "selected";  ?>><?php echo $intY; ?></option><?php
+									}
+									?>
+                                   
+                                </select> 		
+                           
+                                <select name="max_year" id="max_year" class="select-with-75 select-mrg-10">
+                                    <option value="">Select</option>
+                                     <?php echo $end_year = date("Y");
+									for($intY = $end_year; $intY >= $start_year; $intY--)
+									{ 
+										?><option value="<?php echo $intY; ?>" <?php if(@$objSearch->max_year == $intY)  echo "selected";  ?>><?php echo $intY; ?></option><?php
+									}
+									?>                                     
+                                                                 
+                                </select>
+                      </td>
+                    <td>
+                        <span class="select-popup-container">
+                      <span style="width:168px; float:left;" class="label-text2">Price Range </span></span>
+                      
+                                <select name="min_price" id="min_price" class="select-with-75">
+                                    <option value="">Select</option>
+									<option value="">No Min</option>
+                                   <?php foreach($arr_fixed_values['min_price'] as $key => $value) { ?>
+										<option value="<?php echo $key; ?>" <?php if(@$objSearch->min_price == $key)  echo "selected";  ?>><?php echo $value; ?></option>
+									<?php } ?>
+                                </select> 		
+                           
+                                <select name="max_price" id="max_price" class="select-with-75 select-mrg-10">
+                                    <option value="">Select</option>
+                                      <?php foreach($arr_fixed_values['max_price'] as $key => $value) { ?>
+										<option value="<?php echo $key; ?>" <?php if(@$objSearch->max_price == $key)  echo "selected";  ?>><?php echo $value; ?></option>
+									<?php } ?>                                    
+                                      <option value="">No max</option>                           
+                                </select>
+                      </td>
+					  
+					   <td>
+                        <span class="select-popup-container">
+                      <span style="width:100px; float:left;" class="label-text2">Status </span></span>
+					    <select name="car_status" id="car_status" class="select-with-75">
+						<option value="">Select</option>
+						  <?php foreach($arrStatus as $key => $value) { ?>
+							<option value="<?php echo $value['car_status']; ?>" <?php if(@$objSearch->car_status == $value['car_status'])  echo "selected";  ?>><?php echo $value['car_status']; ?></option>
+						<?php } ?>  
+						</select>
+                               
+                      </td>
+                </tr> 
+
+            </tbody></table>
+        </div>
+        <div class="high-advanced-filter" id="show">
+            <!--<img src="images/hide-icon.png" class="hide-icon"><span class="text-advanced-search" id="advanced_search_link">Show Advanced Search</span>-->
+            <input name="Submit" type="submit" value="Search" class="filter-search-icon"> 
+
+        </div>   
+
+    </div>
+    <div class="search-crateria">
+    	
+                
+                
+                
+        
+                
+        
+        
+    </div>
+    
+    
+    <div class="short-by-filter filter-mrg-t10">
+       
+        <div class="right">
+            <ul>
+                <li class="first"><span class="shotr-by-text">Sort By: </span>
+                    <span class="select-popup-container">
+                        
+                           <select name="sort_by" id="sort_by" class="car-make-select" style="width:140px; padding:2px 3px 2px 3px">
+								<option value="listing_date desc" <?php if(@$objSearch->sort_by == "listing_date desc")  echo "selected";  ?> class="jMake">Listed on: Latest</option>
+								<option value="listing_date asc" <?php if(@$objSearch->sort_by == "listing_date asc")  echo "selected";  ?> class="jMake">Listed On: Oldest</option>
+								<option value="expected_price asc" <?php if(@$objSearch->sort_by == "expected_price asc")  echo "selected";  ?> class="jMake">Price: Low - High</option>
+								<option value="expected_price desc" <?php if(@$objSearch->sort_by == "expected_price desc")  echo "selected";  ?> class="jMake">Price: High to low</option>
+								<option value="make_year desc" <?php if(@$objSearch->sort_by == "make_year desc")  echo "selected";  ?> class="jMake">Year: Latest</option>
+								<option value="make_year asc" <?php if(@$objSearch->sort_by == "make_year asc")  echo "selected";  ?> class="jMake">Year: Oldest</option>
+								<option value="model_name asc" <?php if(@$objSearch->sort_by == "model_name asc")  echo "selected";  ?> class="jMake">Model: A-Z</option>
+								<option value="model_name desc" <?php if(@$objSearch->sort_by == "model_name desc")  echo "selected";  ?> class="jMake">Model: Z-A</option>
+                        </select>
+                     
+                    </span>
+                </li>
+                                <li>
+                    <a class="export-stock" style="cursor:pointer" >Export 
+                        <img src="<?php echo $this->basePath();?>/images/excel.png" class="img">
+						<input type="hidden" name="actionid" id="actionid" value="<?php echo $actionid; ?>">
+                    </a>
+                </li>
+				
+				 <li>
+                    <a class="send-sms fancybox" href="javascript:void(0);" style="cursor:pointer" >Notify User
+                      
+                    </a>
+                </li>
+            
+                            </ul>
+        </div>
+    </div>
+
+
+</form>            <div class="car-detail-content">
+            <!-- row start -->
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="5" class="jmytable table-gray" style="border-collapse:collapse;" id="Latest">
+
+                                        <tbody>
+										<?php foreach($arrStock as $stock) {?>
+
+										<tr><td>
+                                <div class="car-detail-box">
+                                    <ul>
+                                        <li class="star">
+                                                                                    
+                                                                                             
+                                                        
+                                            <input value="<?php echo $stock['stock_id']; ?>" type="checkbox" name="cs[]" id="cs">
+                                            
+                                        </li>
+                                      <?php
+										$image_name = "noimage.gif";
+										
+										if($stock['is_profile_img'] != "")
+										{
+											$arrImage = explode(",",$stock['image_name']); 
+											$arrProfile = explode(",",$stock['is_profile_img']); 
+											for($i=0; $i < count($arrProfile); $i++)
+											{
+												if($i==0 || $arrProfile[$i] == 1)
+												{
+													$image_name = $arrImage[$i];
+												}
+											}
+										
+										}
+										if(file_exists($config['image_absolute_path']."stock/crop/".$image_name))
+										{
+											$image_path = $config['image_path']."stock/crop/";
+										}
+										else
+										{
+											$image_path = $config['image_path']."stock/";
+										}
+										
+										?>
+<li class="view-images"><img src="<?php echo $image_path.$image_name; ?>"  class="jInImage" style="display: inline; width:80px;">
+                                            <div class="view-photos-btn">
+                                                <a class="iframe cboxElement" href="<?php echo $this->url('inventory',array('action' => "image-view",'id'=>$stock['stock_id'])) ?>">VIEW PHOTOS</a>   
+                                            </div>
+                                        </li>                                            <li>
+                                            <div class="car-name">
+                                                <a href="<?php echo $this->url('inventory',array('action' => "edit",'id'=>$stock['stock_id'])) ?>" target="_blank" onmouseout="this.style.textDecoration='none'" onmouseover="this.style.textDecoration='underline'" style="text-decoration: none;">
+                                                <?php echo $arr_fixed_values['month'][$stock['make_month']]; ?>&nbsp; <?php echo $stock['make_year']; ?>, <?php echo $stock['make_name']; ?>&nbsp;<?php echo $stock['model_name']; ?>&nbsp;<?php echo $stock['variant_name']; ?> ,<?php echo $stock['color']; ?>&nbsp;<?php echo $stock['kilometre']; ?>KM&nbsp;                                               
+                                                <?php echo $stock['registration_place']; ?>&nbsp;
+                                                
+                                                </a>
+                                            </div>
+                                            <div class="columns-div-small">
+                                                <p>Profile ID:
+                                                    <span class="linked-color-txt">
+                                                        <?php echo $stock['stock_id']; ?>                                                    </span></p>
+                                                <p> Listed on:
+                                                     <span class="linked-color-txt">
+													 <?php echo date("d M Y", strtotime($stock['listing_date'])); ?>
+                                                                                                       </span></p>
+                                            </div>
+                                            <div class="columns-div-small">
+                                                <p>Fuel Type:
+                                                 <span class="linked-color-txt">
+												<?php echo $stock["fuel_type"]; ?></span></p>
+                                                <p>Transmission: 
+                                                 <span class="linked-color-txt">
+												<?php echo $stock["transmission_type"]; ?></span> </p>
+                                            </div>
+                                            <div class="columns-div-small">
+                                                <p>No. of Owners: 
+                                                 <span class="linked-color-txt">
+												<?php echo $stock['owner']; ?></span></p>
+                                                <p>Reg No.:<span class="linked-color-txt">
+												<?php echo $stock['registration_no']; ?></span>
+                                                </p>
+                                            </div>
+                                            
+                                            <div class="columns-div">
+                                                <div class="view-query larg-font"> 
+                                                    Expected Price<br>
+                                                    <a id="show_retail_price_223839"> 
+                                                        Rs. <?php echo number_format($stock['expected_price']); ?></a> 
+                                                       <?php if($stock['hot_deal'] == '1'){?>   
+													    <br>Hot Deal Price<br>
+                                                    <a id="show_retail_price_223839"> 
+                                                        Rs. <?php echo number_format($stock['hoat_deal_price']); ?></a> 
+													   <?php } ?>
+                                                </span></div>
+                                                
+
+                                                
+                                            </div>
+                                            <div class="car-detail-small-text" style="clear:both;">
+                                                <p>
+                                                                                                        
+							<!--<a href="#"> View Leads</a> |--><a href="<?php echo $this->url('inventory',array('action' => "edit",'id'=>$stock['stock_id'])) ?>">Edit Details</a> 
+                                                       
+                                    		
+                                      
+														<?php if($stock['certified_by'] != "") { ?>
+                                                        <a href="">   
+                                                                             
+                                                        <img title="Certified By <?php echo $stock['certified_by'];  ?> " class="certified-icon" src="<?php echo $this->basePath();?>/images/<?php echo str_replace(" ","_",strtolower($stock['certified_by'])).".png";  ?>">
+                                                                                                               </a>
+														<?php } ?>
+                                                    </p>
+                                                    
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <div class="upload-photo-tab">
+                                        <ul>
+                                            <li><a class="iframe cboxElement" href="<?php echo $this->url('inventory',array('action' => "image-list",'id'=>$stock['stock_id'])) ?>">UPLOAD PHOTOS</a></li>
+                                            
+                                            <li><a class="iframe cboxElement" href="<?php echo $this->url('inventory',array('action' => "image-sort",'id'=>$stock['stock_id'])) ?>">SORT PHOTOS</a></li>
+                                            
+                                                                                       <li> 
+                                                <?php if($stock['status'] == '1'){?>
+												<a href="<?php echo $this->url('inventory',array('action' => "delete",'id'=>$stock['stock_id'])) ?>" onclick="return confirm('Are you sure you want to remove stock??'); " class="iframe cboxElement">REMOVE STOCK</a>
+												<?php } else { ?>
+												<a href="<?php echo $this->url('inventory',array('action' => "add-stock",'id'=>$stock['stock_id'])) ?>" class="iframe cboxElement">ADD TO STOCK</a>
+												<?php } ?>
+                                            </li>
+                                                 <?php if($stock['car_status'] != "Sold Out") { ?>
+                                                                                       <li class="markASsold show-stock-on">  
+                                                <a href="javascript:void(0);" stock-id="<?php echo $stock['stock_id']; ?>" class="mark-as-sold iframe cboxElement">
+                                                    MARK AS SOLD
+                                                </a>
+												<?php }?>
+												  <li> 
+                                                <?php if($stock['hot_deal'] == '1')
+													{
+													?>
+												<a href="<?php echo $this->url('inventory',array('action' => "unmark-hoat-deal",'id'=>$stock['stock_id'])) ?>" class="iframe cboxElement">
+                                                    UNMARK Hot Deal
+                                                </a>
+												<?php
+													}
+													else
+													{
+													?>
+												<a href="javascript:void(0);" stock-id="<?php echo $stock['stock_id']; ?>" class="mark-as-hot-deal iframe cboxElement fancybox">
+												<?php //echo $this->url('inventory',array('action' => "mark-hoat-deal",'id'=>$stock['stock_id'])) ?>
+                                                    MARK AS Hot Deal
+                                                </a>
+												<?php } ?>
+                                            </li>
+											<li><a class="iframe cboxElement" href="<?php echo $this->url('inventory',array('action' => "export-pdf",'id'=>$stock['stock_id'])) ?>" target="_blank">EXPORT PDF</a></li>
+											  <li> 
+                                                <?php if($stock['show_on_site'] == '1')
+													{
+													?>
+												<a href="<?php echo $this->url('inventory',array('action' => "not-show-on-site",'id'=>$stock['stock_id'])) ?>" class="iframe cboxElement">
+                                                    Don't Show On Site
+                                                </a>
+												<?php
+													}
+													else
+													{
+													?>
+												<a href="<?php echo $this->url('inventory',array('action' => "show-on-site",'id'=>$stock['stock_id'])) ?>" class="iframe cboxElement">
+												<?php //echo $this->url('inventory',array('action' => "mark-hoat-deal",'id'=>$stock['stock_id'])) ?>
+                                                    Show On Site
+                                                </a>
+												<?php } ?>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div></td><td></td></tr>
+                                    <?php } ?>
+									</tbody></table>
+</div>
+    </div>
+    
+   
+    
+</div>
+             </div>
+    </div>

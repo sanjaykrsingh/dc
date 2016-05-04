@@ -1,0 +1,117 @@
+<div class="admin_menu_box">
+      
+            
+             <div class="">
+               <div class="manage-inventory-right-panel">
+	<h1>
+		Edit Buyer Enquiry - 
+        	
+       		Car: <?php echo $arrData['make_name']." - ".$arrData['model_name'].	" - ".$arrData['variant_name']; ?>
+            , Budget: <?php echo $arrData['budget_range'];?> LKH 
+        
+    </h1>
+		<div class="errortopdiv" style="color: red; text-align: center; width: 100%;"><?php print_r(@$flashMessages[0]); ?></div>
+     <div class="tab">
+    	
+    </div>	
+	<div class="tab-Available">
+        <div class="add-inventory-tab-content">
+		<?php $form->prepare(); // The correct enctype is set here ?>
+		<?php echo $this->form()->openTag($form); ?>
+			<input type="hidden" name="enq_id" id="enq_id" value="<?php echo $arrData['enq_id']; ?>">
+			<input type="hidden" name="customer_id" id="customer_id" value="<?php echo $arrData['customer_id']; ?>">
+        <!-- Car Details -->
+
+		
+        <div class="sub-content">
+		
+		 
+            <table cellpadding="12" cellspacing="0">
+            	<tbody>
+				
+				<tr>
+                	<td>					 
+					<span class="label-text">Customer Name: </span>
+					 <?php echo $this->formText($form->get('name')); ?>	
+                    </td>
+				
+                	<td>					 
+					<span class="label-text">Email: </span>
+					 <?php echo $this->formText($form->get('email')); ?>
+					 </td>
+					 <td>
+					 <span class="label-text">Mobile: </span>
+					 <?php echo $this->formText($form->get('mobile')); ?>	
+                    </td>
+					
+               </tr>
+				<tr>
+                	<td>					 
+					<span class="label-text">Address: </span>
+					 <?php echo $this->formTextArea($form->get('customer_address')); ?>	
+                    </td>
+					
+                
+                	
+                	<td>					 
+					<span class="label-text">State: </span>
+					 <?php echo $this->formSelect($form->get('customer_state')); ?>	
+                    </td>
+					
+					
+                	<td>					 
+					<span class="label-text">City: </span>
+					 <?php echo $this->formSelect($form->get('customer_city')); ?>	
+                    </td>
+				</tr>
+				<tr>
+                	<td>					 
+					<span class="label-text">Pin Code: </span>
+					 <?php echo $this->formText($form->get('customer_pin')); ?>	
+                    </td>
+					
+               
+                	<td>					 
+					<span class="label-text">Gender: </span>
+					 <?php echo $this->formSelect($form->get('gender')); ?>	
+                    </td>
+					
+               
+                	<td>					 
+					<span class="label-text">Prefession: </span>
+					 <?php echo $this->formText($form->get('profession')); ?>	
+                    </td>
+					
+                </tr>
+				<tr>
+                	<td>					 
+					<span class="label-text">Annual Income: </span>
+					 <?php echo $this->formText($form->get('annual_income')); ?>	
+                    </td>
+					
+                	
+					
+               
+                	<td colspan="2">					 
+					<span class="label-text">Comments: </span>
+					 <?php echo $this->formTextArea($form->get('comments')); ?>	
+                    </td>
+					
+                </tr>
+				<tr>
+                	<td>					 
+					<span class="label-text">Status: </span>
+					 <?php echo $this->formSelect($form->get('status')); ?>	
+                    </td>
+					</tr>
+				
+               
+            </tbody></table>
+			<input type="submit" id="addimagesave" class="add-enventry-save" value="Save">
+		</div>
+		<?php echo $this->form()->closeTag(); ?>
+	 </div>
+	 </div>
+</div>
+</div>
+</div>

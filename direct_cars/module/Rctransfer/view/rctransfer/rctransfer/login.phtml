@@ -1,0 +1,682 @@
+
+ <div class="admin_menu_box">
+             <div class="">
+               				<div class="manage-inventory-right-panel">
+   <div class="middle">
+
+<span class="err_hide"></span>
+<h3>Document Upload RC Transfer File Login & Status Updation</h3>
+ <div class="tab">
+    	<ul>
+           <li><a style="cursor:pointer" href="<?php echo $this->url('rctransfer',array("action"=>"create-agent")) ?>" >Create Agent</a></li>
+            <li><a style="cursor:pointer" class="active" >RCT Log-in</a></li>
+			 <li><a style="cursor:pointer"  href="<?php echo $this->url('rctransfer',array("action"=>"view")) ?>">RCT Edit</a></li>
+        </ul>
+    </div>	 
+ <div class="tab-Available">
+        <div class="add-inventory-tab-content">
+<?php if(count($flashMessages)) : ?>
+    <div class="row" >
+        <div class="alert alert-success alert-dismissable">
+            <button class="close" aria-hidden="true" data-dismiss="alert" type="button">
+                ×
+            </button>
+            <ul>
+                <?php foreach ($flashMessages as $msg) : ?>
+                    <li><?php echo $msg; ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>
+<div class="grid_head">
+
+
+</div>
+
+<?php $form->prepare(); // The correct enctype is set here ?>
+		<?php echo $this->form()->openTag($form); ?>
+		<?php echo $this->formHidden($form->get('stock_id')); ?>
+		 <div class="sub-content">
+		<div class="basic-car-detail-header">Vehicle Detail</div>
+		 <table cellpadding="12" cellspacing="12" width="100%">
+                
+                <tbody>
+				<tr>
+                    <td><span class="label-text">Reg No.*&nbsp; &nbsp;</span><?php echo $this->formText($form->get('reg_no')); ?> <input type="button" id="vehicledetail" value="Go"></td>
+					<td><span class="label-text">Make&nbsp; &nbsp;</span><?php echo $this->formText($form->get('make_name')); ?> </td>
+                    <td><span class="label-text">Model&nbsp; &nbsp;</span><?php echo $this->formText($form->get('model_name')); ?> </td>
+                </tr>
+				<tr>
+				<td><span class="label-text">Variant&nbsp; &nbsp;</span><?php echo $this->formText($form->get('variant_name')); ?> </td>
+				<td><span class="label-text">Make Year&nbsp; &nbsp;</span><?php echo $this->formText($form->get('make_year')); ?> <?php echo $this->formText($form->get('make_month')); ?></td>
+				<td><span class="label-text">Fuel Type&nbsp; &nbsp;</span><?php echo $this->formText($form->get('fuel_type')); ?> </td>
+				</tr>
+				<tr>
+				<td><span class="label-text">Hypothecation&nbsp; &nbsp;</span><span class="select-popup-container"><?php echo $this->formRadio($form->get('hypothecation')); ?> </span></td>
+				<td class="financier_name"><span class="label-text">Financier Name&nbsp; &nbsp;</span><?php echo $this->formSelect($form->get('financier_name')); ?> </td>
+				<td class="financier_name"><input type="text" name="txt_financier_name" id="txt_financier_name" value="" style="display:none" class="basic-car-detail-textbox"></td>
+				</tr>
+				<tr>
+				<td><span class="label-text">Purchase Date&nbsp; &nbsp;</span><?php echo $this->formText($form->get('purchase_date')); ?> </td>
+				<td><span class="label-text">Date of Delivery&nbsp; &nbsp;</span><?php echo $this->formText($form->get('delivery_date')); ?> </td>
+				<td><span class="label-text">Delivered By&nbsp; &nbsp;</span><?php echo $this->formSelect($form->get('delivered_by')); ?> </td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="sub-content">
+		<div class="basic-car-detail-header">Seller & Purchase Documents</div>
+		 <table cellpadding="12" cellspacing="12" width="100%">
+                <?php echo $this->formHidden($form->get('seller_id')); ?>
+                <tbody>
+					<tr>
+						<td >
+						<span class="label-text">Seller Mob: </span>
+						 <?php echo $this->formText($form->get('seller_mobile')); ?>  <input type="button" id="sellermobile" value="Go">
+						</td>
+						<td >
+						<span class="label-text">Seller ID: </span>
+						 <?php echo $this->formText($form->get('seller_number')); ?>  <input type="button" id="sellernumber" value="Go">
+						</td>
+							<td >
+						<span class="label-text">Seller Name: </span>
+						 <?php echo $this->formText($form->get('seller_name')); ?>
+						</td>
+                  
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">Original RC  File*: </span>
+						 <?php echo $this->formSelect($form->get('original_rc_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('original_rc_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+							 <?php $fileElement = $form->get('original_rc_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>	
+						</div>
+												
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">Insurance: </span>
+						 <?php echo $this->formSelect($form->get('insurance_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('insurance_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('insurance_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						 </div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">TTO Set: </span>
+						 <?php echo $this->formSelect($form->get('tto_set_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('tto_set_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('tto_set_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>	
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">NOC & Form 35: </span>
+						 <?php echo $this->formSelect($form->get('form35_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('form35_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('form35_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">Affidavit: </span>
+						 <?php echo $this->formSelect($form->get('affidavit_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('affidavit_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('affidavit_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">Letter Head: </span>
+						 <?php echo $this->formSelect($form->get('letter_head_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('letter_head_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('letter_head_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">ID Proof 1: </span>
+						 <?php echo $this->formSelect($form->get('id_proof_1_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('id_proof_1_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('id_proof_1_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">ID Proof 2: </span>
+						 <?php echo $this->formSelect($form->get('id_proof_2_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('id_proof_2_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('id_proof_2_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">Address Proof 1: </span>
+						 <?php echo $this->formSelect($form->get('address_proof_1_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('address_proof_1_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('address_proof_1_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">Address Proof 2: </span>
+						 <?php echo $this->formSelect($form->get('address_proof_2_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('address_proof_2_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('address_proof_2_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="sub-content">
+		<div class="basic-car-detail-header">Buyer Details & Documents</div>
+		 <table cellpadding="12" cellspacing="12" width="100%">
+                <?php echo $this->formHidden($form->get('buyer_id')); ?>
+                <tbody>
+					
+				<tr>
+                	<td >
+					<span class="label-text">Buyer Mob: </span>
+                   	<?php echo $this->formText($form->get('buyer_mobile')); ?>   <input type="button" id="buyermobile" value="Go">
+                    </td>
+                  	<td >
+					<span class="label-text">Buyer ID: </span>
+                   	 <?php echo $this->formText($form->get('buyer_number')); ?>   <input type="button" id="buyernumber" value="Go">
+                    </td>
+					<td >
+					<span class="label-text">Buyer Name: </span>
+                   	  <?php echo $this->formText($form->get('buyer_name')); ?>
+                    </td>
+                  
+                </tr>
+					<tr>
+                	<td >
+					<span class="label-text">Address: </span>
+                   	<?php echo $this->formTextArea($form->get('buyer_address')); ?>
+                    </td>
+                  	<td >
+					<span class="label-text">City: </span>
+                   	 <?php echo $this->formText($form->get('buyer_city')); ?>
+                    </td>
+					<td >
+					<span class="label-text">State: </span>
+                   	  <?php echo $this->formText($form->get('buyer_state')); ?>
+                    </td>
+                </tr>
+				<tr>
+				<td >
+					<span class="label-text">Zip: </span>
+                   	<?php echo $this->formText($form->get('buyer_pin')); ?>
+                    </td>
+				</tr>
+				<tr>
+						<td>
+						<span class="label-text">ID Proof 1: </span>
+						 <?php echo $this->formSelect($form->get('buyer_id_proof_1_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('buyer_id_proof_1_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('buyer_id_proof_1_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">ID Proof 2: </span>
+						 <?php echo $this->formSelect($form->get('buyer_id_proof_2_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('buyer_id_proof_2_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('buyer_id_proof_2_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">Address Proof 1: </span>
+						 <?php echo $this->formSelect($form->get('buyer_address_proof_1_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('buyer_address_proof_1_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('buyer_address_proof_1_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">Address Proof 2: </span>
+						 <?php echo $this->formSelect($form->get('buyer_address_proof_2_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('buyer_address_proof_2_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('buyer_address_proof_2_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<span class="label-text">PUC: </span>
+						 <?php echo $this->formSelect($form->get('puc_file_status')); ?></td>
+						<td>Received/Expected Date: <?php echo $this->formText($form->get('puc_date')); ?> </td>
+						<td>
+						<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('puc_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="sub-content">
+		<div class="basic-car-detail-header">RC Transfer File Log-in & Updation</div>
+		 <table cellpadding="12" cellspacing="12" width="100%">
+              
+                <tbody>
+					<tr>
+						<td >
+						<span class="label-text">Transfer By: </span>
+						 <?php echo $this->formSelect($form->get('transfer_by')); ?> 
+						</td>
+						<td >
+						<span class="label-text">Transfer Type: </span>
+						 <?php echo $this->formSelect($form->get('transfer_type')); ?>
+						</td>
+						<td><span class="label-text">DupRClicate RC:&nbsp; &nbsp;</span><span class="select-popup-container"><?php echo $this->formRadio($form->get('duplicate_rc')); ?> </span></td>
+                  
+					</tr>
+					<tr>
+					
+					<td><span class="label-text">HPA:&nbsp; &nbsp;</span><span class="select-popup-container"><?php echo $this->formRadio($form->get('hpa')); ?> </span></td>
+					<td class="buyer_financiers_name">
+						<span class="label-text">Financier Name: </span>
+						 <?php echo $this->formSelect($form->get('buyer_financiers_name')); ?>
+						</td>
+					<td class="buyer_financiers_name">
+					<input type="text" name="txt_buyer_financiers_name" id="txt_buyer_financiers_name" value="" style="display:none" class="basic-car-detail-textbox">
+					</td>
+					</tr>
+					
+					<tr>
+						<td >
+						<span class="label-text">From City: </span>
+						 <?php echo $this->formSelect($form->get('transfer_from')); ?> 
+						</td>
+						<td >
+						<span class="label-text">To City: </span>
+						 <?php echo $this->formSelect($form->get('transfer_to')); ?>
+						</td>
+						
+                  
+					</tr>
+					<tr>
+					<td></td>
+					<td><span class="label-text">CNG Addition:&nbsp; &nbsp;</span><span class="select-popup-container"><?php echo $this->formRadio($form->get('cng_addition')); ?> </span></td>
+					<td >
+						<span class="label-text">CNG Vendor: </span>
+						 <?php echo $this->formText($form->get('cng_vendor')); ?>
+						</td>
+					</tr>
+					<tr>
+                	<td >
+					 <?php echo $this->formHidden($form->get('agent_id')); ?>
+					<span class="label-text">Agent Mob: </span>
+                   	<?php echo $this->formText($form->get('agent_mobile')); ?>   <input type="button" id="agentmobile" value="Go">
+                    </td>
+                  	<td >
+					<span class="label-text">Agent ID: </span>
+                   	 <?php echo $this->formText($form->get('agent_number')); ?>   <input type="button" id="agentnumber" value="Go">
+                    </td>
+					<td >
+					<span class="label-text">Agent Name: </span>
+                   	  <?php echo $this->formText($form->get('agent_name')); ?>
+                    </td>
+                  
+                </tr>
+				<tr>
+                	<td >
+					<span class="label-text">File Status: </span>
+                   	<?php echo $this->formSelect($form->get('file_status')); ?>   
+                    </td>
+                  	<td >
+					<span class="label-text">Log-in Date: </span>
+                   	 <?php echo $this->formText($form->get('login_date')); ?> 
+                    </td>
+					<td >
+					<span class="label-text">Remarks: </span>
+                   	  <?php echo $this->formTextArea($form->get('login_remarks')); ?>
+                    </td>
+                  
+                </tr>
+				<tr>
+                	<td >
+					
+					<span class="label-text">Transfer Status: </span>
+                   	<?php echo $this->formSelect($form->get('transfer_status')); ?>   
+                    </td>
+                  	<td >
+					<span class="label-text">Transfer Date: </span>
+                   	 <?php echo $this->formText($form->get('transfer_date')); ?> 
+                    </td>
+					<td>
+					<div class="fileUpload btn btn-red">
+							<span>Upload</span>
+						 <?php $fileElement = $form->get('transfer_file'); ?>
+							<?php echo $this->formFile($fileElement); ?>
+							<?php echo $this->formElementErrors($fileElement); ?>							
+						</div>
+					</td>
+                </tr>
+				<tr>
+				<td >
+					<span class="label-text">Discrepency Remarks: </span>
+                   	<?php echo $this->formTextArea($form->get('discrepency_details')); ?>   
+                    </td>
+                  	<td >
+					<span class="label-text">ReLog-in Date: </span>
+                   	 <?php echo $this->formText($form->get('resubmission_date')); ?> 
+                    </td>
+					<td >
+					<span class="label-text">ReLog-in Remarks: </span>
+                   	  <?php echo $this->formTextArea($form->get('resubmission_remarks')); ?>
+                    </td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+			<input type="submit" id="addimagesave" class="add-enventry-save" value="Save">
+<?php echo $this->form()->closeTag(); ?>
+
+</div>
+</div>
+ </div>
+    
+</div>
+             </div>
+    </div>
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('[name="purchase_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="delivery_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});	  
+  $('[name="login_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="transfer_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="resubmission_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="original_rc_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="insurance_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="tto_set_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="form35_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="affidavit_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="letter_head_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="id_proof_1_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="id_proof_2_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="address_proof_1_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="address_proof_2_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="buyer_id_proof_1_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="buyer_id_proof_2_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="buyer_address_proof_1_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="buyer_address_proof_2_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$('[name="puc_date"]').datepicker({
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
+	$("#rct-login").submit( function(){
+		var err = "";
+		var stock_id = $("#stock_id").val();
+				
+		$.ajax({
+				type: "post",
+				data: "stock_id=" +stock_id,
+				url: base_url() + "rctransfer/check-rc-exist",
+				async: false,
+				dataType: "html",
+				success: function(response) {	
+					if(response > 0)
+					{
+						err += 'Entry Already Exist. Please Edit From RCT Edit Screen. \n';
+					}
+				}
+		});
+		
+		if($("#original_rc_file_status").val() == 'Received' && $("#original_rc_file").val() == "")
+		{
+			err += "Please Select Original RC File \n";
+		}
+		if($("#insurance_file_status").val() == 'Received' && $("#insurance_file").val() == "")
+		{
+			err += "Please Select Insurance File \n";
+		}
+		if($("#tto_set_file_status").val() == 'Received' && $("#tto_set_file").val() == "")
+		{
+			err += "Please Select TTO Set File \n";
+		}
+		if($("#form35_file_status").val() == 'Yes' && $("#form35_file").val() == "")
+		{
+			err += "Please Select NOC & Form 35 File \n";
+		}
+		if($("#affidavit_file_status").val() == 'Received' && $("#affidavit_file").val() == "")
+		{
+			err += "Please Select Affidavit File \n";
+		}
+		if($("#letter_head_file_status").val() == 'Received' && $("#letter_head_file").val() == "")
+		{
+			err += "Please Select Letter Head File \n";
+		}
+		if($("#id_proof_1_file_status").val() != '' && $("#id_proof_1_file_status").val() != 'Pending' && $("#id_proof_1_file").val() == "")
+		{
+			err += "Please Select Seller ID Proof 1 File \n";
+		}
+		if($("#id_proof_2_file_status").val() != '' && $("#id_proof_2_file_status").val() != 'Pending' && $("#id_proof_2_file").val() == "")
+		{
+			err += "Please Select Seller ID Proof 2 File \n";
+		}
+		if($("#address_proof_1_file_status").val() != '' && $("#address_proof_1_file_status").val() != 'Pending' && $("#address_proof_1_file").val() == "")
+		{
+			err += "Please Select Seller Address Proof 1 File \n";
+		}
+		if($("#address_proof_2_file_status").val() != '' && $("#address_proof_2_file_status").val() != 'Pending' && $("#address_proof_2_file").val() == "")
+		{
+			err += "Please Select Seller Address Proof 2 File \n";
+		}
+		if($("#buyer_id_proof_1_file_status").val() != '' && $("#buyer_id_proof_1_file_status").val() != 'Pending' && $("#buyer_id_proof_1_file").val() == "")
+		{
+			err += "Please Select Buyer ID Proof 1 File \n";
+		}
+		if($("#buyer_id_proof_2_file_status").val() != '' && $("#buyer_id_proof_2_file_status").val() != 'Pending' && $("#buyer_id_proof_2_file").val() == "")
+		{
+			err += "Please Select Buyer ID Proof 2 File \n";
+		}
+		if($("#buyer_address_proof_1_file_status").val() != '' && $("#buyer_address_proof_1_file_status").val() != 'Pending' && $("#buyer_address_proof_1_file").val() == "")
+		{
+			err += "Please Select Buyer Address Proof 1 File \n";
+		}
+		if($("#buyer_address_proof_2_file_status").val() != '' && $("#buyer_address_proof_2_file_status").val() != 'Pending' && $("#buyer_address_proof_2_file").val() == "")
+		{
+			err += "Please Select Buyer Address Proof 2 File \n";
+		}
+		if($("#puc_file_status").val() == 'Received' && $("#puc_file").val() == "")
+		{
+			err += "Please Select PUC File \n";
+		}
+		if($("#transfer_status").val() == 'Transferred' && $("#transfer_file").val() == "")
+		{
+			err += "Please Select Traansfer File \n";
+		}
+		if($("#file_status").val() == 'Logged-in' && $("#agent_id").val() == '')
+		{
+			err += "Please Enter Agent Detail \n";
+		}
+		if($("#file_status").val() != 'Logged-in' && $("#login_date").val()  != "")
+		{
+			err += "Please Remove Login Date \n";
+		}
+		if($("#file_status").val() == 'Logged-in' && $("#login_date").val()  == "")
+		{
+			err += "Please Select Login Date \n";
+		}
+		if($("#transfer_status").val() == 'Transferred' && $("#transfer_date").val()  == "")
+		{
+			err += "Please Select Transfer Date \n";
+		}
+		if(err != "")
+		{
+			alert(err);
+			return false;
+		}
+		
+	});
+  });
+
+</script>

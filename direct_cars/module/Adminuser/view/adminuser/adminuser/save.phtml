@@ -1,0 +1,69 @@
+<div class="admin_menu_box">
+      
+            
+             <div class="">
+               <div class="manage-inventory-right-panel">
+	<h1>
+		Add Testimonial
+        	<div>
+       			
+             
+        </div>
+    </h1>
+		<div class="errortopdiv" style="color: red; text-align: center; width: 100%;"><?php print_r(@$flashMessages[0]); ?></div>
+     <div class="tab">
+    	
+    </div>	
+	<div class="tab-Available">
+        <div class="add-inventory-tab-content">
+		<?php $form->prepare(); // The correct enctype is set here ?>
+		<?php echo $this->form()->openTag($form); ?>
+			<input type="hidden" name="testimonial_id" id="testimonial_id" value="">
+        <!-- Car Details -->
+		
+        <div class="sub-content">
+		
+		 
+            <table cellpadding="12" cellspacing="0">
+            	<tbody>
+				
+				<tr>
+                	<td>					 
+					<span class="label-text">Client Name: </span>
+					 <?php echo $this->formText($form->get('client_name')); ?>	
+                    </td>
+					
+                </tr>
+				<tr>
+                	<td>
+					 <?php $fileElement = $form->get('image-file'); ?>
+					<span class="label-text">Client Image*: </span>
+					
+                    	<?php echo $this->formFile($fileElement); ?>
+						<?php echo $this->formElementErrors($fileElement); ?>
+						
+                    </td>
+				</tr>
+				<tr>
+                	<td>					 
+					<span class="label-text">Testimonial*: </span>
+					 <?php echo $this->formTextarea($form->get('description')); ?>	
+                    </td>
+					
+                </tr>
+				<tr>
+                	<td>					 
+					<span class="label-text">Status*: </span>
+					 <?php echo $this->formSelect($form->get('status')); ?>	
+                    </td>
+					
+                </tr>
+            </tbody></table>
+			<input type="submit" id="addimagesave" class="add-enventry-save" value="Save">
+		</div>
+		<?php echo $this->form()->closeTag(); ?>
+	 </div>
+	 </div>
+</div>
+</div>
+</div>

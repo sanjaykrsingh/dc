@@ -1,0 +1,60 @@
+<div class="admin_menu_box">
+      
+            
+             <div class="">
+               <div class="manage-inventory-right-panel">
+	<h1>
+		Add Inventory Images
+        	<div class="add-image">
+       			
+              <a href="<?php echo $this->url('inventory',array('action' => "image-list",'id'=>$stockid)) ?>">Back </a> 
+        </div>
+    </h1>
+		<div class="errortopdiv" style="color: red; text-align: center; width: 100%;"><?php print_r(@$flashMessages[0]); ?></div>
+     <div class="tab">
+    	<ul>
+           <li><a style="cursor:pointer" href="<?php echo $this->url('inventory',array('action' => "edit",'id'=>$stockid))?>">Car Details</a></li>
+            <li><a style="cursor:pointer" class="active " >Image Manager</a></li>
+        </ul>
+    </div>	
+	<div class="tab-Available">
+        <div class="add-inventory-tab-content">
+		<?php $form->prepare(); // The correct enctype is set here ?>
+		<?php echo $this->form()->openTag($form); ?>
+			<input type="hidden" name="mmv_id" id="mmv_id" value="">
+        <!-- Car Details -->
+		
+        <div class="sub-content">
+		 <div style="color:green;text-align:center;padding-bottom: 10px;
+    text-align: center;">You can upload images of size greater than 25kb and less than 8MB</div>
+		 <div class="basic-car-detail-header">Image Upload</div>
+            <table cellpadding="12" cellspacing="0">
+            	<tbody>
+				
+				<tr>
+                	<td>
+					 <?php
+						
+					 $fileElement = $form->get('image-file'); ?>
+					<span class="label-text">Select Image*: </span>
+					
+                    	<?php echo $this->formFile($fileElement); ?>
+						<?php echo $this->formElementErrors($fileElement); ?>
+						
+                    </td>
+					
+                    <td>
+					
+                    </td><td>&nbsp;
+                    </td>
+                </tr>
+				
+            </tbody></table>
+			<input type="submit" id="addimagesave" class="add-enventry-save" value="Save">
+		</div>
+	<?php echo $this->form()->closeTag(); ?>
+	 </div>
+	 </div>
+</div>
+</div>
+</div>

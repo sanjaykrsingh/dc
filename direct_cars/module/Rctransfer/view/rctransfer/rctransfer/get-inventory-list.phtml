@@ -1,0 +1,165 @@
+
+ <div class="admin_menu_box">
+             <div class="">
+               				<div class="manage-inventory-right-panel">
+   <div class="middle">
+
+<span class="err_hide"></span>
+<h3>Inventory List</h3>
+ 
+	
+ <div class="tab-Available">
+ 
+        <div class="add-inventory-tab-content">
+
+<div class="grid_head">
+
+
+</div>
+<span class="tab_manage_container" style="display:block">
+<br>
+
+    <table class="table-content" width="100%" cellpadding="5" cellspacing="0">
+<thead>
+ <tr>
+		<th>Stock  Id</th>
+        <th>Reg. No.</th>
+		<th>Model</th>
+		<th>Make Year</th>
+		<th>Purchase Date</th>
+		<th>Delivery Date</th>
+</tr>
+</thead>
+<tbody>
+ <?php
+                foreach ($arrStockData as $stock) :
+            ?>
+<tr>
+	<td><a href="javascript:void(0);" class="selectrctrecord" stock-id = "<?php echo $this->escapeHtml($stock['stock_id']);?>"><?php echo $this->escapeHtml($stock['stock_id']);?></a></td>
+	<td><?php echo $this->escapeHtml($stock['registration_no']);?></td>
+	
+	<td> <?php echo $this->escapeHtml($stock['make_name']);?> - <?php echo $this->escapeHtml($stock['model_name']);?> - <?php echo $this->escapeHtml($stock['variant_name']);?></td>
+	<td><?php echo $this->escapeHtml($stock['make_month']);?> - <?php echo $this->escapeHtml($stock['make_year']);?></td>
+	
+		<td><?php echo date("d-m-Y",strtotime($stock['purchase_date']));?></td>
+		<td><?php echo date("d-m-Y",strtotime($stock['delivery_date']));?></td>
+	
+</tr>
+ <?php
+                endforeach;
+            ?>
+	<?php if(count($arrStockData) == 0)
+	{
+		?>
+		<tr><td colspan="6"><center>No Records Found</center></td></tr>
+		<?php
+	} ?>
+</tbody></table>
+
+</span>
+</div>
+</div>
+ </div>
+    
+</div>
+             </div>
+    </div>
+<script type="text/javascript">
+  $(document).ready(function() {	
+	$(".selectrctrecord").click(function (e) {
+		var stock_id = $(this).attr("stock-id");
+		window.parent.$("#stock_id").val(stock_id);
+		
+		$.ajax({
+				type: "post",
+				data: "stock_id=" +stock_id,
+				url: base_url() + "inventory/get-vehicle-detail",
+				async: false,
+				dataType: "html",
+				success: function(response) {			
+					var result = $.parseJSON(response);
+					$.each(result ,function(a,b){
+						window.parent.$("#make_name").val(b.make_name);
+						window.parent.$("#model_name").val(b.model_name);
+						window.parent.$("#variant_name").val(b.variant_name);
+						window.parent.$("#make_year").val(b.make_year);
+						window.parent.$("#make_month").val(b.make_month);
+						window.parent.$("#fuel_type").val(b.fuel_type);
+						window.parent.$("input[name=hypothecation][value='"+b.hypothecation+"']").prop("checked",true);
+						if(b.hypothecation == 0)
+						{
+							window.parent.$(".financier_name").attr("style","display:none");
+						}
+						window.parent.$("#financier_name").val(b.seller_financiers_name);
+						if ( window.parent.$("#financier_name option[value='"+b.seller_financiers_name+"']").length == 0 ){
+							window.parent.$("#txt_financier_name").val(b.seller_financiers_name);
+							window.parent.$("#financier_name").val('other');
+						}
+						else
+						{
+							window.parent.$("#financier_name").val(b.seller_financiers_name);
+						}
+						if(window.parent.$("#financier_name").val() == 'other')
+						{
+							window.parent.$("#txt_financier_name").attr("style","")			
+						}
+						else
+						{
+							window.parent.$("#txt_financier_name").attr("style","display:none")			
+						}
+						if(b.hpa == 1)	b.hpa = 'Yes'; else b.hpa='No';
+						window.parent.$("input[name=hpa][value='"+b.hpa+"']").prop("checked",true);
+						if(b.hpa == 'No')
+						{
+							window.parent.$(".buyer_financiers_name").attr("style","display:none");
+						}
+						if ( window.parent.$("#buyer_financiers_name option[value='"+b.buyer_financiers_name+"']").length == 0 ){
+							window.parent.$("#txt_buyer_financiers_name").val(b.buyer_financiers_name);
+							window.parent.$("#buyer_financiers_name").val('other');
+						}
+						else
+						{
+							window.parent.$("#buyer_financiers_name").val(b.buyer_financiers_name);
+						}
+						if(window.parent.$("#buyer_financiers_name").val() == 'other')
+						{
+							window.parent.$("#txt_buyer_financiers_name").attr("style","")			
+						}
+						else
+						{
+							window.parent.$("#txt_buyer_financiers_name").attr("style","display:none")			
+						}
+						
+						if(b.purchase_date != '0000-00-00')
+						{
+							var rc_date = b.purchase_date.split('-');
+							window.parent.$("#purchase_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						
+						if(b.delivery_date != '0000-00-00')
+						{
+							var rc_date = b.delivery_date.split('-');
+							window.parent.$("#delivery_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						window.parent.$("#delivered_by").val(b.delivered_by);
+						window.parent.$("#stock_id").val(b.stock_id);
+						window.parent.$("#seller_id").val(b.seller_id);
+						window.parent.$("#seller_number").val(b.seller_number);
+						window.parent.$("#seller_mobile").val(b.seller_mobile);
+						window.parent.$("#seller_name").val(b.seller_name);
+						window.parent.$("#buyer_id").val(b.buyer_id);
+						window.parent.$("#buyer_number").val(b.buyer_number);
+						window.parent.$("#buyer_mobile").val(b.buyer_mobile);
+						window.parent.$("#buyer_name").val(b.buyer_name);
+						window.parent.$("#buyer_address").val(b.buyer_address);
+						window.parent.$("#buyer_city").val(b.buyer_city);
+						window.parent.$("#buyer_state").val(b.buyer_state);
+						window.parent.$("#buyer_pin").val(b.buyer_pin);
+					});
+				}	
+					
+			});
+			 $.fancybox.close(); 
+	});
+  });
+</script>

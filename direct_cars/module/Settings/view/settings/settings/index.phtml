@@ -1,0 +1,79 @@
+
+ <div class="admin_menu_box">
+             <div class="">
+               				<div class="manage-inventory-right-panel">
+   <div class="middle">
+
+<span class="err_hide"></span>
+<h3>Page List</h3>
+
+<?php if(count($flashMessages)) : ?>
+    <div class="row" >
+        <div class="alert alert-success alert-dismissable">
+            <button class="close" aria-hidden="true" data-dismiss="alert" type="button">
+                ×
+            </button>
+            <ul>
+                <?php foreach ($flashMessages as $msg) : ?>
+                    <li><?php echo $msg; ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>
+<!--tabs add here-->
+<table width="100%" border="0">
+    <tbody>
+        <tr>
+            <td width="22%" align="right" height="20"><a href="<?php echo $this->url('settings',array('action' => "variable-edit")) ?>" class="link_org3">Edit Global Variables</a></td>
+						
+        </tr>
+    </tbody>
+</table>
+<br>
+
+
+
+
+<div class="grid_head">
+
+
+</div>
+<span class="tab_manage_container" style="display:block">
+<form action="" name="tplform03" id="tplform03" method="post">
+
+    <table class="table-content" width="100%" cellpadding="5" cellspacing="0">
+<thead>
+ <tr>
+		<th>page</th>
+        <th width="100px">Action</th>
+</tr>
+</thead>
+<tbody>
+ <?php
+                foreach ($arrSettings as $settings) :
+            ?>
+<tr>
+	
+	<td> <?php echo $this->escapeHtml($settings['settings_name']);?></td>
+       
+        <td>
+			 <a href="<?php echo $this->url('settings',array('action' => "download","id"=>$settings['settings_id'])) ?>">Download</a> |
+            <a href="<?php echo $this->url('settings',array('action' => "edit","id"=>$settings['settings_id'])) ?>">Edit</a>
+          
+            
+        </td>
+        
+	
+</tr>
+ <?php
+                endforeach;
+            ?>
+</tbody></table>
+</form>
+</span>
+ </div>
+    
+</div>
+             </div>
+    </div>

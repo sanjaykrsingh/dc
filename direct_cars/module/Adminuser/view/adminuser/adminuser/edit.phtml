@@ -1,0 +1,73 @@
+<div class="admin_menu_box">
+      
+            
+             <div class="">
+               <div class="manage-inventory-right-panel">
+	<h1>
+		Edit User
+        	<div>
+       			
+             
+        </div>
+    </h1>
+		<div class="errortopdiv" style="color: red; text-align: center; width: 100%;"><?php print_r(@$flashMessages[0]); ?></div>
+     <div class="tab">
+    	
+    </div>	
+	<div class="tab-Available">
+        <div class="add-inventory-tab-content">
+		<?php $form->prepare(); // The correct enctype is set here ?>
+		<?php echo $this->form()->openTag($form); ?>
+			<input type="hidden" name="user_id" id="user_id" value="<?php echo $userid; ?>">
+        <!-- Car Details -->
+		
+        <div class="sub-content">
+		
+		 
+            <table cellpadding="12" cellspacing="0">
+            	<tbody>
+				<tr>
+                	<td>					 
+					<span class="label-text">First Name: </span>
+					 <input type="text" name="first_name" id="first_name" value="<?php echo $arrUser['first_name']; ?>">
+                    </td>
+				
+                	<td>					 
+					<span class="label-text">Last Name: </span>
+					 <input type="text" name="last_name" id="last_name" value="<?php echo $arrUser['last_name']; ?>">
+                    </td>
+					
+					<td>					 
+					<span class="label-text">Display Name: </span>
+					 <input type="text" name="display_name" id="display_name" value="<?php echo $arrUser['display_name']; ?>">
+                    </td>
+					
+                </tr>
+				<tr>
+                	<td>					 
+					<span class="label-text">New Password: </span>
+					 <?php echo $this->formInput($form->get('newCredential')); ?>	
+                    </td>
+				
+                	<td>					 
+					<span class="label-text">Confirm Password: </span>
+					 <?php echo $this->formInput($form->get('newCredentialVerify')); ?>	
+                    </td>
+					<td>
+						<span class="label-text">Is Admin: </span>
+							<select name="is_admin" id="is_admin">
+								<option value="0" <?php if($arrUser['is_admin'] == 0) echo "Selected"; ?>>No</option>
+								<option value="1" <?php if($arrUser['is_admin'] == 1) echo "Selected"; ?>>Yes</option>
+							</select>
+					</td>
+                </tr>
+				
+            </tbody></table>
+			<input type="submit" id="addimagesave" class="add-enventry-save" value="Save">
+		</div>
+		<?php echo $this->form()->closeTag(); ?>
+	 </div>
+	 </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,85 @@
+<div class="admin_menu_box">
+      
+            
+             <div class="">
+               <div class="manage-inventory-right-panel">
+	<h1>
+		Crop Images
+        	<div class="add-image">
+       			
+              <a href="<?php echo $this->url('showroom',array('action' => "view-images",'id'=>$showroom_id)) ?>">Back </a> 
+        </div>
+    </h1>
+		<div class="errortopdiv" style="color: red; text-align: center; width: 100%;"><?php print_r(@$flashMessages[0]); ?></div>
+<script type="text/javascript">
+
+  $(function(){
+
+    $('#cropbox').Jcrop({
+      aspectRatio: 1.5,
+      onSelect: updateCoords
+    });
+
+  });
+
+  function updateCoords(c)
+  {
+    $('#x').val(c.x);
+    $('#y').val(c.y);
+    $('#w').val(c.w);
+    $('#h').val(c.h);
+  };
+
+  function checkCoords()
+  {
+    if (parseInt($('#w').val())) return true;
+    alert('Please select a crop region then press submit.');
+    return false;
+  };
+
+</script>   
+   <div class="tab">
+    	<ul>
+          
+        </ul>
+    </div>	
+	<div class="tab-Available">
+        <div class="add-inventory-tab-content">
+        <!-- Car Details -->
+<form action="" method="post" onsubmit="return checkCoords();">
+        <div class="sub-content">
+		 <div class="basic-car-detail-header">Crop Image</div>
+            <table cellpadding="12" cellspacing="0">
+            	<tbody>
+				
+				<tr>
+                	<td align="center">
+					<?php //echo "<pre>"; print_r($data); ?>
+					<!-- This is the image we're attaching Jcrop to -->
+					<img src="<?php echo $image_path."showroom/src/".$image_name; ?>" id="cropbox" />
+
+					<!-- This is the form that our event handler fills -->
+					
+						<input type="hidden" name="stock_img_src" id="stock_img_src"value="<?php echo $image_name; ?>" >
+						<input type="hidden" id="action_taken" name="action_taken" value="crop">
+						<input type="hidden" id="x" name="x" />
+						<input type="hidden" id="y" name="y" />
+						<input type="hidden" id="w" name="w" />
+						<input type="hidden" id="h" name="h" />
+						
+					
+                    </td>
+                    <td>
+					
+                    </td><td>&nbsp;
+                    </td>
+                </tr>
+            </tbody></table>
+			<input type="submit" value="Crop Image"  class="add-enventry-save"/>
+		</div>
+	</form>
+	 </div>
+	 </div>
+</div>
+</div>
+</div>

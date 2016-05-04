@@ -1,0 +1,41 @@
+<?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
+namespace Application\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Zend\Mvc\MvcEvent;
+
+class IndexController extends AbstractActionController
+{
+   public function onDispatch(MvcEvent $e) {
+
+        $sm = $this->getServiceLocator();
+        $auth = $sm->get('zfcuserauthservice');
+        if (!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('zfcuser');
+        }
+		else
+		{
+			return $this->redirect()->toRoute('inventory',array('action'=>'dashboard'));
+		}
+        return parent::onDispatch($e);
+    }
+
+    public function indexAction() {     
+        
+        $sm = $this->getServiceLocator();
+        $auth = $sm->get('zfcuserauthservice');
+        if (!$auth->hasIdentity()) {
+            //return $this->redirect()->toRoute('zfcuser');
+        }
+        return new ViewModel();
+    }
+}

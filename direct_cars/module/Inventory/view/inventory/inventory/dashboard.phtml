@@ -1,0 +1,311 @@
+﻿
+	<div class="wrapper dashboard">
+	
+		<div class="container">
+			<div class="col-md-6">
+				<h4>Enquiries Summary Report</h4>
+				<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>By Enq Type</th>
+						<th>Today</th>
+						<th>Yesterday</th>
+						<th>WTD</th>
+						<th>MTD</th>
+						<th>All Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Buyer</td>
+						<td><?php echo $buyer_enquiry['today']; ?></td>
+						<td><?php echo $buyer_enquiry['yesterday']; ?></td>
+						<td><?php echo $buyer_enquiry['week']; ?></td>
+						<td><?php echo $buyer_enquiry['month']; ?></td>
+						<td><?php echo $buyer_enquiry['all']; ?></td>
+					</tr>
+					<tr>
+						<td>Seller</td>
+						<td><?php echo $seller_enquiry['today']; ?></td>
+						<td><?php echo $seller_enquiry['yesterday']; ?></td>
+						<td><?php echo $seller_enquiry['week']; ?></td>
+						<td><?php echo $seller_enquiry['month']; ?></td>
+						<td><?php echo $seller_enquiry['all']; ?></td>
+					</tr>
+					<tr>
+						<td>General</td>
+						<td><?php echo $general_enquiry['today']; ?></td>
+						<td><?php echo $general_enquiry['yesterday']; ?></td>
+						<td><?php echo $general_enquiry['week']; ?></td>
+						<td><?php echo $general_enquiry['month']; ?></td>
+						<td><?php echo $general_enquiry['all']; ?></td>
+					</tr>
+					<tr>
+						<td>Total</td>
+						<td><?php echo $buyer_enquiry['today']+$seller_enquiry['today']+$general_enquiry['today']; ?></td>
+						<td><?php echo $buyer_enquiry['yesterday']+$seller_enquiry['yesterday']+$general_enquiry['yesterday']; ?></td>
+						<td><?php echo $buyer_enquiry['week']+$seller_enquiry['week']+$general_enquiry['week']; ?></td>
+						<td><?php echo $buyer_enquiry['month']+$seller_enquiry['month']+$general_enquiry['month']; ?></td>
+						<td><?php echo $buyer_enquiry['all']+$seller_enquiry['all']+$general_enquiry['all']; ?></td>
+					</tr>
+				</tbody>
+			</table>
+				<!-- end table -->
+				
+				<h3>Enquiry Reports</h3>
+				
+				<h4>Buy Enquiry by Budget</h4>
+				<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Budget</th>
+						<th>Today</th>
+						<th>Yesterday</th>
+						<th>WTD</th>
+						<th>MTD</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Below 1 Lac</td>
+						<td><?php echo $arrBuyerBudget['today']['0-1']; ?></td>
+						<td><?php echo $arrBuyerBudget['yesterday']['0-1']; ?></td>
+						<td><?php echo $arrBuyerBudget['week']['0-1']; ?></td>
+						<td><?php echo $arrBuyerBudget['month']['0-1']; ?></td>
+					</tr>
+					<tr>
+						<td>1 - 2 Lac</td>
+						<td><?php echo $arrBuyerBudget['today']['1-2']; ?></td>
+						<td><?php echo $arrBuyerBudget['yesterday']['1-2']; ?></td>
+						<td><?php echo $arrBuyerBudget['week']['1-2']; ?></td>
+						<td><?php echo $arrBuyerBudget['month']['1-2']; ?></td>
+					</tr>
+					<tr>
+						<td>2 - 3 Lac</td>
+						<td><?php echo $arrBuyerBudget['today']['2-3']; ?></td>
+						<td><?php echo $arrBuyerBudget['yesterday']['2-3']; ?></td>
+						<td><?php echo $arrBuyerBudget['week']['2-3']; ?></td>
+						<td><?php echo $arrBuyerBudget['month']['2-3']; ?></td>
+					</tr>
+					<tr>
+						<td>3 - 5 Lac</td>
+						<td><?php echo $arrBuyerBudget['today']['3-5']; ?></td>
+						<td><?php echo $arrBuyerBudget['yesterday']['3-5']; ?></td>
+						<td><?php echo $arrBuyerBudget['week']['3-5']; ?></td>
+						<td><?php echo $arrBuyerBudget['month']['3-5']; ?></td>
+					</tr>
+					<tr>
+						<td>5 - 10 Lac</td>
+						<td><?php echo $arrBuyerBudget['today']['5-10']; ?></td>
+						<td><?php echo $arrBuyerBudget['yesterday']['5-10']; ?></td>
+						<td><?php echo $arrBuyerBudget['week']['5-10']; ?></td>
+						<td><?php echo $arrBuyerBudget['month']['5-10']; ?></td>
+					</tr>
+					<tr>
+						<td>Above 10 Lac</td>
+						<td><?php echo $arrBuyerBudget['today']['10-0']; ?></td>
+						<td><?php echo $arrBuyerBudget['yesterday']['10-0']; ?></td>
+						<td><?php echo $arrBuyerBudget['week']['10-0']; ?></td>
+						<td><?php echo $arrBuyerBudget['month']['10-0']; ?></td>
+					</tr>
+					<tr>
+						<td>Total</td>
+						<td><?php echo $arrBuyerBudget['today']['0-1']+$arrBuyerBudget['today']['1-2']+$arrBuyerBudget['today']['2-3']+$arrBuyerBudget['today']['3-5']+$arrBuyerBudget['today']['5-10']+$arrBuyerBudget['today']['10-0']; ?></td>
+						<td><?php echo $arrBuyerBudget['yesterday']['0-1']+$arrBuyerBudget['yesterday']['1-2']+$arrBuyerBudget['yesterday']['2-3']+$arrBuyerBudget['yesterday']['3-5']+$arrBuyerBudget['yesterday']['5-10']+$arrBuyerBudget['yesterday']['10-0']; ?></td>
+						<td><?php echo $arrBuyerBudget['week']['0-1']+$arrBuyerBudget['week']['1-2']+$arrBuyerBudget['week']['2-3']+$arrBuyerBudget['week']['3-5']+$arrBuyerBudget['week']['5-10']+$arrBuyerBudget['week']['10-0']; ?></td>
+						<td><?php echo $arrBuyerBudget['month']['0-1']+$arrBuyerBudget['month']['1-2']+$arrBuyerBudget['month']['2-3']+$arrBuyerBudget['month']['3-5']+$arrBuyerBudget['month']['5-10']+$arrBuyerBudget['month']['10-0']; ?></td>
+					</tr>
+				</tbody>
+			</table>
+				<!-- end table -->
+				
+				<h4>Buy Enquiry by Fuel Type</h4>
+				<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Make Model</th>
+						<th>Today</th>
+						<th>Yesterday</th>
+						<th>WTD</th>
+						<th>MTD</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($arrBuyerFuelType['month'] as $stock) { ?>
+					<tr>
+						<td><?php echo $stock['fuel_type']; ?></td>
+						<td><?php echo isset($arrBuyerFuelType['today'][$stock['fuel_type']])?$arrBuyerFuelType['today'][$stock['fuel_type']]:0; ?></td>
+						<td><?php echo isset($arrBuyerFuelType['yesterday'][$stock['fuel_type']])?$arrBuyerFuelType['yesterday'][$stock['fuel_type']]:0; ?></td>
+						<td><?php echo isset($arrBuyerFuelType['week'][$stock['fuel_type']])?$arrBuyerFuelType['week'][$stock['fuel_type']]:0; ?></td>
+						<td><?php echo $stock['cnt']; ?></td>
+					</tr>
+					<?php } ?>
+					
+				</tbody>
+			</table>
+				<!-- end table -->
+				
+				<h4>Buy Enquiry by Make Model</h4>
+				<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Make Model</th>
+						<th>Today</th>
+						<th>Yesterday</th>
+						<th>WTD</th>
+						<th>MTD</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($arrBuyerMM['month'] as $stock) { ?>
+					<tr>
+						<td><?php echo $stock['make_name']." ".$stock['model_name']; ?></td>
+						<td><?php echo isset($arrBuyerMM['today'][$stock['make_name']." ".$stock['model_name']])?$arrBuyerMM['today'][$stock['make_name']." ".$stock['model_name']]:0; ?></td>
+						<td><?php echo isset($arrBuyerMM['yesterday'][$stock['make_name']." ".$stock['model_name']])?$arrBuyerMM['yesterday'][$stock['make_name']." ".$stock['model_name']]:0; ?></td>
+						<td><?php echo isset($arrBuyerMM['week'][$stock['make_name']." ".$stock['model_name']])?$arrBuyerMM['week'][$stock['make_name']." ".$stock['model_name']]:0; ?></td>
+						<td><?php echo $stock['cnt']; ?></td>
+					</tr>
+					<?php } ?>
+					
+				</tbody>
+			</table>
+				<!-- end table -->
+			
+			</div>
+			<!-- end left section -->
+			<div class="col-md-6">
+				<div class="content listing-summary outer-bdr">
+					<h4>Listing Summary Report</h4>
+					<table class="table borderless">
+						<tbody>
+							<tr>
+								<td>Total Active Cars (Nos)</td>
+								<td><?php echo $total_active_cars;?></td>
+							</tr>
+							<tr>
+								<td>Active Cars with Pictures (Nos)</td>
+								<td><?php echo $total_img_cars;?></td>
+							</tr>
+							<tr>
+								<td>Active Cars with Pictures (%)</td>
+								<td><?php echo number_format(($total_img_cars/$total_active_cars)*100,2);?></td>
+							</tr>
+							<tr>
+								<td>Active Cars with Spl Offer (Nos)</td>
+								<td><?php echo $total_hot_deal_cars; ?></td>
+							</tr>
+						</tbody>
+					</table>
+					
+				</div>
+				<h3>Inventory Reports</h3>
+				
+				<h4>Stock Mix by Budget</h4>
+				<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Budget</th>
+						<th>No of Active Cars</th>
+						<th>Percentage</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Below 1 Lac</td>
+						<td><?php echo $arrBudget['0-1']; ?></td>
+						<td><?php echo number_format(($arrBudget['0-1']/$total_active_cars)*100,2);?></td>
+					</tr>
+					<tr>
+						<td>1 - 2 Lac</td>
+						<td><?php echo $arrBudget['1-2']; ?></td>
+						<td><?php echo number_format(($arrBudget['1-2']/$total_active_cars)*100,2);?></td>
+					</tr>
+					<tr>
+						<td>2 - 3 Lac</td>
+						<td><?php echo $arrBudget['2-3']; ?></td>
+						<td><?php echo number_format(($arrBudget['2-3']/$total_active_cars)*100,2);?></td>
+					</tr>
+					<tr>
+						<td>3 - 5 Lac</td>
+						<td><?php echo $arrBudget['3-5']; ?></td>
+						<td><?php echo number_format(($arrBudget['3-5']/$total_active_cars)*100,2);?></td>
+					</tr>
+					<tr>
+						<td>5 - 10 Lac</td>
+						<td><?php echo $arrBudget['5-10']; ?></td>
+						<td><?php echo number_format(($arrBudget['5-10']/$total_active_cars)*100,2);?></td>
+					</tr>
+					<tr>
+						<td>Above 10 Lac</td>
+						<td><?php echo $arrBudget['10-0']; ?></td>
+						<td><?php echo number_format(($arrBudget['10-0']/$total_active_cars)*100,2);?></td>
+					</tr>
+					<tr>
+						<td>Total</td>
+						<td><?php echo $total_active_cars;?></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+				<!-- end table -->
+				
+				<h4>Stock Mix by Fuel Type</h4>
+				<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Fuel Type</th>
+						<th>No of Active Cars</th>
+						<th>Percentage</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($arrFuelType as $stock) { ?>
+					<tr>
+						<td><?php echo $stock['fuel_type']; ?></td>
+						<td><?php echo $stock['cnt']; ?></td>
+						<td><?php echo number_format(($stock['cnt']/$total_active_cars)*100,2);?></td>
+					</tr>
+					<?php } ?>
+					
+					<tr>
+						<td>Total</td>
+						<td><?php echo $total_active_cars;?></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+				<!-- end table -->
+				
+				<h4>Stock Mix by Make Model</h4>
+				<table class="table table-bordered table-hover">
+				<thead>
+					
+					<tr>
+						<th>Make Model</th>
+						<th>No of Active Cars</th>
+						<th>Percentage</th>
+					</tr>
+					
+				</thead>
+				<tbody>
+				<?php foreach($arrMM as  $stock) { ?>
+					<tr>
+						<td><?php echo $stock['make_name']." ".$stock['model_name']; ?></td>
+						<td><?php echo $stock['cnt']; ?></td>
+						<td><?php echo number_format(($stock['cnt']/$total_active_cars)*100,2);?></td>
+					</tr>
+					<?php } ?>
+					
+					<tr>
+						<td>Total</td>
+						<td><?php echo $total_active_cars;?></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+				<!-- end table -->
+			</div>
+			<!-- end right section -->
+		</div>
+		
+	</div>

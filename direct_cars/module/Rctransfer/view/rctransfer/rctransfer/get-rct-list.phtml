@@ -1,0 +1,413 @@
+
+ <div class="admin_menu_box">
+             <div class="">
+               				<div class="manage-inventory-right-panel">
+   <div class="middle">
+
+<span class="err_hide"></span>
+<h3>RC Transfer List</h3>
+ 
+	
+ <div class="tab-Available">
+ 
+        <div class="add-inventory-tab-content">
+
+<div class="grid_head">
+
+
+</div>
+<span class="tab_manage_container" style="display:block">
+<br>
+
+    <table class="table-content" width="100%" cellpadding="5" cellspacing="0">
+<thead>
+ <tr>
+		<th>RC Transfer Id</th>
+        <th>Reg. No.</th>
+		<th>Model</th>
+		<th>Make Year</th>
+		<th>Purchase Date</th>
+		<th>Delivery Date</th>
+</tr>
+</thead>
+<tbody>
+ <?php
+                foreach ($arrStockData as $stock) :
+            ?>
+<tr>
+	<td><a href="javascript:void(0);" class="selectrctrecord" rct-id = "<?php echo $this->escapeHtml($stock['rc_transfer_id']);?>"><?php echo $this->escapeHtml($stock['rc_transfer_id']);?></a></td>
+	<td><?php echo $this->escapeHtml($stock['registration_no']);?></td>
+	
+	<td> <?php echo $this->escapeHtml($stock['make_name']);?> - <?php echo $this->escapeHtml($stock['model_name']);?> - <?php echo $this->escapeHtml($stock['variant_name']);?></td>
+	<td><?php echo $this->escapeHtml($stock['make_month']);?> - <?php echo $this->escapeHtml($stock['make_year']);?></td>
+	
+		<td><?php echo date("d-m-Y",strtotime($stock['purchase_date']));?></td>
+		<td><?php echo date("d-m-Y",strtotime($stock['delivery_date']));?></td>
+	
+</tr>
+ <?php
+                endforeach;
+            ?>
+	<?php if(count($arrStockData) == 0)
+	{
+		?>
+		<tr><td colspan="6"><center>No Records Found</center></td></tr>
+		<?php
+	} ?>
+</tbody></table>
+
+</span>
+</div>
+</div>
+ </div>
+    
+</div>
+             </div>
+    </div>
+<script type="text/javascript">
+  $(document).ready(function() {	
+	$(".selectrctrecord").click(function (e) {
+		var rct_id = $(this).attr("rct-id");
+		window.parent.$("#rct_id").val(rct_id);
+		
+		 $.ajax({
+				type: "post",
+				data: "rct_id=" +rct_id,
+				url: base_url() + "rctransfer/get-rc-detail",
+				async: false,
+				dataType: "html",
+				success: function(response) {
+						
+					var result = $.parseJSON(response);
+					$.each(result ,function(a,b){
+						window.parent.$("#reg_no").val(b.registration_no);
+						window.parent.$("#make_name").val(b.make_name);
+						window.parent.$("#model_name").val(b.model_name);
+						window.parent.$("#variant_name").val(b.variant_name);
+						window.parent.$("#make_year").val(b.make_year);
+						window.parent.$("#make_month").val(b.make_month);
+						window.parent.$("#fuel_type").val(b.fuel_type);
+						window.parent.$("input[name=hypothecation][value='"+b.hypothecation+"']").prop("checked",true);
+						if(b.hypothecation == 0)
+						{
+							window.parent.$(".financier_name").attr("style","display:none");
+						}
+						if ( window.parent.$("#financier_name option[value='"+b.seller_financiers_name+"']").length == 0 ){
+							window.parent.$("#txt_financier_name").val(b.seller_financiers_name);
+							window.parent.$("#financier_name").val('other');
+						}
+						else
+						{
+							window.parent.$("#financier_name").val(b.seller_financiers_name);
+						}
+						if(window.parent.$("#financier_name").val() == 'other')
+						{
+							window.parent.$("#txt_financier_name").attr("style","")			
+						}
+						else
+						{
+							window.parent.$("#txt_financier_name").attr("style","display:none")			
+						}
+						
+						if(b.purchase_date != '0000-00-00')
+						{
+							var rc_date = b.purchase_date.split('-');
+							window.parent.$("#purchase_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						
+						if(b.delivery_date != '0000-00-00')
+						{
+							var rc_date = b.delivery_date.split('-');
+							window.parent.$("#delivery_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						
+						window.parent.$("#delivered_by").val(b.delivered_by);
+						window.parent.$("#stock_id").val(b.stock_id);
+						window.parent.$("#seller_id").val(b.seller_id);
+						window.parent.$("#seller_number").val(b.seller_number);
+						window.parent.$("#seller_mobile").val(b.seller_mobile);
+						window.parent.$("#seller_name").val(b.seller_name);
+						window.parent.$("#buyer_id").val(b.buyer_id);
+						window.parent.$("#buyer_number").val(b.buyer_number);
+						window.parent.$("#buyer_mobile").val(b.buyer_mobile);
+						window.parent.$("#buyer_name").val(b.buyer_name);
+						window.parent.$("#buyer_address").val(b.buyer_address);
+						window.parent.$("#buyer_city").val(b.buyer_city);
+						window.parent.$("#buyer_state").val(b.buyer_state);
+						window.parent.$("#buyer_pin").val(b.buyer_pin);
+						window.parent.$("#agent_id").val(b.agent_id);
+						window.parent.$("#agent_number").val(b.agent_number);
+						window.parent.$("#agent_mobile").val(b.agent_mobile);
+						window.parent.$("#agent_name").val(b.agent_name);
+						if(b.original_rc_file != "")
+						{
+							window.parent.$('#original_rc_file').parent().removeClass( "btn-red" );
+							window.parent.$('#original_rc_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_original_rc_file").attr("style","");
+							window.parent.$(".btn_original_rc_file").attr("file-name",b.original_rc_file);
+						}
+						window.parent.$("#original_rc_file_status").val(b.original_rc_file_status);
+						if(b.original_rc_date != '0000-00-00')
+						{
+							var rc_date = b.original_rc_date.split('-');
+							window.parent.$("#original_rc_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.insurance_file != "")
+						{
+							window.parent.$('#insurance_file').parent().removeClass( "btn-red" );
+							window.parent.$('#insurance_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_insurance_file").attr("style","");
+							window.parent.$(".btn_insurance_file").attr("file-name",b.insurance_file);
+						}
+						window.parent.$("#insurance_file_status").val(b.insurance_file_status);
+						if(b.insurance_date != '0000-00-00')
+						{
+							var rc_date = b.insurance_date.split('-');
+							window.parent.$("#insurance_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						
+						if(b.tto_set_file != "")
+						{
+							window.parent.$('#tto_set_file').parent().removeClass( "btn-red" );
+							window.parent.$('#tto_set_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_tto_set_file").attr("style","");
+							window.parent.$(".btn_tto_set_file").attr("file-name",b.tto_set_file);
+						}
+						window.parent.$("#tto_set_file_status").val(b.tto_set_file_status);
+						if(b.tto_set_date != '0000-00-00')
+						{
+							var rc_date = b.tto_set_date.split('-');
+							window.parent.$("#tto_set_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.form35_file != "")
+						{
+							window.parent.$('#form35_file').parent().removeClass( "btn-red" );
+							window.parent.$('#form35_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_form35_file").attr("style","");
+							window.parent.$(".btn_form35_file").attr("file-name",b.form35_file);
+						}
+						window.parent.$("#form35_file_status").val(b.form35_file_status);
+						if(b.form35_date != '0000-00-00')
+						{
+							var rc_date = b.form35_date.split('-');
+							window.parent.$("#form35_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.affidavit_file != "")
+						{
+							window.parent.$('#affidavit_file').parent().removeClass( "btn-red" );
+							window.parent.$('#affidavit_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_affidavit_file").attr("style","");
+							window.parent.$(".btn_affidavit_file").attr("file-name",b.affidavit_file);
+						}
+						window.parent.$("#affidavit_file_status").val(b.affidavit_file_status);
+						if(b.affidavit_date != '0000-00-00')
+						{
+							var rc_date = b.affidavit_date.split('-');
+							window.parent.$("#affidavit_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.letter_head_file != "")
+						{
+							window.parent.$('#letter_head_file').parent().removeClass( "btn-red" );
+							window.parent.$('#letter_head_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_letter_head_file").attr("style","");
+							window.parent.$(".btn_letter_head_file").attr("file-name",b.letter_head_file);
+						}
+						window.parent.$("#letter_head_file_status").val(b.letter_head_file_status);
+						if(b.letter_head_date != '0000-00-00')
+						{
+							var rc_date = b.letter_head_date.split('-');
+							window.parent.$("#letter_head_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.id_proof_1_file != "")
+						{
+							window.parent.$('#id_proof_1_file').parent().removeClass( "btn-red" );
+							window.parent.$('#id_proof_1_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_id_proof_1_file").attr("style","");
+							window.parent.$(".btn_id_proof_1_file").attr("file-name",b.id_proof_1_file);
+						}
+						window.parent.$("#id_proof_1_file_status").val(b.id_proof_1_file_status);
+						if(b.id_proof_1_date != '0000-00-00')
+						{
+							var rc_date = b.id_proof_1_date.split('-');
+							window.parent.$("#id_proof_1_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.id_proof_2_file != "")
+						{
+							window.parent.$('#id_proof_2_file').parent().removeClass( "btn-red" );
+							window.parent.$('#id_proof_2_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_id_proof_2_file").attr("style","");
+							window.parent.$(".btn_id_proof_2_file").attr("file-name",b.id_proof_2_file);
+						}
+						window.parent.$("#id_proof_2_file_status").val(b.id_proof_2_file_status);
+						if(b.id_proof_2_date != '0000-00-00')
+						{
+							var rc_date = b.id_proof_2_date.split('-');
+							window.parent.$("#id_proof_2_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.address_proof_1_file != "")
+						{
+							window.parent.$('#address_proof_1_file').parent().removeClass( "btn-red" );
+							window.parent.$('#address_proof_1_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_address_proof_1_file").attr("style","");
+							window.parent.$(".btn_address_proof_1_file").attr("file-name",b.address_proof_1_file);
+						}
+						window.parent.$("#address_proof_1_file_status").val(b.address_proof_1_file_status);
+						if(b.address_proof_1_date != '0000-00-00')
+						{
+							var rc_date = b.address_proof_1_date.split('-');
+							window.parent.$("#address_proof_1_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.address_proof_2_file != "")
+						{
+							window.parent.$('#address_proof_2_file').parent().removeClass( "btn-red" );
+							window.parent.$('#address_proof_2_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_address_proof_2_file").attr("style","");
+							window.parent.$(".btn_address_proof_2_file").attr("file-name",b.address_proof_2_file);
+						}
+						window.parent.$("#address_proof_2_file_status").val(b.address_proof_2_file_status);
+						if(b.address_proof_2_date != '0000-00-00')
+						{
+							var rc_date = b.address_proof_2_date.split('-');
+							window.parent.$("#address_proof_2_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.buyer_id_proof_1_file != "")
+						{
+							window.parent.$('#buyer_id_proof_1_file').parent().removeClass( "btn-red" );
+							window.parent.$('#buyer_id_proof_1_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_buyer_id_proof_1_file").attr("style","");
+							window.parent.$(".btn_buyer_id_proof_1_file").attr("file-name",b.buyer_id_proof_1_file);
+						}
+						window.parent.$("#buyer_id_proof_1_file_status").val(b.buyer_id_proof_1_file_status);
+						if(b.buyer_id_proof_1_date != '0000-00-00')
+						{
+							var rc_date = b.buyer_id_proof_1_date.split('-');
+							window.parent.$("#buyer_id_proof_1_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.buyer_id_proof_2_file != "")
+						{
+							window.parent.$('#buyer_id_proof_2_file').parent().removeClass( "btn-red" );
+							window.parent.$('#buyer_id_proof_2_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_buyer_id_proof_2_file").attr("style","");
+							window.parent.$(".btn_buyer_id_proof_2_file").attr("file-name",b.buyer_id_proof_2_file);
+						}
+						window.parent.$("#buyer_id_proof_2_file_status").val(b.buyer_id_proof_2_file_status);
+						if(b.buyer_id_proof_2_date != '0000-00-00')
+						{
+							var rc_date = b.buyer_id_proof_2_date.split('-');
+							window.parent.$("#buyer_id_proof_2_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.buyer_address_proof_1_file != "")
+						{
+							window.parent.$('#buyer_address_proof_1_file').parent().removeClass( "btn-red" );
+							window.parent.$('#buyer_address_proof_1_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_buyer_address_proof_1_file").attr("style","");
+							window.parent.$(".btn_buyer_address_proof_1_file").attr("file-name",b.buyer_address_proof_1_file);
+						}
+						window.parent.$("#buyer_address_proof_1_file_status").val(b.buyer_address_proof_1_file_status);
+						if(b.buyer_address_proof_1_date != '0000-00-00')
+						{
+							var rc_date = b.buyer_address_proof_1_date.split('-');
+							window.parent.$("#buyer_address_proof_1_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.buyer_address_proof_2_file != "")
+						{
+							window.parent.$('#buyer_address_proof_2_file').parent().removeClass( "btn-red" );
+							window.parent.$('#buyer_address_proof_2_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_buyer_address_proof_2_file").attr("style","");
+							window.parent.$(".btn_buyer_address_proof_2_file").attr("file-name",b.buyer_address_proof_2_file);
+						}
+						window.parent.$("#buyer_address_proof_2_file_status").val(b.buyer_address_proof_2_file_status);
+						if(b.buyer_address_proof_2_date != '0000-00-00')
+						{
+							var rc_date = b.buyer_address_proof_2_date.split('-');
+							window.parent.$("#buyer_address_proof_2_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.puc_file != "")
+						{
+							window.parent.$('#puc_file').parent().removeClass( "btn-red" );
+							window.parent.$('#puc_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_puc_file").attr("style","");
+							window.parent.$(".btn_puc_file").attr("file-name",b.puc_file);
+						}
+						window.parent.$("#puc_file_status").val(b.puc_file_status);
+						if(b.puc_date != '0000-00-00')
+						{
+							var rc_date = b.puc_date.split('-');
+							window.parent.$("#puc_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						window.parent.$("#transfer_by").val(b.transfer_by);
+						window.parent.$("#transfer_type").val(b.transfer_type);
+						if ( window.parent.$("#buyer_financiers_name option[value='"+b.buyer_financiers_name+"']").length == 0 ){
+							window.parent.$("#txt_buyer_financiers_name").val(b.buyer_financiers_name);
+							window.parent.$("#buyer_financiers_name").val('other');
+						}
+						else
+						{
+							window.parent.$("#buyer_financiers_name").val(b.buyer_financiers_name);
+						}
+						if(window.parent.$("#buyer_financiers_name").val() == 'other')
+						{
+							window.parent.$("#txt_buyer_financiers_name").attr("style","")			
+						}
+						else
+						{
+							window.parent.$("#txt_buyer_financiers_name").attr("style","display:none")			
+						}
+						window.parent.$("#transfer_from").val(b.transfer_from);
+						window.parent.$("#transfer_to").val(b.transfer_to);
+						window.parent.$("#cng_vendor").val(b.cng_vendor);
+						window.parent.$("#file_status").val(b.file_status);
+						if(b.login_date != '0000-00-00')
+						{
+							var rc_date = b.login_date.split('-');
+							window.parent.$("#login_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						window.parent.$("#login_remarks").val(b.login_remarks);
+						window.parent.$("#transfer_status").val(b.transfer_status);
+						if(b.transfer_date != '0000-00-00')
+						{
+							var rc_date = b.transfer_date.split('-');
+							window.parent.$("#transfer_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						if(b.transfer_file != "")
+						{
+							window.parent.$('#transfer_file').parent().removeClass( "btn-red" );
+							window.parent.$('#transfer_file').parent().addClass( "btn-green" );
+							window.parent.$(".btn_transfer_file").attr("style","");
+							window.parent.$(".btn_transfer_file").attr("file-name",b.transfer_file);
+						}
+						window.parent.$("#discrepency_details").val(b.discrepency_details);
+						if(b.resubmission_date != '0000-00-00')
+						{
+							var rc_date = b.resubmission_date.split('-');
+							window.parent.$("#resubmission_date").val(rc_date[2]+"-"+rc_date[1]+"-"+rc_date[0]);
+						}
+						window.parent.$("#resubmission_remarks").val(b.resubmission_remarks);
+						window.parent.$("input[name=duplicate_rc][value='"+b.duplicate_rc+"']").prop("checked",true);
+						window.parent.$("input[name=hpa][value='"+b.hpa+"']").prop("checked",true);
+						if(b.hpa == 'No')
+						{
+							window.parent.$(".buyer_financiers_name").attr("style","display:none");
+						}
+						window.parent.$("input[name=cng_addition][value='"+b.cng_addition+"']").prop("checked",true);
+						if(window.parent.$("#file_status").val()  == 'Logged-in')
+						{
+							window.parent.$("#login_date").prop("disabled",false);
+							window.parent.$("#transfer_status").prop("disabled",false);
+						}
+						if(window.parent.$("#transfer_status").val()  == 'Transferred' || window.parent.$("#transfer_date").val() != '')
+						{
+							window.parent.$("#transfer_date").prop("disabled",false);
+						}
+						if(window.parent.$("#transfer_status").val()  == 'Resubmitted' || window.parent.$("#resubmission_date").val() != '')
+						{
+							window.parent.$("#resubmission_date").prop("disabled",false);
+						}
+					});
+				}	
+					
+			});
+			 $.fancybox.close(); 
+	});
+  });
+</script>

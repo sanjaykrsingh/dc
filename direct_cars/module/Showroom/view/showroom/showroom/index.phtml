@@ -1,0 +1,112 @@
+
+ <div class="admin_menu_box">
+             <div class="">
+               				<div class="manage-inventory-right-panel">
+   <div class="middle">
+
+<span class="err_hide"></span>
+<h3>Showroom List</h3>
+
+<?php if(count($flashMessages)) : ?>
+    <div class="row" >
+        <div class="alert alert-success alert-dismissable">
+            <button class="close" aria-hidden="true" data-dismiss="alert" type="button">
+                ×
+            </button>
+            <ul>
+                <?php foreach ($flashMessages as $msg) : ?>
+                    <li><?php echo $msg; ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>
+<!--tabs add here-->
+<table width="100%" border="0">
+    <tbody>
+        <tr>
+            <td width="22%" align="right" height="20"><a href="<?php echo $this->url('showroom',array('action' => "add")) ?>" class="link_org3">Add Showroom</a></td>
+						
+        </tr>
+    </tbody>
+</table>
+<br>
+
+
+
+
+<div class="grid_head">
+
+
+</div>
+<span class="tab_manage_container" style="display:block">
+<form action="tab.php" name="tplform03" id="tplform03" method="post">
+<?php if ($this->pageCount >  1): ?>
+    <div class="pagination pagination-centered" width="100%">
+        <ul>
+            <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('showroom', array('action' => 'index', 'page' => $this->first, 'order_by' => $order_by, 'order' => $order,)); ?>">&laquo;</a></li>
+            <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('showroom', array('action' => 'index','page' => $this->previous, 'order_by' => $order_by, 'order' => $order,)); ?>">&lsaquo;</a></li>
+
+            <!-- Numbered page links -->
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <li <?php echo $page == $this->current ? 'class="active"' : ''; ?>><a href="<?php echo $this->url('showroom', array('action' => 'index','page' => $page, 'order_by' => $order_by, 'order' => $order,)); ?>">
+                        <?php echo $page; ?>
+                    </a></li>
+            <?php endforeach; ?>
+
+            <!-- Next page link -->
+            <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('showroom', array('action' => 'index','page' => $this->next, 'order_by' => $order_by, 'order' => $order,)); ?>">&rsaquo;</a></li>
+            <!-- Last page link -->
+            <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('showroom', array( 'action' => 'index','page' => $this->last, 'order_by' => $order_by, 'order' => $order,)); ?>">&raquo;</a></li>
+        </ul>
+    </div>
+<?php endif; ?>
+    <table class="table-content" width="100%" cellpadding="5" cellspacing="0">
+<thead>
+ <tr>
+		<th>Showroom Name</th>
+        <th>Address</th>
+		<th>Land Mark</th>
+        <th>Phone</th>
+		<th>Email</th>
+		<th>View/Edit Images</th>
+        <th width="100px">Action</th>
+</tr>
+</thead>
+<tbody>
+ <?php
+                foreach ($arrShowroom as $showroom) :
+            ?>
+<tr>
+	<td><?php echo $this->escapeHtml($showroom['showroom_name']);?></td>
+	<td> <?php echo $this->escapeHtml($showroom['address_line_1']);?>,<?php echo $this->escapeHtml($showroom['address_line_2']);?>
+	<br><?php echo $this->escapeHtml($showroom['city']);?>,<?php echo $this->escapeHtml($showroom['state']);?>
+	<br><?php echo $this->escapeHtml($showroom['country']);?> - <?php echo $this->escapeHtml($showroom['pin_code']);?>
+	</td>
+	
+        <td> <?php echo $this->escapeHtml($showroom['land_mark']);?></td>
+		<td> <?php echo $this->escapeHtml($showroom['phone_1']);?></td>
+		<td> <?php echo $this->escapeHtml($showroom['email']);?></td>
+		<td><a href="<?php echo $this->url('showroom',array('action' => "view-images","id"=>$showroom['showroom_id'])) ?>">View/Edit Images</a></td>
+        <td>
+            <a href="<?php echo $this->url('showroom',array('action' => "edit","id"=>$showroom['showroom_id'])) ?>">Edit</a> <?php if($showroom['showroom_id'] != 2) { ?>|             <a href="<?php echo $this->url('showroom',array('action' => "delete","id"=>$showroom['showroom_id'])) ?>" onclick="return confirm('Do you want to delete?')">Delete</a><?php } ?>
+            
+        </td>
+        
+	
+</tr>
+ <?php
+                endforeach;
+            ?>
+</tbody></table>
+</form>
+</span>
+ </div>
+    
+</div>
+             </div>
+    </div>

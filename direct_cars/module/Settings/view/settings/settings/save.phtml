@@ -1,0 +1,61 @@
+<div class="admin_menu_box">
+      
+            
+             <div class="">
+               <div class="manage-inventory-right-panel">
+	<h1>
+		Upload Page
+        	<div>
+       			
+             
+        </div>
+    </h1>
+		<div class="errortopdiv" style="color: red; text-align: center; width: 100%;"><?php print_r(@$flashMessages[0]); ?></div>
+     <div class="tab">
+    	
+    </div>	
+	<div class="tab-Available">
+        <div class="add-inventory-tab-content">
+		<form name="frmsettings" id="frmsettings" method="POST" action="" enctype="multipart/form-data">
+		
+			<input type="hidden" name="settings_id" id="settings_id" value="<?php echo $arrSettings[0]['settings_id']; ?>">
+        <!-- Car Details -->
+		
+        <div class="sub-content">
+		
+		 
+            <table cellpadding="12" cellspacing="0">
+            	<tbody>
+				
+				<tr>
+                	<td>					 
+					<span class="label-text">Name: </span>
+					 <?php echo $arrSettings[0]['settings_name']; ?>
+                    </td>
+					
+                </tr>
+				<tr>
+                	<td>					 
+					<span class="label-text">Path: </span>
+					 <?php echo $arrSettings[0]['settings_value']; ?>
+                    </td>
+					
+                </tr>
+				<tr>
+                	<td>
+					<span class="label-text">PHTML File*: </span>
+					
+                    	<input type="file" name="file_upload" id="file_upload">
+						
+                    </td>
+				</tr>
+			
+            </tbody></table>
+			<input type="submit" id="addimagesave" class="add-enventry-save" value="Save">
+		</div>
+		</form>
+	 </div>
+	 </div>
+</div>
+</div>
+</div>
