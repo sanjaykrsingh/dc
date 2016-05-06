@@ -1,0 +1,239 @@
+	<div class="top-banner">
+		<div class="container">
+		<h2>You're almost there to buy a <span class="redColor">quality certified</span> preowned car</h2>
+		<div class="banner-nav">
+			<a href=""><span>1.</span>select your car </a> 
+			<a href=""><span>2.</span>contact us </a> 
+			<a href=""><span>3.</span>we will help you get the right car </a>
+		</div>
+		</div>
+	</div>
+	
+	
+	
+	<div class="grid-view">
+	<form method="post" name="frmsearch" id="frmsearch" type="post" action="">
+	<div class="container search-bar mobile-hide">
+		<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav col-xs-12">
+            <li class="col-xm-12 col-lg-2 col-sm-2 text-right">Search By</li>
+			<li class="dropdown col-xm-12 col-lg-2 col-sm-2">
+              &nbsp;
+              <select name="make" id="make" class="car-make-select">
+                                <option value="" class="jMake">Model</option>
+								<?php foreach($arrMake as $model) { ?>
+								<option value="<?php echo $model['make_name']; ?>" <?php if(@$objSearch->make == $model['make_name'])  echo "selected";  ?> class="jMake"><?php echo $model['make_name']; ?></option>
+								<?php } ?>
+                        </select>
+            </li>
+			<li class="dropdown col-xm-12 col-lg-2 col-sm-2">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Price <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+              </ul>
+            </li>
+			<li class="dropdown col-xm-12 col-lg-2 col-sm-2">
+                <select name="body_style" id="body_style" class="car-make-select">
+                                <option value="" class="jMake">Body Style</option>
+								<?php foreach($arrBodyStyle as $bodystyle) { ?>
+								<option value="<?php echo $bodystyle['bod_style']; ?>" <?php if(@$objSearch->body_style == $bodystyle['bod_style'])  echo "selected";  ?> class="jMake"><?php echo $bodystyle['bod_style']; ?></option>
+								<?php } ?>
+                        </select>
+            </li>
+			<li class="dropdown col-xm-12 col-lg-2 col-sm-2">
+               <select name="fuel_type" id="fuel_type" class="car-make-select">
+                                <option value="" class="jMake">Fuel Type</option>
+								<?php foreach($arrFuel as $key=>$value) { ?>
+								<option value="<?php echo $key; ?>" <?php if(@$objSearch->fuel_type == $key)  echo "selected";  ?> class="jMake"><?php echo $value; ?></option>
+								<?php } ?>
+                        </select>
+             
+            </li>
+       
+                <button type="submit" class="btn btn-default">Reset All</button>
+            
+        </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	</div>
+	
+	
+	<div class="container sort-cont">
+		<div class="col-xs-12 col-lg-9">
+			<h2>Certified used cars in Gurgaon <span>There are XXX certified preowned cars for your search</span></h2>
+		</div>
+		<div class="pull-right col-sm-3 col-xs-12">
+                            <div class=" row  ">
+                            <div class=" row  ">
+                                <div class="col-xs-4 text-right pdtop7 ">Sort by:</div>
+                                <div class="col-xs-8">                                
+                                    <select id="sort_by" name="sort_by">
+                                    <option value="">Relevance</option>
+									<option value="listing_date desc" <?php if(@$objSearch->sort_by == "listing_date desc") { echo "selecctd"; } ?>>Date (Latest to Oldest)</option>
+									<option value="make_year asc" <?php if(@$objSearch->sort_by == "make_year asc") { echo "selecctd"; } ?>>Year (Low to High)</option>
+									<option value="make_year desc" <?php if(@$objSearch->sort_by == "make_year desc") { echo "selecctd"; } ?>>Year (High to Low)</option>
+									<option value="expected_price asc" <?php if(@$objSearch->sort_by == "expected_price asc") { echo "selecctd"; } ?>>Price (Low to High)</option>
+									<option value="expected_price desc" <?php if(@$objSearch->sort_by == "expected_price desc") { echo "selecctd"; } ?>>Price (High to Low)</option>
+									<option value="kilometre asc" <?php if(@$objSearch->sort_by == "kilometre asc") { echo "selecctd"; } ?>>Kilometer (Low to High)</option>
+									<option value="kilometre desc" <?php if(@$objSearch->sort_by == "kilometre desc") { echo "selecctd"; } ?>>Kilometer (High to Low)</option>
+                                    </select>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+	</div>
+	</form>
+	<div class="container">
+		<?php foreach($arrStockList as $stock) { ?>
+		<div class="car-grid-container">
+			<div class="grid-header">
+				<div class="col-xs-12">
+					<div class="row">
+						<div class="col-xs-12 col-lg-6 col-sm-6">
+							<a href=""><h3>Certified <?php echo $stock['make_year']; ?> <?php echo $stock['make_name']; ?> <?php echo $stock['model_name']; ?> <span class="small"><?php echo $stock['variant_name']; ?></span></h3></a>
+						</div>						
+						<div class="col-xs-12 col-lg-6 col-sm-6 price">
+							<?php if($stock['hot_deal']== '1') {?><div class="offer-flag"></div><?php } ?>
+							<div class="offer-price-cont">
+								<span class="icon-rs"></span>
+								<?php if($stock['hot_deal']== '1') {?>
+								<span class="market-price">Rs.<?php echo number_format($stock['expected_price']);?></span>
+								<span class="offer-price">Rs.<?php echo number_format($stock['hoat_deal_price']);?></span>
+								<?php } else { ?>
+								<span class="offer-price">Rs.<?php echo number_format($stock['expected_price']);?></span>
+								<?php } ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="car-detail-container">
+				<div class="col-xs-12 col-lg-3 car-img">
+				 <?php
+										$image_name = "noimage.gif";
+										if($stock['is_profile_img'] != "")
+										{
+											$arrImage = explode(",",$stock['image_name']); 
+											$arrProfile = explode(",",$stock['is_profile_img']); 
+											for($i=0; $i < count($arrProfile); $i++)
+											{
+												if($i==0 || $arrProfile[$i] == 1)
+												{
+													$image_name = $arrImage[$i];
+												}
+											}
+										
+										}
+										?>
+					<img src="<?php echo $image_path."/stock/crop/".$image_name; ?>" alt=""/>
+					<div class="media-cont text-center">
+						<a href=""><i class="fa fa-camera"></i> <?php echo count($arrImage);?> </a>
+						<a href=""><i class="fa fa-video-camera"></i> </a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-lg-6 car-detail">
+					<div class="row">
+					<div class="col-lg-6 pull-left">
+						<div class="">Spaces & Features: 4 Cylinders, 2000 CC, 141 PS automatic air con, alloy wheels, leather seats <a href="">More </a></div>
+						<ul class="car-description">
+							<li class="icon-fuel"><?php echo $stock["fuel_type"]; ?></li>
+							<li class="icon-transmission"><?php echo $stock["transmission_type"]; ?></li>
+							<li class="icon-color"><?php echo $stock['color']; ?></li>
+							<li class="icon-owner"><?php echo $stock['owner']; ?></li>
+							<li class="icon-meter"><?php echo number_format($stock['kilometre']); ?> Kms</li>
+							<li class="icon-star"><img src="<?php echo $image_path;?>/<?php echo str_replace(" ","_",strtolower($stock['certified_by'])).".png";  ?>" alt="<?php echo $stock['certified_by']; ?>"/></li>
+						</ul>						
+					</div>
+					
+						
+					<div class="col-lg-6 pull-left car-detail-content mobile-hide">
+						<h4 class="about-car">About this car</h4>
+						<p> <?php echo $stock['car_hignlights']; ?>
+							<a href="">More</a>
+						</p>
+						<div class="clearfix"></div>
+						<?php if($stock['hot_deal']== '1') {?>
+						<h4 class="redColor">Special Offer</h4>
+						<p> <?php echo $stock['hoat_deal_offer']; ?>
+							<a href="">More</a>
+						</p>
+						<?php } ?>
+					</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-lg-3 car-contact">
+					<div class=" mobile-hide">
+					<p><i class="fa fa-home"></i><strong><?php echo $stock['showroom_name']; ?></strong></p>
+					<p><?php echo $stock['locality']; ?>, <?php echo $stock['land_mark']; ?>, <?php echo $stock['city']; ?><br>
+					<?php echo $stock['state']; ?> - <?php echo $stock['pin_code']; ?></p>
+					<h3>+91 <?php echo $stock['phone_1']; ?></h3>
+					
+					</div>
+					<div class="col-xs-8  col-lg-8 col-lg-offset-2 ">
+						<button type="submit" class="btn btn-default btn-block btn-success">See More Detail</button>
+					</div>
+					<a class="btn btn-success col-xs-4 click-to-call" href="tel:<?php echo $stock['phone_1']; ?>">
+					   <i class="fa fa-mobile"></i> Call 
+					</a>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+	</div>
+		
+	</div>
+	<!-- *** our customer feedback *** -->
+		<div class="customer-feedback-cont">
+			<div class="container">
+				<h2>Our <span>Satisfied</span> Customers</h2>
+				<div class="carousel slide media-carousel" id="media">
+        <div class="carousel-inner">
+			<?php
+		$intTC = 0;
+		 foreach ($arrTestimonial as $testimonial) :
+         ?>
+			<?php if($intTC%3 == 0) { ?>
+			<ul class="customer-feedback item  <?php if($intTC == 0) { echo "active"; }?>">
+			<?php } ?>
+				<li>
+					<p>
+						<img src="<?php echo $image_path."/testimonial/thumb/".$testimonial['client_image']; ?>" alt=""/> 
+						<?php echo $this->escapeHtml(substr($testimonial['description'],0,150));?> ...
+					</p>
+					<div class="owner-detail"><span><?php echo $this->escapeHtml($testimonial['client_name']);?></span>Car Owner</div>
+				</li>
+				
+			<?php if($intTC%3 == 2) { ?>
+			</ul>
+			<?php
+			}
+				$intTC++;
+                endforeach;
+            ?>
+          </div>
+		
+        <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+        <a data-slide="next" href="#media" class="right carousel-control">›</a>
+      </div>                          
+    
+			</div>
+			
+		</div>

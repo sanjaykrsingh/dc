@@ -1,0 +1,398 @@
+﻿<style>
+ 
+    #gmap_canvas{
+        width:100%;
+        height:30em;
+    }
+     
+    #map-label,
+    #address-examples{
+        
+    }
+    </style>
+	<div class="top-banner">
+		<div class="container">
+		<h2>Take a <span class="redColor">virtual tour </span> of our Showroom</h2>		
+		</div>
+	</div>
+	<?php
+	$formSubmit = false;
+	if(count($flashMessages)) : 
+	$formSubmit = true;
+	?>
+    <div class="row" >
+        <div class="alert alert-success alert-dismissable">
+            <button class="close" aria-hidden="true" data-dismiss="alert" type="button">
+                ×
+            </button>
+            <ul>
+                <?php foreach ($flashMessages as $msg) : ?>
+                    <li><?php echo $msg; ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>
+	
+	<?php //$image_path = $this->serverUrl().$image_path; ?>
+	<div class="grid-view detail-view">
+	<div class="container">
+		<div class="car-grid-container">
+			<div class="grid-header">
+				<div class="col-xs-12">
+					<div class="row">
+						<div class="col-xs-12">
+							<h1><?php echo $arrShowroom['showroom_name']; ?>, <?php echo $arrShowroom['address_line_1']; ?>, <?php echo $arrShowroom['land_mark']; ?>, <?php echo $arrShowroom['city']; ?> </h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="car-detail-container">
+				<div class="col-xs-12 col-lg-6 car-img">
+					<div class="car-gallery">
+					<?php //print_r($arrShowroomImage); ?>
+        <div id="carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+				<?php for($i=0; $i<count($arrShowroomImage); $i++) { ?>
+				<?php if(file_exists($image_root_path."showroom/thumb/".$arrShowroomImage[$i]['img_name']))
+								$file_path = "showroom/thumb/";
+							else 
+								$file_path = "showroom/";
+					?>
+				
+                <div class="item <?php if($i==0) { ?>active<?php } ?>">
+                    <img src="<?php echo $image_path.$file_path.$arrShowroomImage[$i]['img_name']; ?>" alt="<?php echo $arrShowroomImage[$i]['img_title']; ?>">
+                </div>
+				<?php } ?>
+            </div>
+        </div> 
+    <div class="clearfix"></div>
+		<div class="content text-center">
+			<div class="col-xs-4">
+				<a href="#">Photos (<?php echo count($arrShowroomImage); ?>)</a>
+			</div>
+			<div class="col-xs-4">
+				<a  <?php if($arrShowroom['virtual_tour_video'] != "") { ?> href="#play-video" class="fancybox" <?php } ?>>Videos (<?php if($arrShowroom['virtual_tour_video'] != "") { ?>1<?php } else {?>0<?php } ?>)</a>
+			</div>
+			<div class="col-xs-4">
+				<a href="#inline1" id="showroom-map" class="fancybox">View Map</a>
+				
+			</div>
+		</div>
+		<div class="clearfix"></div>
+        <div id="thumbcarousel" class="carousel slide" data-interval="false">
+            <div class="carousel-inner">
+				<?php for($i=0; $i<count($arrShowroomImage); $i++) { ?>
+				<?php if(file_exists($image_root_path."showroom/carousel/".$arrShowroomImage[$i]['img_name']))
+								$file_path = "showroom/carousel/";
+							else 
+								$file_path = "showroom/";
+					?>
+                <?php if($i%5 == 0) { ?><div class="item <?php if($i==0) { ?>active<?php } ?>"><?php } ?>
+                    <div data-target="#carousel" data-slide-to="<?php echo $i;?>" class="thumb"><img src="<?php echo $image_path.$file_path.$arrShowroomImage[$i]['img_name']; ?>" alt="<?php echo $arrShowroomImage[$i]['img_title']; ?>"></div>
+					
+                 <?php if($i%5 == 4 || $i == (count($arrShowroomImage)-1)) { ?></div><!-- /item --><?php } ?>
+				<?php } ?>
+            </div><!-- /carousel-inner -->
+            <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div> <!-- /thumbcarousel -->
+		
+		<div class="clearfix"></div>
+	<!-- /clearfix -->
+    </div> <!-- /col-sm-6 -->
+				</div>
+				<div class="col-xs-12 col-lg-6 ">
+					<div class="content">						
+						<h3>Overview</h3>
+						<p class="marginT10"><?php echo $arrShowroom['description']; ?></P>
+						<p><strong>Our facilities:</strong> <?php echo $arrShowroom['services']; ?></P>
+						<?php $arrDays = explode(",",$arrShowroom['showroom_timings_days']);
+						if(count($arrDays )== 7) { ?>
+						<p><strong>Working days:</strong> We are OPEN 7 days a week</p>
+						<?php } else {?>
+						<p><strong>Working days:</strong> We are OPEN ON <?php echo str_replace(",",", ",$arrShowroom['showroom_timings_days']); ?></p>
+						<?php } ?>
+						<p><strong>Timing:</strong> <?php echo $arrShowroom['showroom_timings_start']; ?> to <?php echo $arrShowroom['showroom_timings_end']; ?> </p>
+					</div>
+					<div class="content">
+						<ul class="info">
+							<li><strong>Manager:</strong> <?php echo $arrShowroom['manager_name']; ?></li>
+							<li><i class="fa fa-mobile"></i> +91 <?php echo $arrShowroom['phone_1']; ?></li>
+							<li><a href="#"><i class="fa fa-envelope-o"></i> <?php echo $arrShowroom['email']; ?></a></li>
+							<li class="col-xs-12"><a class="btn btn-success col-xs-8 col-xs-offset-2 click-to-call" href="tel:<?php echo $arrShowroom['phone_1']; ?>">
+								   <i class="fa fa-mobile"></i> Click to call
+								</a></li>							
+						</ul>
+					</div>
+					<div class="clearfix"></div>
+					<div class="query-form-cont">	
+						
+						<h4 class="query-hd">Have a query, leave us a message we will get in touch </h4>
+						<form class="query-form" name="frm-enquiry" id="frm-enquiry" method="POST" action="" onsubmit="var _gaq = _gaq || []; _gaq.push(['_trackEvent', 'General', 'GeneralEnquiry', 'General Enquiry Submit.']);">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Name" required="required" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" name="customer_email" id="customer_email" placeholder="Email (required)" />
+								</div>
+								<div class="form-group">
+									 <label>Or</label>
+									<input type="text" class="form-control" name="customer_mobile" id="customer_mobile" placeholder="Mobile (required)" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<textarea name="message" id="message" class="form-control" rows="7" cols="25" required="required"
+										placeholder="Message"></textarea>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+									Send Message</button>
+							</div>
+						</div>
+						</form>
+					</div>
+								</div>        
+							
+				
+			</div>
+		</div>
+		
+	</div>
+		
+	</div>
+	<!-- end -->
+	<!-- *** Car feature *** -->
+	<?php //echo "<pre>"; print_R($arrStock); ?>
+	<div class="container">
+		<div class="col-sm-7 marginT10">
+			<div class="row">
+				<div class="col-sm-6">View Inventory</div>
+				<div class="col-sm-6 text-right mobile-hide"><a href="<?php echo $this->url('usedcar',array('action' => "search"));?>">View all cars >></a></div>
+			</div>
+		</div>
+		<div class="inventory col-sm-7">
+			<?php for($intS=0; $intS<count($arrStock); $intS++) { 
+			$image_name = "noimage.gif";
+			$stock=$arrStock[$intS];
+			if($stock['is_profile_img'] != "")
+			{
+				$arrImage = explode(",",$stock['image_name']); 
+				$arrProfile = explode(",",$stock['is_profile_img']); 
+				for($i=0; $i < count($arrProfile); $i++)
+				{
+					if($i==0 || $arrProfile[$i] == 1)
+					{
+						$image_name = $arrImage[$i];
+					}
+				}
+			
+			}
+			?>
+			<div class="col-md-4 inventory-list">
+			 <?php if(file_exists($image_root_path."stock/thumb/".$image_name))
+								$file_path = "stock/thumb/";
+							else 
+								$file_path = "stock/";
+					?>
+				<img src="<?php echo $image_path.$file_path.$image_name; ?>" alt="Carnation">
+				<?php $keyword = $stock['make_name']." ".$stock['model_name']." ".$stock['variant_name']."-".$stock['stock_id'];
+							$keyword = str_replace(" ","-",$keyword);
+							$keyword = strtolower($keyword);
+						?>
+				<a href="<?php echo $this->url('usedcar',array('action' => "view-car",'keyword'=>$keyword));?>" class="single-inventory"><?php if($stock['certified_by'] != "") { ?>Certified <?php } else {?>Used<?php } ?> <?php echo $stock['make_year']; ?> <?php echo $stock['make_name']; ?> <?php echo $stock['model_name']; ?> <?php echo $stock['variant_name']; ?> <span>Rs.<?php if($stock['hot_deal'] == '1') { echo $stock['hoat_deal_price']; } else {  echo $stock['expected_price']; } ?></span></a>
+				
+			</div>
+			<?php } ?>
+			
+		</div>
+		<div class="col-sm-12 text-right view-all-cars"><a href="<?php echo $this->url('usedcar',array('action' => "search"));?>">View all cars >></a></div>
+		<!-- end feature -->
+		<div class="call-us-free col-md-4 pull-right">
+			<img src="<?php echo $this->basePath();?>/images/call-us.jpg" alt="Carnation">
+			<a href="" class="mobile-hide"><i class="fa fa-mobile"></i> +91 <?php echo $arrShowroom['phone_1']; ?></a>
+			<a href="tel:<?php echo $arrShowroom['phone_1']; ?>">
+			<button type="submit" class="btn btn-success click-to-call btn-block" id="btnContactUs">
+									<i class="fa fa-mobile"></i> Click to call</button></a>
+		</div>
+		
+		
+	</div>
+	<!-- *** our customer feedback *** -->
+		<div class="customer-feedback-cont">
+			<div class="container">
+				<h2>Our <span>Satisfied</span> Customers</h2>
+				<div class="carousel slide media-carousel" id="media">
+        <div class="carousel-inner">
+		<?php
+		$intTC = 0;
+		 foreach ($arrTestimonial as $testimonial) :
+         ?>
+			<?php if($intTC%3 == 0) { ?>
+			<ul class="customer-feedback item  <?php if($intTC == 0) { echo "active"; }?>">
+			<?php } ?>
+				<li>
+					<p>
+						<img src="<?php echo $image_path."/testimonial/thumb/".$testimonial['client_image']; ?>" alt="<?php echo $testimonial['client_image'];?>"/> 
+						<?php echo $this->escapeHtml(substr($testimonial['description'],0,150));?> ...
+					</p>
+					<div class="owner-detail"><span><?php echo $this->escapeHtml($testimonial['client_name']);?></span>Car Owner</div>
+				</li>
+				
+			<?php if($intTC%3 == 2) { ?>
+			</ul>
+			<?php
+			}
+				$intTC++;
+                endforeach;
+            ?>
+          </div>
+		
+        <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+        <a data-slide="next" href="#media" class="right carousel-control">›</a>
+      </div>                          
+    
+			</div>
+			
+		</div>
+		<div id="inline1" style="position: absolute;left: -1000%;width:500px;">
+			<?php
+		// if able to geocode the address
+    if($data_arr){
+         
+        $latitude = $data_arr[0];
+        $longitude = $data_arr[1];
+        $formatted_address = $data_arr[2];
+                     
+    ?>
+  
+    <!-- google map will be shown here -->
+    <div id="gmap_canvas" style="width:100%; height:200px;">Loading map...</div>
+    <div id='map-label'>Map shows approximate location.</div>
+ 
+    <!-- JavaScript to show google map -->
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3.5&sensor=true"></script>   
+    <script type="text/javascript">
+        function init_map() {
+            var myOptions = {
+                zoom: 14,
+                center: new google.maps.LatLng(<?php echo $latitude; ?>, <?php echo $longitude; ?>),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
+            marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(<?php echo $latitude; ?>, <?php echo $longitude; ?>)
+            });
+            infowindow = new google.maps.InfoWindow({
+                content: "<?php echo $formatted_address; ?>"
+            });
+            google.maps.event.addListener(marker, "click", function () {
+                infowindow.open(map, marker);
+            });
+            infowindow.open(map, marker);
+        }
+        google.maps.event.addDomListener(window, 'load', init_map);
+		
+    </script>
+ 
+    <?php
+ 
+    // if unable to geocode the address
+    }else{
+        echo "No map found.";
+    }
+
+?>
+	</div>
+<div id="play-video" style="display:none" >
+	 <iframe height="200px" width="100%"
+src="<?php echo $arrShowroom['virtual_tour_video']; ?>">
+</iframe> 
+</div>
+<?php if(!$formSubmit) { ?>
+<script type="text/javascript">
+var google_tag_params = {
+dynx_itemid: 'dcshowroom',
+dynx_itemid2: '',
+dynx_pagetype: 'other',
+dynx_totalvalue: '',
+};
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 968035675;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/968035675/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '716196795170389']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=716196795170389&amp;ev=PixelInitialized" /></noscript>
+<?php } else { ?>
+<!-- Google Code for Website Leads Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 968035675;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "7FO2CN_18VoQ25rMzQM";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/968035675/?label=7FO2CN_18VoQ25rMzQM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<!-- Facebook Conversion Code for Leads - Direct Cars -FB -->
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6034453847920', {'value':'0.00','currency':'INR'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6034453847920&amp;cd[value]=0.00&amp;cd[currency]=INR&amp;noscript=1" /></noscript>
+<?php } ?>

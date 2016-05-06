@@ -1,0 +1,285 @@
+<div style="display:none">
+			<img src="https://directcars.in/images/sell-car-img.png"width="200">
+		</div>	
+	<div class="slider">
+			<div class="container bg-banner">
+				<div class="heading-text">
+					<h1>We buy <span>used cars</span></h1>
+					<h1>Our buying process assures <span>complete peace of mind</span></h1>
+				</div>
+				<div class="sell-car-img col-xs-4 pull-right mobile-hide"></div>
+			</div>
+		</div>
+		<!-- sell car four steps -->
+		<?php 
+		$formSubmit = false;
+		if(count($flashMessages)) : 
+		$formSubmit = true;
+		?>
+    <div class="row" >
+        <div class="alert alert-success alert-dismissable">
+            <button class="close" aria-hidden="true" data-dismiss="alert" type="button">
+                ×
+            </button>
+            <ul>
+                <?php foreach ($flashMessages as $msg) : ?>
+                    <li><?php echo $msg; ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>
+		<div class="container sell-car-steps">
+			<h3>Enjoy Safe, Fast & Hassle-Free Car Selling in 4 Simple Steps</h3>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-lg-3 step">
+					<h4 class="icon-doorstep">Appraisal at your doorstep</h4>
+					<p>We will come to your doorstep for a FREE Condition Assessment</p>
+					
+				</div>
+				<div class="col-xs-12 col-sm-6 col-lg-3 step">
+					<h4 class="icon-fair">Fair and Transparent Prices</h4>
+					<p>Our Price offer is based on latest market prices & actual condition of your car</p>
+					<p>There are not hidden charges</p>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-lg-3 step">
+					<h4 class="icon-purchase">Purchase Offer valid for 7 days</h4>
+					<p>We make a firm purchase offer that you can encash in 7 days</P>
+					<p>There are not obligations for you to sell the car to us</p>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-lg-3 step">
+					<h4 class="icon-cheque">Prompt Payments</h4>
+					<div class="clearfix"></div>
+					<p>Once the price is agreed upon we will make the full payment by Cheque/DD with in 48 hours and complete the paperwork simultaneously</p>
+				</div>
+			</div>
+		</div>
+		
+		<!-- sell-car form -->
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-sm-12 valuatation-detail">
+
+					<form role="form" action="" method="post" id="sell-form" onsubmit="var _gaq = _gaq || []; _gaq.push(['_trackEvent', 'Sell', 'SellerEnquiry', 'Seller Enquiry Submit.']);" name="sell-form" autocomplete="off">
+						<h4>Get started... Give your vehicle information and contact information, we will get your vehicle valuated for you</h4>
+						<!-- car detail -->
+						<div class="row">
+						<div class="col-lg-6 col-sm-12">
+							<h5>Car information <span>(optional)</span></h5>
+							<div class="form-group">
+								<label for="email" class="sr-only">Make Year</label>
+								 <select name="make_year" id="make_year" class="select-make form-control">
+                                    <option value="">make Year</option>
+									<?php echo $end_year = date("Y");
+									for($intY = $end_year; $intY >= $start_year; $intY--)
+									{ 
+										?><option value="<?php echo $intY; ?>"><?php echo $intY; ?></option><?php
+									}
+									?>
+                                                                            
+                                                                            
+                                                                 
+                                </select>
+							</div>
+							<div class="form-group">
+								<label for="key" class="sr-only">Make & Model</label>
+								<select name="car_make" id="car_make" class="form-control">
+                                <option value="">Select Make</option>
+                                 </select>
+								 <select name="car_model" id="car_model" class="form-control">
+                                <option value="">Select Model</option>
+                                 </select>
+							</div>
+							<div class="form-group">
+								<label for="key" class="sr-only">km driven</label>
+								<input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  name="km_driven" id="km_driven" class="form-control" placeholder="km driven">
+							</div>
+							<div class="form-group">
+								<label for="key" class="sr-only">city of registration</label>
+								<select  name="reg_city" id="reg_city" class="form-control">
+								  <option value="">city of registration</option>
+								  <?php foreach($regcity as $key => $value)
+								  { ?> 
+									<option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+							 <?php } ?>
+								</select>
+							</div>
+						</div>
+						<!-- user detail -->
+						<div class="col-lg-6 col-sm-12 contact-detail">
+							<h5>Contact information <span>(* mandatory)</span></h5>
+							<div class="form-group">
+								<label for="email" class="sr-only">Name</label>
+								<input type="text" id="customer_name" name="customer_name" class="form-control" placeholder="Name">
+							</div>
+							<div class="form-group required">
+								<label for="key" class="sr-only">Email</label>
+								<input type="text" name="customer_email" id="customer_email" class="form-control" placeholder="email">
+							</div>
+							<div class="form-group required">
+								<label for="key" class="sr-only">Mobile</label>
+								<input type="text" name="customer_mobile" id="customer_mobile" class="form-control" placeholder="98XXXXXXXX">
+							</div>
+							<div class="form-group">
+								<label for="key" class="sr-only">City</label>
+								<select name="customer_city" id="customer_city" class="form-control">
+								   <option value="">City</option>
+								  <?php foreach($regcity as $key => $value)
+								  { ?> 
+									<option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+							 <?php } ?>
+								</select>
+							</div>
+						</div>
+						</div>
+						
+						<?php
+							 //  require_once( '../direct_Cars_website/vendor/recaptcha/recaptchalib.php');
+							 // $publickey = "6LdmEAUTAAAAAN_zSKKg48FNKjeVXYgPG3HtSG4K"; // You got this from the signup page.
+							 // echo recaptcha_get_html($publickey);
+						?>
+                        <div class="row center-block sell-form-btn">
+							<div class="col-lg-5 col-xs-12">
+								<a class="btn btn-success btn-sell-submit col-xs-12" >
+								   Sell Now
+								</a>
+							</div>
+							<div class="col-xs-12 col-lg-1 text-center"><h3>or</h3></div>
+							<div class="col-lg-5 col-xs-12 text-center">
+								<h3 class="mobile-hide"><i class="fa fa-mobile"></i> +91 <?php echo $sell_phone; ?></h3>
+								<a class="btn btn-success col-xs-12 click-to-call" href="tel:<?php echo $sell_phone; ?>">
+								   <i class="fa fa-mobile"></i> Click to call 
+								</a>
+							</div>
+						</div>
+                    </form>
+				</div>
+				<div class="col-lg-6 col-sm-12">
+					<h3>Why sell your used car to Direct Cars</h3>
+					<ul class="why-sell-us">						
+						<li class="check">because we take care of all your concerns involved in selling a used car, whether it is the right market price, fast payments and most importantly clean documentation.</li>
+						<li class="check">our professional approach ensures you always get the right market price based on demand and condition of your car</li>
+						<li class="check">we also ensure the deal is honoured and payments are made in time by corporate check or demand draft</li>
+						<li class="check">that's not all, we ensure paperwork is complete and your car is sold to the right hands and copy of transferred RC is given to you</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		
+		<!-- *** our customer feedback *** -->
+		<div class="customer-feedback-cont">
+			<div class="container">
+				<h2>Our <span>Satisfied</span> Customers</h2>
+				<div class="carousel slide media-carousel" id="media">
+        <div class="carousel-inner">
+			<?php
+		$intTC = 0;
+		 foreach ($arrTestimonial as $testimonial) :
+         ?>
+			<?php if($intTC%3 == 0) { ?>
+			<ul class="customer-feedback item  <?php if($intTC == 0) { echo "active"; }?>">
+			<?php } ?>
+				<li>
+					<p>
+						<img src="<?php echo $image_path."testimonial/thumb/".$testimonial['client_image']; ?>" alt="<?php echo $testimonial['client_image'];?>"/> 
+						<?php echo $this->escapeHtml(substr($testimonial['description'],0,150));?> ...
+					</p>
+					<div class="owner-detail"><span><?php echo $this->escapeHtml($testimonial['client_name']);?></span>Car Owner</div>
+				</li>
+				
+			<?php if($intTC%3 == 2) { ?>
+			</ul>
+			<?php
+			}
+				$intTC++;
+                endforeach;
+            ?>
+          </div>
+		
+        <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+        <a data-slide="next" href="#media" class="right carousel-control">›</a>
+      </div>                          
+    
+			</div>
+			
+		</div>
+
+<?php if(!$formSubmit) { ?>
+<script type="text/javascript">
+
+var google_tag_params = {
+dynx_itemid: 'dcsell',
+dynx_itemid2: '',
+dynx_pagetype: 'other',
+dynx_totalvalue: '',
+};
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 968035675;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/968035675/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>	
+
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '716196795170389']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=716196795170389&amp;ev=PixelInitialized" /></noscript>
+<?php } else { ?>
+<!-- Google Code for Website Leads Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 968035675;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "7FO2CN_18VoQ25rMzQM";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/968035675/?label=7FO2CN_18VoQ25rMzQM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<!-- Facebook Conversion Code for Leads - Direct Cars -FB -->
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6034453847920', {'value':'0.00','currency':'INR'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6034453847920&amp;cd[value]=0.00&amp;cd[currency]=INR&amp;noscript=1" /></noscript>
+<?php } ?>

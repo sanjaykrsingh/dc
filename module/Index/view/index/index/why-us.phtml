@@ -1,0 +1,166 @@
+﻿	<div class="slider why-slider">
+			<div class="container bg-banner">
+				<div class="heading-text why-heaing">
+					<h1>Why buy & sell at <span>Direct Cars</span></h1>
+					<p>For our commitment to deliver great quality, great value & great experience and making buying & selling used cars a joyful experience.</p>
+				</div>
+				<div class="col-xs-4 pull-right mobile-hide"></div>
+			</div>
+		</div>
+		<div class="container why-us">
+			<!-- left panel -->
+			<div class="col-md-7"> 
+				<h2>Commitment to Quality</h2>
+				<div class="content">
+					We select 2 used cars out of 10 we see and reject the rest. Every car selected by us undergoes a thorough refurbishment and then inspection by trained professionals to see if anything has been missed and then certified. That’s not all, as a mark of confidence we offer warranty up to 12 months on our Certified Preowned Cars. We offer the car for sale to you, only when we are thoroughly so that you only get the best used cars in town.
+				</div>
+				<div class="clearfix"></div>
+				
+				<div class="content">
+					<div class="why-us-container">	
+						<h3>Our Quality Process for Certifying Used Cars</h3>
+						<div class="list-group">
+							<div class="list-group-item">
+								<h4 class="list-group-item-heading">1.  Selection</h4>
+								<p>We select 2 out of 10 used cars that we see, we reject the other cars due to:</p>
+								<ul>
+									<li><i class="fa fa-check"></i>Frame damage (accidental cars)</li>
+									<li><i class="fa fa-check"></i>Excessively driven, high mileage, doubtful or tempered odometer</li>
+									<li><i class="fa fa-check"></i>Cars not maintained properly, in poor mechanical condition</li>
+									<li><i class="fa fa-check"></i>Vehicles with incomplete or improper documents</li>
+									<li><i class="fa fa-check"></i>Cars that are over priced</li>
+								</ul>
+							</div>
+							<div class="list-group-item">
+								<h4 class="list-group-item-heading">2. Refurbishment</h4>
+								<p>Every cars then undergoes a thorough refurbishment, so that you don’t have to spend your time & money. Our refurbishment comprises of the following:</p>
+								<ul>
+									<li><i class="fa fa-check"></i>Comprehensive service that includes changing of fluids, filters, etc.</li>
+									<li><i class="fa fa-check"></i>Repair or replacement of mechanical and electrical components, etc.</li>
+									<li><i class="fa fa-check"></i>Body & aesthetics that includes cosmetic repairs, dry cleaning, etc.</li>
+								</ul>
+							</div>
+							<div class="list-group-item">
+								<h4 class="list-group-item-heading">3. Certification & Warranty</h4>
+								<ul>
+									<li><i class="fa fa-check"></i>Every car is then inspection by trained professionals to see if anything has been missed.</li>
+									<li><i class="fa fa-check"></i>Only then the used car is Certified</li>
+									<li><i class="fa fa-check"></i>You get warranty up to 12 months</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- right panel -->
+			<div class="col-md-5">
+				<div class="content">
+					<h2>Commitment to Value</h2>
+					<p><strong>While delivering quality is a must, delivering great value is equally important to us.</strong></p>
+					<ul>
+						<li><i class="fa fa-check"></i>Every car that we offer to you is competitively priced as per prevailing market conditions.</li>
+						<li><i class="fa fa-check"></i>We also offer attractive used car finance from leading banks like HDFC Bank, Kotak Mahindra, where in the down payment and monthly outflow (EMI) are worked to suit your financial needs and budget. </li>
+						<li><i class="fa fa-check"></i>You also get attractive exchange options if you wish to exchange your old car with our Certified Preowned Car.</li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+				<hr>
+				<div class="content">
+					<h2>Delivering Great Experience</h2>
+					<p><strong>Whether you are buying or selling a car at Direct Cars, at each step we want to deliver hassle-free experience in an honest and transparent manner to you.</strong></p>
+					<p>When you sell a car to us:</p>
+					<ul>
+						<li><i class="fa fa-check"></i>We offer fair and transparent prices for your old car</li>
+						<li><i class="fa fa-check"></i>Complete and prompt payments</li>
+						<li><i class="fa fa-check"></i>We take care of all your documentation needs</li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+				<div class="content">
+					<p>When you by a car from us:</p>
+					<ul>
+						<li><i class="fa fa-check"></i>Hassle-Free sales process, by proving maximum information about the car including vehicle history reports</li>
+						<li><i class="fa fa-check"></i>Competitive pricing based on prevailing market conditions</li>
+					</ul>
+					<p><strong>One-Stop-Shop for all your used car needs, to buy, sell, used car finance, insurance and documentation</strong></p>
+				</div>
+			</div>
+		</div>
+		
+		<!-- *** our customer feedback *** -->
+		<div class="customer-feedback-cont">
+			<div class="container">
+				<h2>Our <span>Satisfied</span> Customers</h2>
+				<div class="carousel slide media-carousel" id="media">
+        <div class="carousel-inner">
+		<?php
+		$intTC = 0;
+		 foreach ($arrTestimonial as $testimonial) :
+         ?>
+			<?php if($intTC%3 == 0) { ?>
+			<ul class="customer-feedback item  <?php if($intTC == 0) { echo "active"; }?>">
+			<?php } ?>
+				<li>
+					<p>
+						<img src="<?php echo $image_path."/testimonial/thumb/".$testimonial['client_image']; ?>" alt="<?php echo $testimonial['client_image'];?>"/> 
+						<?php echo $this->escapeHtml(substr($testimonial['description'],0,150));?> ...
+					</p>
+					<div class="owner-detail"><span><?php echo $this->escapeHtml($testimonial['client_name']);?></span>Car Owner</div>
+				</li>
+				
+			<?php if($intTC%3 == 2) { ?>
+			</ul>
+			<?php
+			}
+				$intTC++;
+                endforeach;
+            ?>
+          </div>
+		
+        <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+        <a data-slide="next" href="#media" class="right carousel-control">›</a>
+      </div>                          
+    
+			</div>
+			
+		</div>
+
+<script type="text/javascript">
+var google_tag_params = {
+dynx_itemid: 'dvwhy',
+dynx_itemid2: '',
+dynx_pagetype: 'other',
+dynx_totalvalue: '',
+};
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 968035675;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/968035675/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '716196795170389']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=716196795170389&amp;ev=PixelInitialized" /></noscript>

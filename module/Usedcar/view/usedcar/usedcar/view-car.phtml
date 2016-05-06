@@ -1,0 +1,457 @@
+﻿<div class="clearfix"></div>
+<?php 
+$formSubmit = false;
+if(count($flashMessages)) : 
+$formSubmit = true;
+?>
+    <div class="row" >
+        <div class="alert alert-success alert-dismissable">
+            <button class="close" aria-hidden="true" data-dismiss="alert" type="button">
+                ×
+            </button>
+            <ul>
+                <?php foreach ($flashMessages as $msg) : ?>
+                    <li><?php echo $msg; ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>
+
+	
+	<?php //$image_path = $this->serverUrl().$image_path; ?>
+	<div class="grid-view detail-view">
+	<div class="container">
+		<div class="car-grid-container">
+			<div class="grid-header">
+				<div class="col-xs-12">
+					<div class="row">
+						<div class="col-xs-12 col-lg-6 col-sm-6">
+							<h1><?php if($arrStockData['certified_by'] != "") { ?>Certified <?php } else {?>Used<?php } ?> <?php echo $arrStockData['make_year']; ?> <?php echo $arrStockData['make_name']; ?> <?php echo $arrStockData['model_name']; ?>  <span class="small"><?php echo $arrStockData['variant_name']; ?></span></h1>
+						</div>						
+						<div class="col-xs-12 col-lg-6 col-sm-6 price">
+							<?php if($arrStockData['hot_deal']== '1') {?><div class="offer-flag"></div><?php } ?>
+							<div class="offer-price-cont">
+								<span class="icon-rs"></span>
+								<?php if($arrStockData['hot_deal']== '1') {
+									$totprice = $arrStockData['hoat_deal_price'];
+								?>
+								<span class="market-price"><?php echo number_format($arrStockData['expected_price']);?></span>
+								<span class="offer-price"><?php echo number_format($arrStockData['hoat_deal_price']);?></span>
+								<?php } else { 
+								$totprice = $arrStockData['expected_price'];
+								?>
+								<span class="offer-price"><?php echo number_format($arrStockData['expected_price']);?></span>
+								<?php } ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			
+			<div class="car-detail-container">
+			
+				<div class="col-xs-12 col-lg-6 car-img">
+					<div class="car-gallery">
+        <div id="carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+			<?php if(count($arrStockImages) == 0) {
+						$arrStockImages[0]['image_name'] = 'noimage.gif';
+						$arrStockImages[0]['image_title'] = 'Coming Soon';
+					}?>
+				<?php 
+				$intProfileImg = 0;
+				for($intC=0; $intC < count($arrStockImages); $intC++) {
+					if($arrStockImages[$intC]['is_profile_img'] == 1)
+					{
+						$intProfileImg = $intC;
+					}
+				}?>
+                <?php for($intC=0; $intC < count($arrStockImages); $intC++) { ?>
+				<div class="item <?php if($intProfileImg == $intC) { ?>active<?php } ?>">
+					<?php if(file_exists($image_root_path."stock/crop/".$arrStockImages[$intC]['image_name']))
+								$file_path = "stock/crop/";
+							else 
+								$file_path = "stock/";
+					?>
+                    <img src="<?php echo $image_path.$file_path.$arrStockImages[$intC]['image_name']; ?>" alt="<?php echo $arrStockImages[$intC]['image_title']; ?>">
+                </div>
+				<?php } ?>
+            </div>
+        </div> 
+    <div class="clearfix"></div>
+		<div class="content text-center">
+			<div class="col-xs-4">
+				<a>Photos (<?php echo count($arrStockImages) ?>)</a>
+			</div>
+			<div class="col-xs-4">
+				<a <?php if($arrStockData['car_video'] != "") { ?> href="#play-video" class="fancybox"  <?php } ?>>Videos (<?php if($arrStockData['car_video'] != "") echo 1; else echo 0; ?>)</a>
+			</div>
+			<div class="col-xs-4">
+				<a href="#inline1" id="showroom-map" class="fancybox">View Map</a>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+        <div id="thumbcarousel" class="carousel slide" data-interval="false">
+            <div class="carousel-inner">
+					
+					 <?php for($intC=0; $intC < count($arrStockImages); $intC++) { ?>
+					 <?php if(file_exists($image_root_path."stock/carousel/".$arrStockImages[$intC]['image_name']))
+								$file_path = "stock/carousel/";
+							else 
+								$file_path = "stock/";
+					?>
+					 <?php if($intC%5 == 0) { ?><div class="item <?php if($intC == 0) { ?>active<?php } ?>"><?php } ?>
+					<div data-target="#carousel" data-slide-to="<?php echo $intC;?>" class="thumb"><img src="<?php echo $image_path.$file_path.$arrStockImages[$intC]['image_name']; ?>" alt="<?php echo $arrStockImages[$intC]['image_title']; ?>"></div>            
+				 <?php if($intC%5 == 4 || $intC == (count($arrStockImages)-1)) { ?></div><!-- /item --><?php } ?>
+				<?php } ?>
+	
+              
+            </div><!-- /carousel-inner -->
+            <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div> <!-- /thumbcarousel -->
+		<div class="content text-center">
+			<div class="col-xs-12">
+				The car status is <strong><?php echo $arrStockData["car_status"]; ?> </strong> as of  <?php echo date("d/m/Y h:i A"); ?>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	<!-- /clearfix -->
+
+    </div> <!-- /col-sm-6 -->
+				</div>
+				<div class="col-xs-12 col-lg-6 ">
+					<div class="row car-detail">
+						<div class="col-lg-6 pull-left">
+							<h3>Overview</h3>
+							<div class="marginT20">Specs & Features: <?php echo $arrStockData['noofcylinders'];?> Cylinders, <?php echo $arrStockData['engine_cc'];?> CC, <?php if(substr($arrStockData['aircondition'],0,3) == "Yes") {?> Aircondition<?php echo substr($arrStockData['aircondition'],3,strlen($arrStockData['aircondition'])); ?> <?php } ?>, <?php if($arrStockData['alloy_wheels'] == 'Yes') { ?>alloy wheels,<?php } if($arrStockData['leather_seats'] == 'Yes') { ?>leather seats<?php } ?><a href="#features">More </a></div>
+							<ul class="car-description marginT10">
+							<li class="icon-fuel"><?php echo $arrStockData["fuel_type"]; ?></li>
+							<li class="icon-transmission"><?php echo $arrStockData["transmission_type"]; ?></li>
+							<li class="icon-color"><?php echo $arrStockData['color']; ?></li>
+							<li class="icon-owner"><?php echo $arrStockData['owner']; ?> Owner</li>
+							<li class="icon-meter"><?php echo number_format($arrStockData['kilometre']); ?> Kms</li>
+							<?php if($arrStockData['certified_by'] != "") { ?>
+							<li class="icon-star"><img src="<?php echo $image_path;?>/<?php echo str_replace(" ","_",strtolower($arrStockData['certified_by'])).".png";  ?>" alt="<?php echo $arrStockData['certified_by']; ?>"/>
+							 
+							</li>
+							<li>&nbsp;</li>
+							<li><a href="#view-warranty" style="flot:right; font-size: 12px;" >View Warranty</a></li>
+							<?php } ?>
+							</ul>						
+						</div>
+						<div class="col-xs-12 col-lg-5 car-contact">
+							<div class=" mobile-hide">
+							<p><div style="float:left"><img src="<?php echo $this->basePath();?>/images/showroom_icon.jpg" alt="Showroom" height="26px">&nbsp;</div> <div> <strong><a href="<?php echo $this->url('showroom',array('action' => "index","id"=>$arrStockData['showroom_id'],"name"=>strtolower(str_replace(" ","+",$arrStockData['showroom_name'])),"city"=>strtolower($arrStockData['city']))); ?>"><?php echo $arrStockData['showroom_name']; ?></a></strong></div></p>
+							
+							<br>
+							<hr>
+							<h3><i class="fa fa-mobile"></i> +91 <?php echo $arrStockData['phone_1']; ?></h3>
+							
+							</div>
+							<!--
+							<div class="col-xs-8 col-lg-12">
+								<button type="submit" class="btn btn-default btn-block btn-success">See More Detail</button>
+							</div>
+							-->
+							<form name="frm-enquiry" id="frm-enquiry" method="POST" action="" onsubmit="var _gaq = _gaq || []; _gaq.push(['_trackEvent', 'Buyer', 'BuyerEnquiry', 'Buyer Enquiry Submit.']);">
+							<div class="mobile-hide">
+								<hr>
+								<div class=" marginT10">Get a call back</div>
+								<div class="input-group mobile-hide">							
+								  <input type="text" class="form-control" name="customer_mobile" id="customer_mobile" placeholder="Mobile">
+								  <span class="input-group-btn">
+									<button class="btn btn-success btn-by-phone" type="button">Go!</button>
+								  </span>
+								</div>
+								<div class=" marginT10">or</div>
+								<div class=" marginT10">Get detail in your email</div>
+								<div class="input-group mobile-hide">
+								  <input type="text" class="form-control" name="customer_email" id="customer_email" placeholder="Email">
+								  <span class="input-group-btn">
+									<button class="btn btn-danger btn-by-email" type="button">Go!</button>
+								  </span>
+								</div>
+							</div>
+							</form>
+						</div>						
+							
+						<div class="col-xs-11 pull-left car-detail-content marginT10">
+							<h4 class="about-car">About this car</h4>
+							<p> <?php echo $arrStockData['car_hignlights']; ?>
+							</p>
+							<div class="clearfix"></div>
+							<?php //if($arrStockData['hot_deal']== '1') {?>
+							<h4 class="redColor">Special Offer</h4>
+							<p> <?php echo $arrStockData['special_offer']; ?>
+							</p>
+							<?php //} ?>
+						</div>
+						<div class="col-xs-12">
+							<a class="btn btn-success col-xs-8 col-xs-offset-2 click-to-call" href="tel: +91<?php echo $arrStockData['phone_1']; ?>">
+							   <i class="fa fa-mobile"></i> Call
+							</a>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+		
+	</div>
+	
+	<!-- end -->
+	<!-- *** Car feature *** -->
+	<div class="container feature-warranty">
+		<div id="features" class="feature col-sm-7">
+			<h4>Features</h4>
+			<div class="row">
+			<div class="col-sm-3">
+				<h5>Exterior</h5>
+				<ul>				
+					<?php if(strtolower($arrStockData['alloy_wheels']) == 'yes') { ?><li>Alloywheels</li><?php } ?>
+					<?php if(strtolower($arrStockData['rear_wash_wiper']) == 'yes') { ?><li>Rear Wash wiper</li><?php } ?>
+					<?php if(strtolower($arrStockData['front_fog_lights']) == 'yes') { ?><li>Front fog lights</li><?php } ?>
+					<?php if(strtolower($arrStockData['electric_mirrors']) == 'yes') { ?><li>Electric Mirrors</li><?php } ?>
+					<?php if(strtolower($arrStockData['electric_foldable_mirrors']) == 'yes') { ?><li>Electric Foldable Mirrors</li><?php } ?>
+					<?php if(strtolower($arrStockData['auto_headlamps']) == 'yes') { ?><li>Auto Headlamps</li><?php } ?>
+					<?php if(strtolower($arrStockData['rain_sensing_wipers']) == 'yes') { ?><li>Rain Sensing Wipers</li><?php } ?>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<h5>Interior</h5>
+				<ul>					
+					<?php if(strtolower($arrStockData['cupholders']) == 'yes') { ?><li>Cupholders</li><?php } ?>
+					<?php if(strtolower($arrStockData['remotefuellid']) == 'yes') { ?><li>Remotefuellid</li><?php } ?>
+					<?php if(strtolower($arrStockData['tachometer']) == 'yes') { ?><li>Tachometer</li><?php } ?>
+					<?php if(strtolower($arrStockData['gear_shift_indicators']) == 'yes') { ?><li>Gear Shift Indicators</li><?php } ?>
+					<?php if(strtolower($arrStockData['bluetooth_connectivity']) == 'yes') { ?><li>Bluetooth Connectivity</li><?php } ?>
+					<?php if(strtolower($arrStockData['audio_system']) == 'yes') { ?><li>Audio System</li><?php } ?>
+					<?php if(strtolower($arrStockData['front_speakers']) == 'yes') { ?><li>Front speakers</li><?php } ?>
+					<?php if(strtolower($arrStockData['rear_speakers']) == 'yes') { ?><li>Rear speakers</li><?php } ?>
+					<?php if(strtolower($arrStockData['steeringmountedaudiocontrols']) == 'yes') { ?><li>Steering mounted audio controls</li><?php } ?>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<h5>Comfort</h5>
+				<ul>					
+					<?php if(strtolower($arrStockData['aircondition']) != 'no' && strtolower($arrStockData['aircondition']) != '') { ?><li>Aircondition</li><?php } ?>
+					<?php if(strtolower($arrStockData['power_steering']) == 'yes') { ?><li>Power Steering</li><?php } ?>
+					<?php if(strtolower($arrStockData['rear_ac_vents']) != 'no' && strtolower($arrStockData['rear_ac_vents']) != '') { ?><li>Rear Ac Vents</li><?php } ?>
+					<?php if(strtolower($arrStockData['power_window']) != 'no' && strtolower($arrStockData['power_window']) != '') { ?><li>Power Windows</li><?php } ?>
+					<?php if(strtolower($arrStockData['auto_down_power_windows']) != 'no' && strtolower($arrStockData['auto_down_power_windows']) != '') { ?><li>Auto Down Power Windows</li><?php } ?>
+					<?php if(strtolower($arrStockData['anti_pinch_power_windows']) != 'no' && strtolower($arrStockData['anti_pinch_power_windows']) != '') { ?><li>Anti Pinch Power Windows</li><?php } ?>
+					<?php if(strtolower($arrStockData['defogger_front']) != 'no' && strtolower($arrStockData['defogger_front']) != '') { ?><li>Defogger</li><?php } ?>
+					<?php if(strtolower($arrStockData['leather_seats']) != 'no' && strtolower($arrStockData['leather_seats']) != '') { ?><li>Leatherseats</li><?php } ?>
+					<?php if(strtolower($arrStockData['power_seats']) != 'no' && strtolower($arrStockData['power_seats']) != '') { ?><li>Powerseats</li><?php } ?>
+					<?php if(strtolower($arrStockData['driver_seat_height_adjust']) != 'no' && strtolower($arrStockData['driver_seat_height_adjust']) != '') { ?><li>Driver Seat Height Adjust</li><?php } ?>
+					<?php if(strtolower($arrStockData['sun_roof']) != 'no' && strtolower($arrStockData['sun_roof']) != '') { ?><li>Sunroof</li><?php } ?>
+					<?php if(strtolower($arrStockData['keyless_entry']) != 'no' && strtolower($arrStockData['keyless_entry']) != '') { ?><li>Keyless Entry</li><?php } ?>
+					<?php if(strtolower($arrStockData['keyless_start']) != 'no' && strtolower($arrStockData['keyless_start']) != '') { ?><li>Keyless Start</li><?php } ?>
+					<?php if(strtolower($arrStockData['cruise_control']) != 'no' && strtolower($arrStockData['cruise_control']) != '') { ?><li>Cruise Control</li><?php } ?>
+					<?php if(strtolower($arrStockData['chilled_glovebox']) != 'no' && strtolower($arrStockData['chilled_glovebox']) != '') { ?><li>Chilled Glovebox</li><?php } ?>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<h5>Safety</h5>
+				<ul>					
+					<?php if(strtolower($arrStockData['central_locking']) != 'no' && strtolower($arrStockData['central_locking']) != '') { ?><li>Central Locking</li><?php } ?>
+					<?php if(strtolower($arrStockData['abs']) != 'no' && strtolower($arrStockData['abs']) != '') { ?><li>ABS</li><?php } ?>
+					<?php if(strtolower($arrStockData['traction_control']) != 'no' && strtolower($arrStockData['traction_control']) != '') { ?><li>Traction control</li><?php } ?>
+					<?php if(strtolower($arrStockData['electronic_stability_control']) != 'no' && strtolower($arrStockData['electronic_stability_control']) != '') { ?><li>Electronic Stability control</li><?php } ?>
+					<?php if(strtolower($arrStockData['airbags']) != 'no' && strtolower($arrStockData['airbags']) != '') { ?><li>Airbags</li><?php } ?>
+					<?php if(strtolower($arrStockData['immobilizer']) != 'no' && strtolower($arrStockData['immobilizer']) != '') { ?><li>Immobilizer</li><?php } ?>
+					<?php if(strtolower($arrStockData['Childsafetylocks']) != 'no' && strtolower($arrStockData['Childsafetylocks']) != '') { ?><li>Childsafetylocks</li><?php } ?>
+					<?php if(strtolower($arrStockData['reversing_camera']) != 'no' && strtolower($arrStockData['reversing_camera']) != '') { ?><li>Reversing Camera</li><?php } ?>
+				</ul>
+			</div>
+			</div>
+		</div>
+		<!-- end feature -->
+		<div id="view-warranty" class="warranty col-sm-5">
+		<div class="certification-cont">
+			<h3>Certification / Warranty</h3>
+			<div class="user-detail demoUser">
+				<dl class="dl-horizontal no-margin">
+				  <dt class="text-info">Certified by:</dt>
+				  <dd><img src="<?php echo $image_path;?>/<?php echo str_replace(" ","_",strtolower($arrStockData['certified_by'])).".png";  ?>" alt="<?php echo $arrStockData['certified_by'];?>"></dd>
+				  
+				  <dt class="text-info">Warranty:</dt>
+				  <dd><?php echo $arrStockData['certified_warranty_details'];?></dd>
+				  
+				  <dt class="text-info">Service History:</dt>
+				  <dd><?php echo $arrStockData['service_history'];?></dd>
+				  
+				  <dt class="text-info">Free Service:</dt>
+				  <dd><?php echo $arrStockData['free_services'];?> Free Services</dd>
+				  
+				  <dt class="text-info">On Road Assist:</dt>
+				  <dd><?php echo $arrStockData['on_road_assistance'];?></dd>
+				</dl>
+			</div>
+			</div>
+			<div class="certification-steps">
+				<h4>Our Certification Process ensures you get the best</h4>
+				<div class="content">
+					<div class="col-sm-4 text-center">
+						<span class="step-one"></span>
+						<p>SELECTION</p>
+					</div>
+					<div class="col-sm-4 text-center">
+						<span class="step-two"></span>
+						<p>REFURBISHMENT</p>
+					</div>
+					<div class="col-sm-4 text-center">
+						<span class="step-three"></span>
+						<p>CERTIFICATION</p>
+					</div>
+				</div>
+				<a href="<?php echo $this->url('index',array('action' => "why-us")); ?>" class="txtgreen">Know more about our certified quality</a>
+			</div>
+		</div>
+	</div>
+		<div id="inline1" style="position: absolute;left: -1000%;width:500px;">
+			<?php
+		// if able to geocode the address
+    if($data_arr){
+         
+        $latitude = $data_arr[0];
+        $longitude = $data_arr[1];
+        $formatted_address = $data_arr[2];
+                     
+    ?>
+  
+    <!-- google map will be shown here -->
+    <div id="gmap_canvas" style="width:100%; height:200px;">Loading map...</div>
+    <div id='map-label'>Map shows approximate location.</div>
+ 
+    <!-- JavaScript to show google map -->
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3.5&sensor=true"></script>   
+    <script type="text/javascript">
+        function init_map() {
+            var myOptions = {
+                zoom: 14,
+                center: new google.maps.LatLng(<?php echo $latitude; ?>, <?php echo $longitude; ?>),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
+            marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(<?php echo $latitude; ?>, <?php echo $longitude; ?>)
+            });
+            infowindow = new google.maps.InfoWindow({
+                content: "<?php echo $formatted_address; ?>"
+            });
+            google.maps.event.addListener(marker, "click", function () {
+                infowindow.open(map, marker);
+            });
+            infowindow.open(map, marker);
+        }
+        google.maps.event.addDomListener(window, 'load', init_map);
+		
+    </script>
+ 
+    <?php
+ 
+    // if unable to geocode the address
+    }else{
+        echo "No map found.";
+    }
+	
+?>
+	</div>
+	
+	<div id="play-video" style="display:none" >
+	 <iframe height="200px" width="100%"
+src="<?php echo $arrStockData['car_video']; ?>">
+</iframe> 
+</div>
+<?php 
+if(!$formSubmit) { 
+$keyword = $arrStockData['stock_id'];
+?>
+
+<script type="text/javascript">
+var google_tag_params = {
+dynx_itemid: '<?php echo $keyword;?>',
+dynx_itemid2: '',
+dynx_pagetype: 'product',
+dynx_totalvalue: '<?php echo $totprice; ?>',
+};
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 968035675;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/968035675/?value=<?php echo $totprice; ?>&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '716196795170389']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=716196795170389&amp;ev=PixelInitialized" /></noscript>
+<?php } else { ?>
+<!-- Google Code for Website Leads Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 968035675;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "7FO2CN_18VoQ25rMzQM";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/968035675/?label=7FO2CN_18VoQ25rMzQM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<!-- Facebook Conversion Code for Leads - Direct Cars -FB -->
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6034453847920', {'value':'0.00','currency':'INR'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6034453847920&amp;cd[value]=0.00&amp;cd[currency]=INR&amp;noscript=1" /></noscript>
+<?php } ?>

@@ -1,0 +1,183 @@
+<div class="slider">
+			<div class="container bg-car">
+				<div class="heading-text">
+					<h2>Make the most of your   <span>TAX REFUND</span></h2>
+					<h2>Apply for   <span>FINANCING</span>  and know your options upfront. </h2>
+				</div>
+				
+				<div class="car-search">
+					<div class="car-search-option-cont">
+						<div class="hd-car-search"><span class="icon-car-search"></span> Find cars by...</div>
+						<ul class="car-search-option">
+							<li id='li-make' style="cursor:pointer" class="">
+								<a class="icon-make">Make</a>
+								<div class="search-make search-popover make-cont">
+						<div class="" style="max-height: 300px;overflow-y: auto;">
+							<ul class="car-make-list">
+							<?php foreach ($arrMake as $bodystyle) : ?>
+								
+								<li class="checkbox col-xs-4" tid="auto" title="<?php echo $this->escapeHtml($bodystyle['make_name']);?>" data-val="<?php echo $this->escapeHtml($bodystyle['make_name']);?>"><label>
+								<img src="images/make_logo/<?php echo $this->escapeHtml($bodystyle['make_name']);?>.jpg" alt="<?php echo $this->escapeHtml($bodystyle['make_name']);?>" width="50px">
+								<br><a href="<?php echo $this->url('usedcar',array('action' => "search",'filter_type'=>'make',"filter_value"=>$bodystyle['make_name'])) ?>"><?php echo $this->escapeHtml($bodystyle['make_name']);?><span><?php echo $this->escapeHtml($bodystyle['cnt']);?></a></span></label></li>
+								<?php  endforeach; ?>
+							</ul>
+							
+						</div>
+					</div>
+							</li>
+							<li id='li-style' class="">
+								<a style="cursor:pointer" class="icon-type">Style</a>
+								<div class="search-type search-popover">
+						<div class="" style="max-height: 300px;overflow-y: auto;">
+							<ul class="body-type-icon">
+								<?php foreach ($arrBodyStyle as $bodystyle) : ?>
+								<li><a href="<?php echo $this->url('usedcar',array('action' => "search",'filter_type'=>'body',"filter_value"=>$bodystyle['bod_style'])) ?>" class="icon-<?php echo $this->escapeHtml(strtolower($bodystyle['bod_style']));?>"><?php echo $this->escapeHtml($bodystyle['bod_style']);?><span><?php echo $this->escapeHtml($bodystyle['cnt']);?></span></a></li>
+								<?php  endforeach; ?>
+								
+							</ul>
+							
+						</div>
+					</div>
+							</li>
+							<li id='li-budget' class="" >
+								<a style="cursor:pointer" class="icon-budget">Budget</a>
+								<div class="search-budget search-popover">
+						<div class="" style="max-height: 300px;overflow-y: auto;">
+							<ul id="budget" class="car-make-list">
+								<li class="checkbox col-xs-4"><label><a href="<?php echo $this->url('usedcar',array('action' => "search",'filter_type'=>'budget',"filter_value"=>"0-3")) ?>">Up to 3 lakh</a></label></li>
+								<li class="checkbox col-xs-4"><label><a href="<?php echo $this->url('usedcar',array('action' => "search",'filter_type'=>'budget',"filter_value"=>"3-4")) ?>">3-4 lakhs</a></label></li>
+								<li class="checkbox col-xs-4"><label><a href="<?php echo $this->url('usedcar',array('action' => "search",'filter_type'=>'budget',"filter_value"=>"4-6")) ?>">4-6 lakhs</a></label></li>
+								<li class="checkbox col-xs-4"><label><a href="<?php echo $this->url('usedcar',array('action' => "search",'filter_type'=>'budget',"filter_value"=>"6-8")) ?>">6-8 lakhs</a></label></li>
+								<li class="checkbox col-xs-4"><label><a href="<?php echo $this->url('usedcar',array('action' => "search",'filter_type'=>'budget',"filter_value"=>"8-12")) ?>">8-12 lakhs</a></label></li>
+								<li class="checkbox col-xs-4"><label><a href="<?php echo $this->url('usedcar',array('action' => "search",'filter_type'=>'budget',"filter_value"=>"12-18")) ?>">12-18 lakhs</a></label></li>
+								<li class="checkbox col-xs-4"><label><a href="<?php echo $this->url('usedcar',array('action' => "search",'filter_type'=>'budget',"filter_value"=>"18-25")) ?>">18-25 lakhs</a></label></li>
+								<li class="checkbox col-xs-4"><label><a  href="<?php echo $this->url('usedcar',array('action' => "search",'filter_type'=>'budget',"filter_value"=>"25-40")) ?>">25-40 lakhs</a></label></li>
+								<li class="checkbox col-xs-4"><label><a href="<?php echo $this->url('usedcar',array('action' => "search",'filter_type'=>'budget',"filter_value"=>"40-0")) ?>">40 lakh and above</a></label></li>
+							</ul>
+							
+						</div>
+					</div>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+				
+				
+			</div>
+			<!-- body type container -->
+			<div class="body-type mobile-hide">
+				<div class="container">
+					<h4>SELECT BY BODY STYLE</h4>
+					<ul class="body-type-icon">
+						<?php foreach ($arrBodyStyle as $bodystyle) : ?>
+								<li><a href="" class="icon-<?php echo $this->escapeHtml(strtolower($bodystyle['bod_style']));?>"><?php echo $this->escapeHtml($bodystyle['bod_style']);?><span><?php echo $this->escapeHtml($bodystyle['cnt']);?></span></a></li>
+								<?php  endforeach; ?>
+					</ul>
+					<a href="<?php echo $this->url('usedcar',array('action' => "search")); ?>"><button type="submit" class="btn btn-success pull-right">View All</button></a>
+				</div>
+			</div>
+			
+		</div>
+		
+		<!-- special offer -->
+		<?php
+		$image_name = "noimage.gif";
+		if($arrHoatDeal['is_profile_img'] != "")
+		{
+			$arrImage = explode(",",$arrHoatDeal['image_name']); 
+			$arrProfile = explode(",",$arrHoatDeal['is_profile_img']); 
+			for($i=0; $i < count($arrProfile); $i++)
+			{
+				if($i==0 || $arrProfile[$i] == 1)
+				{
+					$image_name = $arrImage[$i];
+				}
+			}
+		
+		}
+		?>
+		<div class="special-offer">
+			<div class="container">
+				<div class="offer-flag"></div>
+				<div class="offer-price-cont">
+					<span class="icon-rs"></span>
+					<span class="market-price">Rs.<?php echo number_format($arrHoatDeal['expected_price']);?></span>
+					<span class="offer-price">Rs.<?php echo number_format($arrHoatDeal['hoat_deal_price']);?></span>
+				</div>
+				<div class="clearfix"></div>
+				<div class="icon-car" style="background: url('<?php echo $image_path; ?>stock/crop/<?php echo addslashes($image_name);?>') no-repeat 0 0;"></div>
+				<div class="car-name"><?php echo $arrHoatDeal['make_year']; ?> <?php echo $arrHoatDeal['make_name']; ?> <?php echo $arrHoatDeal['model_name']; ?> <?php echo $arrHoatDeal['variant_name']; ?></div>
+				<div class="car-description pull-right">
+					<ul>
+						<li class="icon-fuel"><span>Fuel:</span><?php echo $arrHoatDeal['fuel_type']; ?></li>
+						<li class="icon-transmission"><span>Transmission:</span><?php echo $arrHoatDeal['transmission_type']; ?></li>
+						<li class="icon-color"><span>Color:</span><?php echo $arrHoatDeal['color']; ?></li>
+						<li class="icon-city"><span>City:</span><?php echo $arrHoatDeal['registration_place']; ?></li>
+						<li class="icon-meter"><span>KMs Run:</span><?php echo $arrHoatDeal['kilometre']; ?> Kms</li>
+						<li class="icon-owner"><span>Owners:</span><?php echo $arrHoatDeal['owner']; ?></li>
+					</ul>
+					<div class="clearfix"></div>
+					<div>
+						<a href="<?php echo $this->url('usedcar',array('action' => "search")); ?>"><button type="submit" class="btn btn-success pull-right">Show All</button></a>
+						<a href="<?php echo $this->url('usedcar',array('action' => "view-car","id"=>$arrHoatDeal['stock_id'])); ?>"><button type="submit" class="btn btn-danger pull-right">View this Car</button></a>
+					</div>
+				</div>
+				
+			</div>
+		</div> 
+		
+		<!--*** sell your car *** -->
+		<div class="sell-your-car">
+			<div class="container">
+				<div class="col-sm-6">
+				<h2><span>Sell</span> us your car</h2>
+				<h4>Enjoy Safe, Fast & Hassle-Free Car Selling in 4 Simple Steps</h4>
+				</div>
+				<div class="sell-car-img col-xs-4 pull-right mobile-hide"></div>
+				<ul class="col-sm-8">
+					<li class="icon-doorstep">Doorstep Appraisal</li>
+					<li class="icon-fair">Fair & Transparent Prices</li>
+					<li class="icon-purchase">Purchase offer valid for 7 days</li>
+					<li class="icon-cheque">Prompt Payments</li>
+				</ul>
+				<button type="button" class="btn btn-danger pull-right">Sell Now</button>
+			</div>
+		</div>
+		<!-- *** our customer feedback *** -->
+		<div class="customer-feedback-cont">
+			<div class="container">
+				<h2>Our <span>Satisfied</span> Customer</h2>
+				<div class="carousel slide media-carousel" id="media">
+        <div class="carousel-inner">
+		<?php
+		$intTC = 0;
+		 foreach ($arrTestimonial as $testimonial) :
+         ?>
+			<?php if($intTC%3 == 0) { ?>
+			<ul class="customer-feedback item  <?php if($intTC == 0) { echo "active"; }?>">
+			<?php } ?>
+				<li>
+					<p>
+						<img src="<?php echo $image_path."/testimonial/thumb/".$testimonial['client_image']; ?>" alt=""/> 
+						<?php echo $this->escapeHtml(substr($testimonial['description'],0,150));?> ...
+					</p>
+					<div class="owner-detail"><span><?php echo $this->escapeHtml($testimonial['client_name']);?></span>Car Owner</div>
+				</li>
+				
+			<?php if($intTC%3 == 2) { ?>
+			</ul>
+			<?php
+			}
+				$intTC++;
+                endforeach;
+            ?>
+          </div>
+		
+        <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+        <a data-slide="next" href="#media" class="right carousel-control">›</a>
+      </div>                          
+    
+			</div>
+			
+		</div>

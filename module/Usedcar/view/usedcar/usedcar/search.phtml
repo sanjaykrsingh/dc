@@ -1,0 +1,327 @@
+	<div class="top-banner">
+		<div class="container mobile-hide">
+		
+		<h2>buy all <span class="redColor">verified, certified</span> used cars. get assured quality. best deals!</h2>
+		<div class="banner-nav">
+			<a><strong>Best Prices</strong></a> 
+			<a><strong>Warranty & Free Services</strong></a> 
+			<a><strong>Attractive Finance & Insurance</strong> </a>
+		</div>
+		</div>
+	</div>
+	
+	
+	
+	<div class="grid-view">
+	<form method="post" name="frmsearch" id="frmsearch" action="<?php echo $this->url('usedcar',array('action' => "search")); ?>">
+	<div class="container search-bar">
+		<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="">
+        <ul class="col-xs-12">
+            <li class="col-xs-5 col-lg-2 col-sm-2 text-right ">Search By</li>
+			<li class="dropdown col-xs-7 col-lg-2 col-sm-2">
+              &nbsp;
+              <select name="make" id="make" class="car-make-select">
+                                <option value="" class="jMake">Make / Model</option>
+								<?php foreach($arrMake as $model) { ?>
+								<option value="<?php echo $model['make_name']; ?>" <?php if(@$objSearch->make == $model['make_name'])  echo "selected";  ?> class="jMake"><?php echo $model['make_name']; ?></option>
+								<?php } ?>
+                        </select>
+            </li>
+			<li class="dropdown col-xm-12 col-lg-2 col-sm-2 mobile-hide">
+              
+                             <select name="budget" id="budget" class="car-make-select">
+                                <option value="" class="jMake">Price</option>
+								<option value="0-1" <?php if(@$objSearch->budget == "0-1")  echo "selected";  ?> class="jMake">Below 1 Lac</option>
+								<option value="1-2" <?php if(@$objSearch->budget == "1-2")  echo "selected";  ?> class="jMake">1-2 lakhs</option>
+								<option value="2-3" <?php if(@$objSearch->budget == "2-3")  echo "selected";  ?> class="jMake">2-3 lakhs</option>
+								<option value="3-5" <?php if(@$objSearch->budget == "3-5")  echo "selected";  ?> class="jMake">3-5 lakhs</option>
+								<option value="5-10" <?php if(@$objSearch->budget == "5-10")  echo "selected";  ?> class="jMake">5-10 lakhs</option>
+								<option value="10-0" <?php if(@$objSearch->budget == "10-0")  echo "selected";  ?> class="jMake">10 lakh and above</option>
+								
+                        </select>
+            </li>
+			<li class="dropdown col-xm-12 col-lg-2 col-sm-2 mobile-hide">
+                <select name="body_style" id="body_style" class="car-make-select">
+                                <option value="" class="jMake">Body Style</option>
+								<?php foreach($arrBodyStyle as $bodystyle) { ?>
+								<option value="<?php echo $bodystyle['bod_style']; ?>" <?php if(@$objSearch->body_style == $bodystyle['bod_style'])  echo "selected";  ?> class="jMake"><?php echo $bodystyle['bod_style']; ?></option>
+								<?php } ?>
+                        </select>
+            </li>
+			<li class="dropdown col-xm-12 col-lg-2 col-sm-2 mobile-hide">
+               <select name="fuel_type" id="fuel_type" class="car-make-select">
+                                <option value="" class="jMake">Fuel Type</option>
+								<?php foreach($arrFuel as $key=>$value) { ?>
+								<option value="<?php echo $key; ?>" <?php if(@$objSearch->fuel_type == $key)  echo "selected";  ?> class="jMake"><?php echo $value; ?></option>
+								<?php } ?>
+                        </select>
+             
+            </li>
+       
+                <button type="submit" class="btn btn-default btn-search-reset mobile-hide">Reset All</button>
+            
+        </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	</div>
+	
+	<?php $arrPriceRange = array("0-1" => "Below 1 Lakh",
+								 "1-2" => "1-2 lakhs",
+								 "2-3" => "2-3 lakhs",
+								 "3-5" => "3-5 lakhs",
+								 "5-10" => "5-10 lakhs",
+								 "10-0" => "10lakhs and above"); ?>
+	<div class="container sort-cont">
+		<div class="col-xs-12 col-lg-9">
+			<h1>Certified used <?php echo @$objSearch->make; ?> <?php echo @$objSearch->model; ?> <?php echo @$objSearch->body_style; ?> cars <?php if(@$objSearch->budget != "") echo "in Price Range ".$arrPriceRange[$objSearch->budget]; ?> in Gurgaon, Delhi/NCR <span>There are <strong><?php echo $totalCount; ?></strong> certified preowned cars for your search</span></h1>
+		</div>
+		<div class="pull-right col-sm-3 col-xs-12">
+                            <div class=" row  ">
+                            <div class=" row  ">
+                                <div class="col-xs-4 text-right pdtop7 ">Sort by:</div>
+                                <div class="col-xs-8">                                
+                                    <select id="sort_by" name="sort_by">
+                                    <option value="">Relevance</option>
+									<option value="listing_date desc" <?php if(@$objSearch->sort_by == "listing_date desc") { echo "selected"; } ?>>Date (Latest to Oldest)</option>
+									<option value="make_year asc" <?php if(@$objSearch->sort_by == "make_year asc") { echo "selected"; } ?>>Year (Low to High)</option>
+									<option value="make_year desc" <?php if(@$objSearch->sort_by == "make_year desc") { echo "selected"; } ?>>Year (High to Low)</option>
+									<option value="expected_price asc" <?php if(@$objSearch->sort_by == "expected_price asc") { echo "selected"; } ?>>Price (Low to High)</option>
+									<option value="expected_price desc" <?php if(@$objSearch->sort_by == "expected_price desc") { echo "selected"; } ?>>Price (High to Low)</option>
+									<option value="kilometre asc" <?php if(@$objSearch->sort_by == "kilometre asc") { echo "selected"; } ?>>Kilometer (Low to High)</option>
+									<option value="kilometre desc" <?php if(@$objSearch->sort_by == "kilometre desc") { echo "selected"; } ?>>Kilometer (High to Low)</option>
+                                    </select>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+	</div>
+	</form>
+	<div class="container">
+		<?php foreach($arrStockList as $stock) { ?>
+		<div class="car-grid-container">
+			<div class="grid-header">
+				<div class="col-xs-12">
+					<div class="row">
+						<div class="col-xs-12 col-lg-6 col-sm-6">
+						<?php $keyword = $stock['make_name']." ".$stock['model_name']." ".$stock['variant_name']."-".$stock['stock_id'];
+							$keyword = str_replace(" ","-",$keyword);
+							$keyword = strtolower($keyword);
+						?>
+							<a href="<?php echo $this->url('usedcar',array('action' => "view-car","keyword"=>$keyword)); ?>" target="_blank"><h1><?php if($stock['certified_by'] != "") { ?>Certified <?php } else {?>Used<?php } ?> <?php echo $stock['make_year']; ?> <?php echo $stock['make_name']; ?> <?php echo $stock['model_name']; ?> <span class="small"><?php echo $stock['variant_name']; ?></span></h1></a>
+						</div>						
+						<div class="col-xs-12 col-lg-6 col-sm-6 price">
+							<?php if($stock['hot_deal']== '1') {?><div class="offer-flag"></div><?php } ?>
+							<div class="offer-price-cont">
+								<span class="icon-rs"></span>
+								<?php if($stock['hot_deal']== '1') {?>
+								<span class="market-price"><?php echo number_format($stock['expected_price']);?></span>
+								<span class="offer-price"><?php echo number_format($stock['hoat_deal_price']);?></span>
+								<?php } else { ?>
+								<span class="offer-price"><?php echo number_format($stock['expected_price']);?></span>
+								<?php } ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="car-detail-container">
+				<div class="col-xs-12 col-lg-3 car-img">
+				 <?php
+										$arrImage = array();
+										$image_name = "noimage.gif";
+										$alt_name ="Coming Soon";
+										if($stock['is_profile_img'] != "")
+										{
+											$arrImage = explode(",",$stock['image_name']); 
+											$arrProfile = explode(",",$stock['is_profile_img']); 
+											$arrAlt = explode(",",$stock['image_title']);
+											for($i=0; $i < count($arrProfile); $i++)
+											{
+												if($i==0 || $arrProfile[$i] == 1)
+												{
+													$image_name = $arrImage[$i];
+													$alt_name = $arrAlt[$i];
+												}
+											}
+										
+										}
+										?>
+										<?php if(file_exists($image_root_path."stock/thumb/".$image_name))
+												{
+													$file_path = "stock/thumb/";
+												}
+												else
+												{
+													$file_path = "stock/";
+												}
+												
+												?>
+					<a href="<?php echo $this->url('usedcar',array('action' => "view-car","keyword"=>$keyword)); ?>" target="_blank"><img src="<?php echo $image_path.$file_path.$image_name; ?>" alt="<?php echo $alt_name; ?>"/></a>
+					<div class="media-cont text-center">
+						<a><i class="fa fa-camera"></i> <?php echo count(@$arrImage);?> </a>
+						<a><i class="fa fa-video-camera"></i><?php if($stock['car_video'] != "") echo 1; else echo 0; ?></a>
+					</div>
+				</div>
+				<div class="col-xs-12 col-lg-6 car-detail">
+					<div class="row">
+					<div class="col-lg-6 pull-left">
+						<div class="">Specs & Features: <?php echo $stock['noofcylinders'];?> Cylinders, <?php echo $stock['engine_cc'];?> CC, <?php if(substr($stock['aircondition'],0,3) == "Yes") {?> Aircondition<?php echo substr($stock['aircondition'],3,strlen($stock['aircondition'])); ?> <?php } ?> 
+						<?php if($stock['alloy_wheels'] == 'Yes') { ?>alloy wheels,<?php } if($stock['leather_seats'] == 'Yes') { ?>leather seats<?php } ?> <a href="<?php echo $this->url('usedcar',array('action' => "view-car","keyword"=>$keyword)); ?>" target="_blank">More </a></div>
+						<ul class="car-description">
+							<li class="icon-fuel"><?php echo $stock["fuel_type"]; ?></li>
+							<li class="icon-transmission"><?php echo $stock["transmission_type"]; ?></li>
+							<li class="icon-color"><?php echo $stock['color']; ?></li>
+							<li class="icon-owner"><?php if($stock['owner'] != "") { echo $stock['owner']; ?> Owner <?php } ?>	</li>
+							<li class="icon-meter"><?php echo number_format($stock['kilometre']); ?> Kms</li>
+							<?php if($stock['certified_by'] != "") { ?>
+							<li class="icon-star"><img src="<?php echo $image_path;?>/<?php echo str_replace(" ","_",strtolower($stock['certified_by'])).".png";  ?>" alt="<?php echo $stock['certified_by']; ?>"/></li>
+							<?php } ?>
+						</ul>						
+					</div>
+					
+						
+					<div class="col-lg-6 pull-left car-detail-content mobile-hide">
+						<h4 class="about-car">About this car</h4>
+						<p> <?php echo substr($stock['car_hignlights'],0,200); ?>
+							<?php if(strlen($stock['car_hignlights']) > 200) { ?><a href="<?php echo $this->url('usedcar',array('action' => "view-car","keyword"=>$keyword)); ?>" target="_blank">More</a><?php } ?>
+						</p>
+						<div class="clearfix"></div>
+						<?php //if($stock['hot_deal']== '1') {?>
+						<h4 class="redColor">Special Offer</h4>
+						<p> <?php echo substr($stock['special_offer'],0,200); ?>
+							<?php if(strlen($stock['special_offer']) > 200){ ?><a href="<?php echo $this->url('usedcar',array('action' => "view-car","keyword"=>$keyword)); ?>" target="_blank">More</a><?php } ?>
+						</p>
+						<?php //} ?>
+					</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-lg-3 car-contact">
+					<div class=" mobile-hide">
+					<p><div style="float:left"><img src="<?php echo $this->basePath();?>/images/showroom_icon.jpg" alt="Showroom" height="26px">&nbsp;</div> <div><strong><a href="<?php echo $this->url('showroom',array('action' => "index","id"=>$stock['showroom_id'],"name"=>strtolower(str_replace(" ","+",$stock['showroom_name'])),"city"=>strtolower($stock['city']))); ?>"  target="_blank"><?php echo $stock['showroom_name']; ?></a></strong></div></p>
+					
+							
+					<h3><i class="fa fa-mobile"></i>+91 <?php echo $stock['phone_1']; ?></h3>
+					
+					</div>
+					
+					<div class="col-xs-8  col-lg-8 col-lg-offset-2 ">
+						<a href="<?php echo $this->url('usedcar',array('action' => "view-car","keyword"=>$keyword)); ?>" target="_blank"><button type="submit" class="btn btn-default btn-block btn-success">See More Detail</button></a>
+					</div>
+					<a class="btn btn-success col-xs-4 click-to-call" href="tel:+91<?php echo $stock['phone_1']; ?>">
+					   <i class="fa fa-mobile"></i> Call 
+					</a>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+	</div>
+	<div class="pagination-centered">
+	<?php if ($this->pageCount >  1): ?>
+    <div  class="pagination pagination-centered" width="100%">
+        <ul>
+            <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('usedcar', array('action' => 'search', 'page' => $this->first, )); ?>">&laquo;</a></li>
+            <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('usedcar', array('action' => 'search','page' => $this->previous, )); ?>">&lsaquo;</a></li>
+
+            <!-- Numbered page links -->
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <li <?php echo $page == $this->current ? 'class="active"' : ''; ?>><a href="<?php echo $this->url('usedcar', array('action' => 'search','page' => $page,)); ?>">
+                        <?php echo $page; ?>
+                    </a></li>
+            <?php endforeach; ?>
+
+            <!-- Next page link -->
+            <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('usedcar', array('action' => 'search','page' => $this->next, )); ?>">&rsaquo;</a></li>
+            <!-- Last page link -->
+            <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
+                <a href="<?php echo $this->url('usedcar', array( 'action' => 'search','page' => $this->last,)); ?>">&raquo;</a></li>
+        </ul>
+    </div>
+<?php endif; ?>	
+</div>
+	</div>
+	<!-- *** our customer feedback *** -->
+		<div class="customer-feedback-cont">
+			<div class="container">
+				<h2>Our <span>Satisfied</span> Customers</h2>
+				<div class="carousel slide media-carousel" id="media">
+        <div class="carousel-inner">
+			<?php
+		$intTC = 0;
+		 foreach ($arrTestimonial as $testimonial) :
+         ?>
+			<?php if($intTC%3 == 0) { ?>
+			<ul class="customer-feedback item  <?php if($intTC == 0) { echo "active"; }?>">
+			<?php } ?>
+				<li>
+					<p>
+						<img src="<?php echo $image_path."/testimonial/thumb/".$testimonial['client_image']; ?>" alt="<?php echo $testimonial['client_image'];?>"/>
+						<?php echo $this->escapeHtml(substr($testimonial['description'],0,150));?> ...
+					</p>
+					<div class="owner-detail"><span><?php echo $this->escapeHtml($testimonial['client_name']);?></span>Car Owner</div>
+				</li>
+				
+			<?php if($intTC%3 == 2) { ?>
+			</ul>
+			<?php
+			}
+				$intTC++;
+                endforeach;
+            ?>
+          </div>
+		
+        <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+        <a data-slide="next" href="#media" class="right carousel-control">›</a>
+      </div>                          
+    
+			</div>
+			
+		</div>
+
+<script type="text/javascript">
+var google_tag_params = {
+dynx_itemid: 'dcsearch',
+dynx_itemid2: '',
+dynx_pagetype: 'searchresults',
+dynx_totalvalue: '',
+};
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 968035675;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/968035675/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '716196795170389']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=716196795170389&amp;ev=PixelInitialized" /></noscript>
