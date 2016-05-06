@@ -1,0 +1,142 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+    <head>
+<!-- Meta Tags -->
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Favicon -->
+     <?php echo $this->headTitle('Direct Cars '. $this->translate('Direct Cars'))->setSeparator(' - ')->setAutoEscape(false) ?>
+	 <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+		<?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/images/favicon.ico')) 
+		 ->prependStylesheet($this->basePath() . '/css/custom.css')
+		 ->prependStylesheet($this->basePath() . '/css/list-view.css')
+		  ->prependStylesheet($this->basePath() . '/css/fonts.css')
+		  ->prependStylesheet($this->basePath() . '/css/bootstrap.css')
+		  ->prependStylesheet($this->basePath() . '/font-awesome-4.1.0/css/font-awesome.min.css')
+		?>
+		<?php echo $this->headScript()
+			->prependFile($this->basePath() . '/js/direct_cars_custom.js')
+            ->prependFile($this->basePath() . '/js/jquery-2.0.2.min.js')
+		
+		?>
+		
+       </head>
+    <body>
+	<div class="wrapper sell-car">
+		<div class="header">
+		<div class="top-bar">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">Welcome to Direct Cars-Great Way to Buy and Sell Used Cars in Gurgaon/NCR</div>
+					<ul class="social_icons pull-right col-sm-6 text-right mobile-hide">
+						<li><a class="btn btn-primary social-login-btn social-google" href="/auth/google"><i class="fa fa-google-plus"></i></a></li>
+						<li><a class="btn btn-primary social-login-btn social-facebook" href="/auth/facebook"><i class="fa fa-facebook"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<nav class="navbar navbar-bootsnipp animate" role="navigation">
+		
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+	
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="animbrand">
+        <a class="navbar-brand animate" href="#"><img src="<?php echo $this->basePath();?>/images/logo.png" alt="Direct Cars-Great Way to Buy and Sell Used Cars"/></a>
+      </div>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <ul class="nav navbar-nav navbar-right">
+       <li class=""><a href="<?php echo $this->url('home',array('action' => "index")); ?>" class="animate">Home</a></li>
+		<li class=""><a href="<?php echo $this->url('usedcar',array('action' => "sell")); ?>" class="animate">Sell Your Car</a></li>
+		<li class=""><a href="<?php echo $this->url('usedcar',array('action' => "search")); ?>" class="animate">Buy Used Car</a></li>
+		<li class=""><a href="<?php echo $this->url('showroom',array('action' => "view",'id'=>2)); ?>" class="animate">Showroom</a></li>
+        <li class=""><a href="<?php echo $this->url('index',array('action' => "why-us")); ?>" class="animate">Why Direct Cars</a></li>
+        <li class=""><a href="http://directcars.in/" class="animate">Our Blog</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+	<div class="breadcrum"> 
+		<div class="container">
+			<div class="col-md-2 mobile-hide">Home</div>
+			<div class="col-sm-7 col-lg-7 col-md-12 pull-right">
+				<ul class="info pull-right">
+					<li class="mobile-hide"><span class="icon-executive"></span></li>
+					<li class="mobile-hide">For Assistance</li>
+					<li><a href="#"><i class="fa fa-envelope-o"></i> info@reen.com</a></li>
+					<li><i class="fa fa-mobile-phone"></i> +00 (123) 456 78 90</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+		</div>
+		<!-- end header -->
+		
+	<?php echo $this->content; ?>
+		<!-- footer -->
+		<div class="footer">
+			<div class="container">
+				<div class="col-sm-4 site-links">
+					<h3 class="title"><strong>Site</strong> links</h3>
+					<ul>
+						<li><b class="right-caret"></b> <a href="<?php echo $this->url('home',array('action' => "index")); ?>">Home</a></li>
+						<li><b class="right-caret"></b> <a href="<?php echo $this->url('usedcar',array('action' => "sell")); ?>">Sell your car</a></li>
+						<li><b class="right-caret"></b> <a href="<?php echo $this->url('usedcar',array('action' => "search")); ?>">Buy used cars</a></li>
+						<li><b class="right-caret"></b> <a href="<?php echo $this->url('showroom',array('action' => "view",'id'=>2)); ?>">Showrooms</a></li>
+						<li><b class="right-caret"></b> <a href="<?php echo $this->url('index',array('action' => "why-us")); ?>">Why Direct Cars</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-4 contact-detail">
+					<h3 class="title"><strong>Contact</strong> info</h3>
+					<h4><?php echo $arrShowroomMaster['showroom_name']; ?> </h4>
+					<p><?php echo $arrShowroomMaster['locality']; ?>, <?php echo $arrShowroomMaster['land_mark']; ?>, <?php echo $arrShowroomMaster['city']; ?><br>
+					</p>
+					<p class="marginT10"><span>Phone:</span> 98xxxxxxxx</p>
+					<p><span>Email:</span> info@cartrade.com</p>
+					<?php $arrDays = explode(",",$arrShowroomMaster['showroom_timings_days']); ?>
+					<p class="marginT10"><span>Working days :</span> <?php if(count($arrDays )== 7) { ?>
+						 We are OPEN 7 days a week
+						<?php } else {?>
+						We are OPEN ON <?php echo str_replace(",",", ",$arrShowroomMaster['showroom_timings_days']); ?>
+						<?php } ?> </p>
+					<p><span>Timing : </span><?php echo $arrShowroomMaster['showroom_timings_start']; ?> to <?php echo $arrShowroomMaster['showroom_timings_end']; ?></p>
+				</div>
+				<div class="col-sm-4">
+					<h3 class="title"><strong>Social</strong> links</h3>
+					<ul class="social_icons">
+					<li><a class="btn btn-primary social-login-btn social-facebook" href="/auth/facebook"><i class="fa fa-facebook"></i></a></li>
+					<li><a class="btn btn-primary social-login-btn social-google" href="/auth/google"><i class="fa fa-google-plus"></i></a></li>
+				  </ul>
+				</div>
+			</div>
+			<div class="callus">
+				<div class="container">
+					<div class="col-sm-4"><a href="#"><img src="<?php echo $this->basePath();?>/images/logo.png" alt="Direct Cars-Great Way to Buy and Sell Used Cars"/></a></div>
+					<div class="col-sm-8 pull-right text-right footer-call"><span>TO BUY CALL: <?php echo $arrShowroomMaster['phone_1']; ?> </span>    <span>TO SELL CALL: <?php if($arrShowroomMaster['phone_2'] != "") echo $arrShowroomMaster['phone_2']; else echo $arrShowroomMaster['phone_1']; ?></span></div>
+				</div>
+			</div>
+		</div>
+		<div class="copywright">
+			<div class="container text-center">© Direct Cars Pvt. Ltd. 2015</div>
+		</div>
+		
+		
+	</div>
+		<script src="<?php echo $this->basePath();?>/js/bootstrap.min.js" type="text/javascript"></script>
+    </body>
+</html>

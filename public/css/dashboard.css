@@ -1,0 +1,25 @@
+﻿.outer-bdr{
+	border: 1px solid #ccc;
+}
+
+.table.borderless > thead > tr > th, 
+.table.borderless > tbody > tr > th, 
+.table.borderless > tfoot > tr > th, 
+.table.borderless > thead > tr > td, 
+.table.borderless > tbody > tr > td, 
+.table.borderless > tfoot > tr > td{
+	border: none;
+}
+
+.listing-summary{
+	padding: 0 10px;
+	margin-bottom: 41px;
+}
+.dashboard h3{
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+}
+.dashboard h4{
+	color: #044d81;
+	margin-top: 30px;
+}
